@@ -1,0 +1,238 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  Copyright © NetworkDLS 2010, All rights reserved
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifndef _NSWFL_MATH_CPP_
+#define _NSWFL_MATH_CPP_
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <Windows.H>
+#include <math.H>
+#include <float.H>
+
+#include "NSWFL_Math.H"
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace NSWFL {
+	namespace Math {
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		double RoundToNearest(double r)
+		{
+			return (r > 0.0) ? floor(r + 0.5) : ceil(r - 0.5);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		bool WithinPercent(double dValue, int iPercent, double dOf)
+		{
+			return((dValue / dOf) >= iPercent / 100.0);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		unsigned int RangeValue(unsigned int iValue, unsigned int iAtLeast, unsigned int iAtMost)
+		{
+			if (iAtMost > iAtLeast && iAtMost > 0)
+			{
+				return ((iValue % (iAtMost - (iAtLeast - 1))) + iAtLeast);
+			}
+			return 0;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		unsigned __int64 ToU64(unsigned int ulLowPart, unsigned int ulHighPart)
+		{
+			ULARGE_INTEGER uliValue;
+			uliValue.LowPart = ulLowPart;
+			uliValue.HighPart = ulHighPart;
+			return uliValue.QuadPart;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		__int64 ToI64(unsigned int ulLowPart, unsigned int ulHighPart)
+		{
+			LARGE_INTEGER uliValue;
+			uliValue.LowPart = ulLowPart;
+			uliValue.HighPart = ulHighPart;
+			return uliValue.QuadPart;
+		}
+
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int SquareRoot(int iInput)
+		{
+			return (iInput * iInput);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int LoByte(unsigned int iInput)
+		{
+			return ((unsigned char)((iInput)& 0xff));
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int HiByte(unsigned int iInput)
+		{
+			return ((unsigned char)((unsigned short)(iInput) >> 8));
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int LongLength(long lIn)
+		{
+			int iSz = 0;
+			long lBuf = 0;
+
+			if (lIn < 0)
+			{
+				lBuf = (0 - lIn);
+				iSz++;
+			}
+			else lBuf = lIn;
+
+			do
+			{
+				lBuf /= 10;
+				iSz++;
+			} while (lBuf != 0);
+
+			return iSz;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int IntLength(int iIn)
+		{
+			return LongLength((long)iIn);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int ReverseLong(long lIn)
+		{
+			long iRevInt = 0;
+			long lBuf = lIn;
+
+			do
+			{
+				iRevInt = (((int)(lBuf % 10)) + (iRevInt * 10));
+				lBuf /= 10;
+			} while (lBuf != 0);
+
+			return iRevInt;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int ReverseInt(int iIn)
+		{
+			return ReverseLong((long)iIn);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		unsigned long VersionToLong(int iBit1, int iBit2, int iBit3, int iBit4)
+		{
+			return (((iBit1 * 1000l + iBit2) * 10l + iBit3) * 10l + iBit4);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		void LongToVersion(DWORD dwInVer, int *iBit1, int *iBit2, int *iBit3, int *iBit4)
+		{
+
+			*iBit4 = (int)dwInVer % 10l;
+			dwInVer /= 10l;
+			*iBit3 = (int)dwInVer % 10l;
+			dwInVer /= 10l;
+			*iBit2 = (int)dwInVer % 10l;
+			*iBit1 = (int)dwInVer / 1000l;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		__int64 *SortIntegerArrayDESC(__int64 *i64Array, unsigned int iItems)
+		{
+			if (iItems <= 0)
+			{
+				return i64Array;
+			}
+
+			unsigned int iItem = 0;
+			bool bMoved = false;
+
+			iItems--;
+
+			do {
+				bMoved = false;
+				for (iItem = 0; iItem < iItems; iItem++)
+				{
+					if (i64Array[iItem] < i64Array[iItem + 1])
+					{
+						SwapBytes(i64Array[iItem - 1], i64Array[iItem]);
+						bMoved = true;
+					}
+				}
+			} while (bMoved);
+
+			return i64Array;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		__int64 *SortIntegerArrayASC(__int64 *i64Array, unsigned int iItems)
+		{
+			if (iItems <= 0)
+			{
+				return i64Array;
+			}
+
+			unsigned int iItem = 0;
+			bool bMoved = false;
+
+			iItems--;
+
+			do {
+				bMoved = false;
+				for (iItem = 0; iItem < iItems; iItem++)
+				{
+					if (i64Array[iItem] > i64Array[iItem + 1])
+					{
+						SwapBytes(i64Array[iItem], i64Array[iItem + 1]);
+						bMoved = true;
+					}
+				}
+			} while (bMoved);
+
+			return i64Array;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		char *ULongToBinary(DWORD_PTR iBitMask, char *sBinary, int iMaxOutSz)
+		{
+			memset(sBinary, 0, iMaxOutSz);
+
+			for (int i = 31; i >= 0; i--)
+			{
+				sBinary[i] = (unsigned int)((iBitMask & 1) + '0');
+				iBitMask = iBitMask >> 1;
+			}
+
+			return sBinary;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	} //namespace::Math
+} //namespace::NSWFL
+#endif

@@ -1,0 +1,125 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  Copyright © NetworkDLS 2010, All rights reserved
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifndef _NSWFL_MEMORY_CPP_
+#define _NSWFL_MEMORY_CPP_
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <Windows.H>
+
+#include "NSWFL_Memory.H"
+#include "NSWFL_String.H"
+
+#ifdef _USE_GLOBAL_MEMPOOL
+#include "../CMemPool/CMemPool.H"
+extern CMemPool *pMem; //pMem must be defined and initalized elsewhere.
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace NSWFL {
+	namespace Memory {
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		void *ClearMem(void *vBuffer, int iBufSz)
+		{
+			for (int iWPos = 0; iWPos < iBufSz; iWPos++)
+			{
+				((char *)vBuffer)[iWPos] = 0;
+			}
+
+			return vBuffer;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/*
+			Destroys the given key by overwriting it with random data before initializing it to 0's.
+		*/
+		void NukeMem(void *pBuf, size_t iBufSz)
+		{
+			if (pBuf)
+			{
+				srand((DWORD)(GetTickCount() + iBufSz));
+
+				for (size_t iWPos = 0; iWPos < iBufSz; iWPos++)
+				{
+					((BYTE *)pBuf)[iWPos] = (BYTE)(rand() % 255);
+				}
+			}
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/*
+			See overload NukeMem()
+		*/
+		void NukeMem(char *sBuf)
+		{
+			NukeMem(sBuf, strlen(sBuf));
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		void *MemCopy(void *vTarget, void *vSource, int iLen)
+		{
+			for (int iPos = 0; iPos < iLen; iPos++)
+			{
+				((char *)vTarget)[iPos] = ((char *)vSource)[iPos];
+			}
+			return vTarget;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		void *MemDup(const void* d, size_t s)
+		{
+			void* p;
+			return ((p = malloc(s)) ? memcpy(p, d, s) : NULL);
+		}
+
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int MemCopyLong(char *sOutBuf, long lIn)
+		{
+			int iWPos = 0;
+
+			long lBuf = 0;
+
+			if (lIn < 0)
+			{
+				lBuf = (0 - lIn);
+			}
+			else lBuf = lIn;
+
+			do {
+				sOutBuf[iWPos++] = '0' + (int)(lBuf % 10);
+				lBuf /= 10;
+			} while (lBuf != 0);
+
+			if (lIn < 0)
+			{
+				sOutBuf[iWPos++] = '-';
+			}
+
+			NSWFL::String::ReverseString(sOutBuf, iWPos);
+
+			sOutBuf[iWPos] = '\0';
+
+			return iWPos;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		int MemCopyInt(char *sOutBuf, int iIn)
+		{
+			return NSWFL::Memory::MemCopyLong(sOutBuf, (long)iIn);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	} //namespace::Memory
+} //namespace::NSWFL
+#endif

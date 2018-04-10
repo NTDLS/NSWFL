@@ -14,17 +14,11 @@
 #include <StdIO.H>
 #include <IO.H>
 
-#include "NSWFL_File.H"
-#include "NSWFL_String.H"
-#include "NSWFL_System.H"
-#include "NSWFL_Registry.H"
-#include "NSWFL_Windows.H"
-#include "NSWFL_Conversion.H"
-#include "NSWFL_Math.H"
+#include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-#include "../CMemPool/CMemPool.H"
-extern CMemPool *pMem; //pMem must be defined and initalized elsewhere.
+using namespace NSWFL::Memory;
+extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

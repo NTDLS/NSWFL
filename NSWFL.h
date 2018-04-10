@@ -27,6 +27,11 @@
 #include "NSWFL_Graphics.H"
 #include "NSWFL_Debug.H"
 #include "NSWFL_InsecureInterface.H"
+#include "NSWFL_HighPrecisionTimer.H"
+#include "NSWFL_CommandLineParser.H"
+#include "NSWFL_StringBuilder.H"
+#include "NSWFL_StringBuilderArray.H"
+#include "NSWFL_MemoryPool.H"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

@@ -12,12 +12,11 @@
 
 #include <Windows.H>
 
-#include "NSWFL_Memory.H"
-#include "NSWFL_String.H"
+#include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-#include "../CMemPool/CMemPool.H"
-extern CMemPool *pMem; //pMem must be defined and initalized elsewhere.
+using namespace NSWFL::Memory;
+extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

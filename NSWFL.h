@@ -10,9 +10,6 @@
 #define _NSWFL_H_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "../Debug/Debug.H"
-#include "../InsecureInterface/ISecInt.H"
-
 #include "NSWFL_Types.H"
 #include "NSWFL_Conversion.H"
 #include "NSWFL_DateTime.H"
@@ -28,6 +25,8 @@
 #include "NSWFL_Menu.H"
 #include "NSWFL_ListView.H"
 #include "NSWFL_Graphics.H"
+#include "NSWFL_Debug.H"
+#include "NSWFL_InsecureInterface.H"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

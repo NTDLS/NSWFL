@@ -13,7 +13,7 @@
 #include <Windows.H>
 #include <StdIO.H>
 
-#include "../Debug/Debug.H"
+#include "NSWFL_Debug.H"
 
 #include "NSWFL_ListBox.H"
 

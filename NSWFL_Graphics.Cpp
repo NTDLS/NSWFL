@@ -14,7 +14,7 @@
 #include <StdIO.H>
 #include <StdLib.H>
 
-#include "../Debug/Debug.H"
+#include "NSWFL_Debug.H"
 
 #include "NSWFL_Graphics.H"
 #include "NSWFL_String.H"

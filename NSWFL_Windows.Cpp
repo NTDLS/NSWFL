@@ -19,7 +19,7 @@
 #include "NSWFL_File.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-#include "../../@Libraries/CMemPool/CMemPool.H"
+#include "../CMemPool/CMemPool.H"
 extern CMemPool *pMem; //pMem must be defined and initalized elsewhere.
 #endif
 

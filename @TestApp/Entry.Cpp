@@ -30,7 +30,7 @@ using namespace NSWFL::Windows;
 
 void main(void)
 {
-	MsgBoxS("Current up time is: %dms.", GetTickCount());
+	MsgBoxF("Current UPTime is: %dms.", GetTickCount());
 
 	return;
 }

@@ -38,6 +38,14 @@
 #include "NSWFL_StringBuilder.H"
 #include "NSWFL_StringBuilderArray.H"
 #include "NSWFL_MemoryPool.H"
+#include "NSWFL_Base64.H"
+#include "NSWFL_VectorBinary.H"
+#include "NSWFL_CRC32.H"
+#include "NSWFL_SHA1.H"
+#include "NSWFL_Queue.H"
+#include "NSWFL_Stack.H"
+#include "NSWFL_VectorString.H"
+#include "NSWFL_VectorT.H"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

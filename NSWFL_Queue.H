@@ -1,0 +1,59 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  Copyright © NetworkDLS 2010, All rights reserved
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifndef _NSWFL_Queue_H_
+#define _NSWFL_Queue_H_
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace NSWFL {
+	namespace Collections {
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		class Queue {
+
+			typedef struct _QUEUECOLLECTION {
+				char **Data;
+				int *DataSize;
+				int Used;
+				int Allocated;
+				int AllocIncrement;
+			} QUEUECOLLECTION, *LPQUEUECOLLECTION;
+
+		public:
+
+			Queue::Queue(void);
+			Queue::Queue(int iAllocIncrement);
+			Queue::~Queue(void);
+
+			bool Initialize(int iAllocIncrement);
+			bool Initialize(void);
+			bool Destroy();
+
+			bool Pop(void *pOutBuf, int iMaxSz, int *iOutSz);
+			bool Pop(void *pOutBuf, int iMaxSz);
+			bool Pop(char *sOutBuf, int iMaxSz);
+
+			bool Peek(void *pOutBuf, int iMaxSz, int *iOutSz);
+			bool Peek(void *pOutBuf, int iMaxSz);
+			bool Peek(char *sOutBuf, int iMaxSz);
+			void *Peek(void);
+
+			bool Push(const void *vInBuf, int iInBufSz);
+			bool Push(const char *sInBuf);
+
+			bool Pop(void);
+
+		private:
+			QUEUECOLLECTION Collection;
+
+		};
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	} //namespace::Collections
+} //namespace::NSWFL
+#endif

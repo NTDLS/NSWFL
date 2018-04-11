@@ -10,13 +10,6 @@
 #define _NSWFL_XMLReader_H_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "NSWFL.H"
-
-#ifdef _USE_GLOBAL_MEMPOOL
-using namespace NSWFL::Memory;
-extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
-#endif
-
 using namespace NSWFL::String;
 
 namespace NSWFL {

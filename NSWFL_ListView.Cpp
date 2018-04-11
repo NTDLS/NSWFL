@@ -12,6 +12,8 @@
 
 #include "NSWFL.H"
 
+#include <CommCtrl.H>
+
 #ifdef _USE_GLOBAL_MEMPOOL
 using namespace NSWFL::Memory;
 extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.

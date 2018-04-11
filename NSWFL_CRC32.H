@@ -14,11 +14,11 @@ namespace NSWFL {
 	namespace Hashing {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		class CCRC32 {
+		class CRC32 {
 
 		public:
-			CCRC32(void);
-			~CCRC32(void);
+			CRC32(void);
+			~CRC32(void);
 
 			void Initialize(void);
 

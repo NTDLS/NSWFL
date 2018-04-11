@@ -31,7 +31,7 @@ namespace NSWFL {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CCRC32::CCRC32(void)
+		CRC32::CRC32(void)
 		{
 			this->Initialize();
 		}
@@ -39,7 +39,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CCRC32::~CCRC32(void)
+		CRC32::~CRC32(void)
 		{
 			//No destructor code.
 		}
@@ -50,7 +50,7 @@ namespace NSWFL {
 				initalize the table before using any of the other CRC32 calculation functions.
 		*/
 
-		void CCRC32::Initialize(void)
+		void CRC32::Initialize(void)
 		{
 			//0x04C11DB7 is the official polynomial used by PKZip, WinZip and Ethernet.
 			unsigned int iPolynomial = 0x04C11DB7;
@@ -78,7 +78,7 @@ namespace NSWFL {
 			You can create CRCs without it, but they won't conform to the standard.
 		*/
 
-		unsigned int CCRC32::Reflect(unsigned int iReflect, const char cChar)
+		unsigned int CRC32::Reflect(unsigned int iReflect, const char cChar)
 		{
 			unsigned int iValue = 0;
 
@@ -102,7 +102,7 @@ namespace NSWFL {
 			Note: For Example usage example, see FileCRC().
 		*/
 
-		void CCRC32::PartialCRC(unsigned int *iCRC, const unsigned char *sData, size_t iDataLength)
+		void CRC32::PartialCRC(unsigned int *iCRC, const unsigned char *sData, size_t iDataLength)
 		{
 			while (iDataLength--)
 			{
@@ -118,7 +118,7 @@ namespace NSWFL {
 			Returns the calculated CRC32 (through iOutCRC) for the given string.
 		*/
 
-		void CCRC32::FullCRC(const unsigned char *sData, size_t iDataLength, unsigned int *iOutCRC)
+		void CRC32::FullCRC(const unsigned char *sData, size_t iDataLength, unsigned int *iOutCRC)
 		{
 			((unsigned int)*iOutCRC) = 0xffffffff; //Initilaize the CRC.
 
@@ -132,7 +132,7 @@ namespace NSWFL {
 			Returns the calculated CRC23 for the given string.
 		*/
 
-		unsigned int CCRC32::FullCRC(const unsigned char *sData, size_t iDataLength)
+		unsigned int CRC32::FullCRC(const unsigned char *sData, size_t iDataLength)
 		{
 			unsigned int iCRC = 0xffffffff; //Initilaize the CRC.
 
@@ -149,7 +149,7 @@ namespace NSWFL {
 					it has been provided for performance purposes only.
 		*/
 
-		bool CCRC32::FileCRC(const char *sFileName, unsigned int *iOutCRC, size_t iBufferSize)
+		bool CRC32::FileCRC(const char *sFileName, unsigned int *iOutCRC, size_t iBufferSize)
 		{
 			((unsigned int)*iOutCRC) = 0xffffffff; //Initilaize the CRC.
 
@@ -195,7 +195,7 @@ namespace NSWFL {
 			Calculates the CRC32 of a file using the a default buffer size of 1MB.
 		*/
 
-		unsigned int CCRC32::FileCRC(const char *sFileName)
+		unsigned int CRC32::FileCRC(const char *sFileName)
 		{
 			unsigned int iCRC;
 			if (this->FileCRC(sFileName, &iCRC, 1048576))
@@ -213,7 +213,7 @@ namespace NSWFL {
 					it has been provided for performance purposes only.
 		*/
 
-		unsigned int CCRC32::FileCRC(const char *sFileName, size_t iBufferSize)
+		unsigned int CRC32::FileCRC(const char *sFileName, size_t iBufferSize)
 		{
 			unsigned int iCRC;
 			if (this->FileCRC(sFileName, &iCRC, iBufferSize))
@@ -228,7 +228,7 @@ namespace NSWFL {
 			Calculates the CRC32 of a file using the a default buffer size of 1MB.
 		*/
 
-		bool CCRC32::FileCRC(const char *sFileName, unsigned int *iOutCRC)
+		bool CRC32::FileCRC(const char *sFileName, unsigned int *iOutCRC)
 		{
 			return this->FileCRC(sFileName, iOutCRC, 1048576);
 		}

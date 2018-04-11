@@ -11,11 +11,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <Windows.H>
-#include <CommCtrl.H>
 #include <Stdio.H>
 #include <Stdlib.H>
-#include <WinLDAP.H> // Requires WLDAP32.Lib
 
+#include "NSWFL_MemoryPool.H"
 #include "NSWFL_Types.H"
 #include "NSWFL_Conversion.H"
 #include "NSWFL_DateTime.H"
@@ -37,7 +36,6 @@
 #include "NSWFL_CommandLineParser.H"
 #include "NSWFL_StringBuilder.H"
 #include "NSWFL_StringBuilderArray.H"
-#include "NSWFL_MemoryPool.H"
 #include "NSWFL_Base64.H"
 #include "NSWFL_VectorBinary.H"
 #include "NSWFL_CRC32.H"

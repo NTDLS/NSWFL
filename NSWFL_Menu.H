@@ -15,7 +15,6 @@ namespace NSWFL {
 		bool IsMenuItemChecked(HMENU hMenu, int iCommand);
 		bool IsMouseOverMenu(HWND hWnd, HMENU hMenu, int iMenuItem);
 
-
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::Menu
 } //namespace::NSWFL

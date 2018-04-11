@@ -21,7 +21,7 @@ namespace NSWFL {
 	namespace XML {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		class CXMLWriter {
+		class XMLWriter {
 
 		public:
 			void *pUserData; //Use it for whatever you want!
@@ -31,9 +31,9 @@ namespace NSWFL {
 				char sName[255];
 			} XMLWriterState, *LPXMLWriterState;
 
-			CXMLWriter(const char *sChildName);
-			CXMLWriter(void);
-			~CXMLWriter(void);
+			XMLWriter(const char *sChildName);
+			XMLWriter(void);
+			~XMLWriter(void);
 
 			bool Initialize(void);
 			bool Initialize(const char *sChildName);
@@ -43,7 +43,7 @@ namespace NSWFL {
 
 			StringBuilder *GetBuilder(void);
 
-			CXMLReader *ToReader(CXMLReader *lpXMLReader);
+			XMLReader *ToReader(XMLReader *lpXMLReader);
 
 			bool Add(const char *sAttributeName, const char *sValue);
 			bool Add(const char *sAttributeName, const char *sValue, const int iValueSz);
@@ -56,11 +56,11 @@ namespace NSWFL {
 			bool Add(const char *sAttributeName, const unsigned __int64 i64Value);
 			bool AddBool(const char *sAttributeName, const bool bValue);
 
-			bool Add(const char *sAttributeName, CXMLWriter *XML);
-			bool Add(const char *sAttributeName, CXMLReader *XML);
+			bool Add(const char *sAttributeName, XMLWriter *XML);
+			bool Add(const char *sAttributeName, XMLReader *XML);
 
-			bool Add(CXMLReader *XML);
-			bool Add(CXMLWriter *XML);
+			bool Add(XMLReader *XML);
+			bool Add(XMLWriter *XML);
 
 			int Length(void);
 
@@ -70,7 +70,7 @@ namespace NSWFL {
 			char *Text(int *iOutSz);
 			void FreePointer(void *pPointer);
 
-#ifdef _CXML_USE_COMPRESSION
+#ifdef _XML_USE_COMPRESSION
 			char *Compress(int *iOutLength);
 			char *Compress(int *iOutLength, int iCompressionLevel);
 #endif

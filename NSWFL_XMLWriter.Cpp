@@ -21,7 +21,7 @@ namespace NSWFL {
 	namespace XML {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLWriter::CXMLWriter(const char *sChildName)
+		XMLWriter::XMLWriter(const char *sChildName)
 		{
 			memset(&this->State, 0, sizeof(this->State));
 			this->Initialize(sChildName);
@@ -29,14 +29,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLWriter::~CXMLWriter(void)
+		XMLWriter::~XMLWriter(void)
 		{
 			this->Destroy();
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLWriter::CXMLWriter(void)
+		XMLWriter::XMLWriter(void)
 		{
 			memset(&this->State, 0, sizeof(this->State));
 			this->State.pBuilder = NULL;
@@ -44,7 +44,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLReader *CXMLWriter::ToReader(CXMLReader *lpXMLReader)
+		XMLReader *XMLWriter::ToReader(XMLReader *lpXMLReader)
 		{
 			int iLength = this->Length();
 
@@ -77,7 +77,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLWriter::GetName(char *sOutName, int iMaxOut)
+		int XMLWriter::GetName(char *sOutName, int iMaxOut)
 		{
 			strcpy_s(sOutName, iMaxOut, this->State.sName);
 			return (int)strlen(this->State.sName);
@@ -85,7 +85,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::ChangeName(const char *sChildName)
+		bool XMLWriter::ChangeName(const char *sChildName)
 		{
 			strcpy_s(this->State.sName, sizeof(this->State.sName), sChildName);
 			return true;
@@ -93,7 +93,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Initialize(const char *sChildName)
+		bool XMLWriter::Initialize(const char *sChildName)
 		{
 			if (sChildName)
 			{
@@ -119,14 +119,14 @@ namespace NSWFL {
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Initialize(void)
+		bool XMLWriter::Initialize(void)
 		{
 			return this->Initialize(NULL);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void CXMLWriter::Destroy(void)
+		void XMLWriter::Destroy(void)
 		{
 			if (this->State.pBuilder)
 			{
@@ -142,7 +142,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(CXMLWriter *XML)
+		bool XMLWriter::Add(XMLWriter *XML)
 		{
 			int iAlloc = XML->Length() + 1;
 			int iLength = 0;
@@ -182,28 +182,28 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(CXMLReader *XML)
+		bool XMLWriter::Add(XMLReader *XML)
 		{
 			return this->State.pBuilder->Append(XML->Text(), XML->Length());
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, CXMLWriter *XML)
+		bool XMLWriter::Add(const char *sAttributeName, XMLWriter *XML)
 		{
 			return this->Add(sAttributeName, XML->State.pBuilder->Buffer, XML->State.pBuilder->Length);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, CXMLReader *XML)
+		bool XMLWriter::Add(const char *sAttributeName, XMLReader *XML)
 		{
 			return this->Add(sAttributeName, XML->Text(), XML->Length());
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, const char *sValue)
+		bool XMLWriter::Add(const char *sAttributeName, const char *sValue)
 		{
 			if (sValue)
 			{
@@ -216,7 +216,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, const char *sValue, const int iValueSz)
+		bool XMLWriter::Add(const char *sAttributeName, const char *sValue, const int iValueSz)
 		{
 			char sTag[255];
 
@@ -233,7 +233,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, const double dValue, const int iDecimalPlaces)
+		bool XMLWriter::Add(const char *sAttributeName, const double dValue, const int iDecimalPlaces)
 		{
 			char sFormat[16];
 			sprintf_s(sFormat, sizeof(sFormat), "<%%s>%%.%df</%%s>", iDecimalPlaces);
@@ -243,7 +243,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, const double dValue)
+		bool XMLWriter::Add(const char *sAttributeName, const double dValue)
 		{
 			this->State.pBuilder->AppendF("<%s>%f</%s>", sAttributeName, dValue, sAttributeName);
 			return true;
@@ -251,7 +251,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, const signed int iValue)
+		bool XMLWriter::Add(const char *sAttributeName, const signed int iValue)
 		{
 			this->State.pBuilder->AppendF("<%s>%d</%s>", sAttributeName, iValue, sAttributeName);
 			return true;
@@ -259,7 +259,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, const DWORD dwValue)
+		bool XMLWriter::Add(const char *sAttributeName, const DWORD dwValue)
 		{
 			this->State.pBuilder->AppendF("<%s>%d</%s>", sAttributeName, dwValue, sAttributeName);
 			return true;
@@ -267,7 +267,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, const unsigned int iValue)
+		bool XMLWriter::Add(const char *sAttributeName, const unsigned int iValue)
 		{
 			this->State.pBuilder->AppendF("<%s>%d</%s>", sAttributeName, iValue, sAttributeName);
 			return true;
@@ -275,7 +275,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, const unsigned __int64 i64Value)
+		bool XMLWriter::Add(const char *sAttributeName, const unsigned __int64 i64Value)
 		{
 			this->State.pBuilder->AppendF("<%s>%llu</%s>", sAttributeName, i64Value, sAttributeName);
 			return true;
@@ -283,7 +283,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLWriter::Add(const char *sAttributeName, const __int64 i64Value)
+		bool XMLWriter::Add(const char *sAttributeName, const __int64 i64Value)
 		{
 			this->State.pBuilder->AppendF("<%s>%I64d</%s>", sAttributeName, i64Value, sAttributeName);
 			return true;
@@ -293,7 +293,7 @@ namespace NSWFL {
 		/*
 			Could not overload due to conflicts with other functions.
 		*/
-		bool CXMLWriter::AddBool(const char *sAttributeName, const bool bValue)
+		bool XMLWriter::AddBool(const char *sAttributeName, const bool bValue)
 		{
 			return this->Add(sAttributeName, bValue ? "Yes" : "No");
 		}
@@ -302,8 +302,8 @@ namespace NSWFL {
 		/*
 			The returned pointer must be freed externally.
 		*/
-#ifdef _CXML_USE_COMPRESSION
-		char *CXMLWriter::Compress(int *iOutLength)
+#ifdef _XML_USE_COMPRESSION
+		char *XMLWriter::Compress(int *iOutLength)
 		{
 			return this->Compress(iOutLength, 9);
 		}
@@ -313,8 +313,8 @@ namespace NSWFL {
 		/*
 			The returned pointer must be freed externally.
 		*/
-#ifdef _CXML_USE_COMPRESSION
-		char *CXMLWriter::Compress(int *iOutLength, int iCompressionLevel)
+#ifdef _XML_USE_COMPRESSION
+		char *XMLWriter::Compress(int *iOutLength, int iCompressionLevel)
 		{
 			return CompressXML(this, iOutLength, iCompressionLevel);
 		}
@@ -324,7 +324,7 @@ namespace NSWFL {
 		/*
 			The returned pointer must be freed externally.
 		*/
-		char *CXMLWriter::Text(void)
+		char *XMLWriter::Text(void)
 		{
 			int iOutSz = 0;
 			return this->Text(&iOutSz);
@@ -334,7 +334,7 @@ namespace NSWFL {
 		/*
 			The string builder must have been externally allocated.
 		*/
-		void CXMLWriter::Text(StringBuilder *textOut)
+		void XMLWriter::Text(StringBuilder *textOut)
 		{
 			int iRequiredLength = this->Length();
 			textOut->Resize(iRequiredLength + 10);
@@ -345,7 +345,7 @@ namespace NSWFL {
 		/*
 			This function is used to easily free a pointer which was returned which needs manual freeing. For example, the pointer returned from Text().
 		*/
-		void CXMLWriter::FreePointer(void *pPointer)
+		void XMLWriter::FreePointer(void *pPointer)
 		{
 #ifdef _USE_GLOBAL_MEMPOOL
 			pMem->Free(pPointer);
@@ -359,7 +359,7 @@ namespace NSWFL {
 			The returned pointer must be freed externally.
 		*/
 
-		char *CXMLWriter::Text(int *iOutSz)
+		char *XMLWriter::Text(int *iOutSz)
 		{
 			int iMaxSize = this->Length() + 1;
 			if (iMaxSize > 0)
@@ -381,7 +381,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLWriter::Text(char *sOutXML, int iMaxOutSz)
+		int XMLWriter::Text(char *sOutXML, int iMaxOutSz)
 		{
 			this->State.pBuilder->Terminate();
 
@@ -408,7 +408,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//The minimum ammount of RAM required to store the XML (including the NULL terminator).
-		int CXMLWriter::Length(void)
+		int XMLWriter::Length(void)
 		{
 			int iTotalSize = 0;
 
@@ -423,7 +423,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		StringBuilder *CXMLWriter::GetBuilder(void)
+		StringBuilder *XMLWriter::GetBuilder(void)
 		{
 			return this->State.pBuilder;
 		}
@@ -432,7 +432,7 @@ namespace NSWFL {
 		/*
 			//Writes XML to a file.
 		*/
-		bool CXMLWriter::ToFile(const char *sFileName)
+		bool XMLWriter::ToFile(const char *sFileName)
 		{
 			HANDLE hTarget = NULL;
 

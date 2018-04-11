@@ -23,7 +23,7 @@ namespace NSWFL {
 	namespace XML {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		class CXMLReader {
+		class XMLReader {
 
 		public:
 			void *pUserData; //Use it for whatever you want!
@@ -35,22 +35,22 @@ namespace NSWFL {
 				int iScanPosition;
 			} XMLREADERSTATE, *LPXMLREADERSTATE;
 
-			CXMLReader(const char *sXML, const int iXMLSz, bool bCompressed);
-			CXMLReader(const char *sXML, const int iXMLSz);
-			CXMLReader(const char *sXML);
-			CXMLReader(CXMLReader *pReader);
-			CXMLReader(void);
-			~CXMLReader(void);
+			XMLReader(const char *sXML, const int iXMLSz, bool bCompressed);
+			XMLReader(const char *sXML, const int iXMLSz);
+			XMLReader(const char *sXML);
+			XMLReader(XMLReader *pReader);
+			XMLReader(void);
+			~XMLReader(void);
 
 			const char *Text(void);
 			int Text(char *sTarget, int iMaxSz);
 			int Length(void);
 
-			bool Initialize(CXMLReader *pReader);
+			bool Initialize(XMLReader *pReader);
 			bool Initialize(const char *sXML);
 			bool Initialize(const char *sXML, const int iXMLSz);
-			CXMLReader *SetPointer(const char *sXML, const int iXMLSz); //For low-level use.
-			CXMLReader *SetPointer(const char *sXML); //For low-level use.
+			XMLReader *SetPointer(const char *sXML, const int iXMLSz); //For low-level use.
+			XMLReader *SetPointer(const char *sXML); //For low-level use.
 			void Destroy(void);
 
 			double ToDouble(const char *sTag);
@@ -74,8 +74,8 @@ namespace NSWFL {
 			unsigned int ToUInteger(const char *sTag);
 			bool ToUInteger(const char *sTag, unsigned int *uiOutValue);
 			bool ToUInteger(const char *sTag, DWORD *uiOutValue);
-			bool ToReader(const char *sTag, CXMLReader *lpXMLReader);
-			bool ToReader(const char *sTag, const int iTag, CXMLReader *lpXMLReader);
+			bool ToReader(const char *sTag, XMLReader *lpXMLReader);
+			bool ToReader(const char *sTag, const int iTag, XMLReader *lpXMLReader);
 			bool ToFile(const char *sFileName);
 
 			int ToInteger(const char *sTag, int iDefaultValue);

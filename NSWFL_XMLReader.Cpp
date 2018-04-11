@@ -27,21 +27,21 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLReader::~CXMLReader(void)
+		XMLReader::~XMLReader(void)
 		{
 			this->Destroy();
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::ScanPosition(void)
+		int XMLReader::ScanPosition(void)
 		{
 			return this->State.iScanPosition;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::ScanPosition(int iPosition)
+		int XMLReader::ScanPosition(int iPosition)
 		{
 			int iOldValue = this->State.iScanPosition;
 
@@ -52,7 +52,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ProgressiveScan(bool bEnable)
+		bool XMLReader::ProgressiveScan(bool bEnable)
 		{
 			bool bOldValue = this->State.bProgressiveScan;
 			this->State.bProgressiveScan = bEnable;
@@ -64,7 +64,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::Text(char *sTarget, int iMaxSz)
+		int XMLReader::Text(char *sTarget, int iMaxSz)
 		{
 			strcpy_s(sTarget, iMaxSz, this->State.sOriginalXML);
 			return this->State.iOriginalXMLSz;
@@ -72,22 +72,22 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		const char *CXMLReader::Text(void)
+		const char *XMLReader::Text(void)
 		{
 			return this->State.sOriginalXML;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::Length(void)
+		int XMLReader::Length(void)
 		{
 			return this->State.iOriginalXMLSz;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#ifdef _CXML_USE_COMPRESSION
-		CXMLReader::CXMLReader(const char *sXML, const int iXMLSz, bool bCompressed)
+#ifdef _XML_USE_COMPRESSION
+		XMLReader::XMLReader(const char *sXML, const int iXMLSz, bool bCompressed)
 		{
 			memset(&this->State, 0, sizeof(this->State));
 
@@ -101,21 +101,21 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLReader::CXMLReader(CXMLReader *pReader)
+		XMLReader::XMLReader(XMLReader *pReader)
 		{
 			Initialize(pReader);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::Initialize(CXMLReader *pReader)
+		bool XMLReader::Initialize(XMLReader *pReader)
 		{
 			return this->Initialize(pReader->Text(), pReader->Length());
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLReader::CXMLReader(const char *sXML, const int iXMLSz)
+		XMLReader::XMLReader(const char *sXML, const int iXMLSz)
 		{
 			memset(&this->State, 0, sizeof(this->State));
 
@@ -124,7 +124,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLReader::CXMLReader(const char *sXML)
+		XMLReader::XMLReader(const char *sXML)
 		{
 			memset(&this->State, 0, sizeof(this->State));
 
@@ -133,14 +133,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLReader::CXMLReader(void)
+		XMLReader::XMLReader(void)
 		{
 			memset(&this->State, 0, sizeof(this->State));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLReader *CXMLReader::SetPointer(const char *sXML, const int iXMLSz)
+		XMLReader *XMLReader::SetPointer(const char *sXML, const int iXMLSz)
 		{
 			memset(&this->State, 0, sizeof(this->State));
 
@@ -154,14 +154,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CXMLReader *CXMLReader::SetPointer(const char *sXML)
+		XMLReader *XMLReader::SetPointer(const char *sXML)
 		{
 			return this->SetPointer(sXML, (int)strlen(sXML));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::Initialize(const char *sXML)
+		bool XMLReader::Initialize(const char *sXML)
 		{
 			return this->Initialize(sXML, (int)strlen(sXML));
 		}
@@ -173,7 +173,7 @@ namespace NSWFL {
 			1) DO NOT Initialize before this, that would cause a memory leak.
 			2) Always Destroy() if this function returns TRUE.
 		*/
-		bool CXMLReader::FromFile(const char *sFileName)
+		bool XMLReader::FromFile(const char *sFileName)
 		{
 			HANDLE hSource = NULL;
 
@@ -241,7 +241,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void CXMLReader::Destroy(void)
+		void XMLReader::Destroy(void)
 		{
 			this->ProgressiveScan(false);
 			if (this->State.sOriginalXML)
@@ -262,7 +262,7 @@ namespace NSWFL {
 
 			1) Always Destroy() if this function returns TRUE.
 		*/
-		bool CXMLReader::Initialize(const char *sXML, const int iXMLSz)
+		bool XMLReader::Initialize(const char *sXML, const int iXMLSz)
 		{
 			memset(&this->State, 0, sizeof(this->State));
 
@@ -296,7 +296,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToDouble(const char *sTag, double *dOutValue)
+		bool XMLReader::ToDouble(const char *sTag, double *dOutValue)
 		{
 			int iResult = 0;
 			char sInteger[64];
@@ -310,7 +310,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToU64(const char *sTag, unsigned __int64 *i64OutValue)
+		bool XMLReader::ToU64(const char *sTag, unsigned __int64 *i64OutValue)
 		{
 			int iResult = 0;
 			char sInteger[64];
@@ -324,7 +324,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToI64(const char *sTag, __int64 *i64OutValue)
+		bool XMLReader::ToI64(const char *sTag, __int64 *i64OutValue)
 		{
 			int iResult = 0;
 			char sInteger[64];
@@ -338,7 +338,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToBoolean(const char *sTag, bool *bOutValue)
+		bool XMLReader::ToBoolean(const char *sTag, bool *bOutValue)
 		{
 			int iResult = 0;
 			char sValue[32];
@@ -371,7 +371,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToUInteger(const char *sTag, DWORD *uiOutValue)
+		bool XMLReader::ToUInteger(const char *sTag, DWORD *uiOutValue)
 		{
 			int iResult = 0;
 			char sInteger[64];
@@ -385,7 +385,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToUInteger(const char *sTag, unsigned int *uiOutValue)
+		bool XMLReader::ToUInteger(const char *sTag, unsigned int *uiOutValue)
 		{
 			int iResult = 0;
 			char sInteger[64];
@@ -399,7 +399,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToInteger(const char *sTag, int *iOutValue)
+		bool XMLReader::ToInteger(const char *sTag, int *iOutValue)
 		{
 			int iResult = 0;
 			char sInteger[64];
@@ -413,7 +413,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		double CXMLReader::ToDouble(const char *sTag, double dDefaultValue)
+		double XMLReader::ToDouble(const char *sTag, double dDefaultValue)
 		{
 			double dValue = 0;
 			if (ToDouble(sTag, &dValue))
@@ -425,7 +425,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		double CXMLReader::ToDouble(const char *sTag)
+		double XMLReader::ToDouble(const char *sTag)
 		{
 			double dValue = 0;
 			if (ToDouble(sTag, &dValue))
@@ -437,7 +437,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		unsigned __int64 CXMLReader::ToU64(const char *sTag, unsigned __int64 i64DefaultValue)
+		unsigned __int64 XMLReader::ToU64(const char *sTag, unsigned __int64 i64DefaultValue)
 		{
 			unsigned __int64 i64Value = 0;
 			if (ToU64(sTag, &i64Value))
@@ -449,7 +449,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		__int64 CXMLReader::ToI64(const char *sTag, __int64 i64DefaultValue)
+		__int64 XMLReader::ToI64(const char *sTag, __int64 i64DefaultValue)
 		{
 			__int64 i64Value = 0;
 			if (ToI64(sTag, &i64Value))
@@ -461,7 +461,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		unsigned __int64 CXMLReader::ToU64(const char *sTag)
+		unsigned __int64 XMLReader::ToU64(const char *sTag)
 		{
 			unsigned __int64 i64Value = 0;
 			if (ToU64(sTag, &i64Value))
@@ -473,7 +473,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		__int64 CXMLReader::ToI64(const char *sTag)
+		__int64 XMLReader::ToI64(const char *sTag)
 		{
 			__int64 i64Value = 0;
 			if (ToI64(sTag, &i64Value))
@@ -485,7 +485,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToBoolean(const char *sTag, bool bDefaultValue)
+		bool XMLReader::ToBoolean(const char *sTag, bool bDefaultValue)
 		{
 			bool bValue = 0;
 			if (this->ToBoolean(sTag, &bValue))
@@ -497,7 +497,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToBoolean(const char *sTag)
+		bool XMLReader::ToBoolean(const char *sTag)
 		{
 			bool bValue = 0;
 			if (ToBoolean(sTag, &bValue))
@@ -509,7 +509,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		unsigned int CXMLReader::ToUInteger(const char *sTag, unsigned int uiDefaultValue)
+		unsigned int XMLReader::ToUInteger(const char *sTag, unsigned int uiDefaultValue)
 		{
 			unsigned int uiValue = 0;
 			if (ToUInteger(sTag, &uiValue))
@@ -521,7 +521,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		unsigned int CXMLReader::ToUInteger(const char *sTag)
+		unsigned int XMLReader::ToUInteger(const char *sTag)
 		{
 			unsigned int uiValue = 0;
 			if (ToUInteger(sTag, &uiValue))
@@ -533,7 +533,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::ToInteger(const char *sTag, int iDefaultValue)
+		int XMLReader::ToInteger(const char *sTag, int iDefaultValue)
 		{
 			int iValue = 0;
 			if (ToInteger(sTag, &iValue))
@@ -545,7 +545,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::ToInteger(const char *sTag)
+		int XMLReader::ToInteger(const char *sTag)
 		{
 			int iValue = 0;
 			if (ToInteger(sTag, &iValue))
@@ -557,7 +557,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::Contains(const char *sTag)
+		bool XMLReader::Contains(const char *sTag)
 		{
 			if (this->State.iOriginalXMLSz <= 0)
 			{
@@ -596,7 +596,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::AttributeLength(const char *sTag)
+		int XMLReader::AttributeLength(const char *sTag)
 		{
 			if (this->State.iOriginalXMLSz <= 0)
 			{
@@ -635,7 +635,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToReader(const char *sTag, const int iTag, CXMLReader *lpXMLReader)
+		bool XMLReader::ToReader(const char *sTag, const int iTag, XMLReader *lpXMLReader)
 		{
 			char sFullTag[255];
 			char sITag[64];
@@ -651,7 +651,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToReader(const char *sTag, CXMLReader *lpXMLReader)
+		bool XMLReader::ToReader(const char *sTag, XMLReader *lpXMLReader)
 		{
 			int iAlloc = this->State.iOriginalXMLSz + 1;
 			int iLength = 0;
@@ -664,7 +664,7 @@ namespace NSWFL {
 
 			if ((iLength = this->ToString(sTag, sBuf, iAlloc)) >= 0)
 			{
-				memset(lpXMLReader, 0, sizeof(CXMLReader));
+				memset(lpXMLReader, 0, sizeof(XMLReader));
 				lpXMLReader->SetPointer(sBuf, iLength);
 				return true;
 			}
@@ -684,14 +684,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::ToString(const char *sTag, char *sOutAttrib, int iMaxSz)
+		int XMLReader::ToString(const char *sTag, char *sOutAttrib, int iMaxSz)
 		{
 			return this->ToString(sTag, sOutAttrib, iMaxSz, "");
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToString(const char *sTag, char *sOutAttrib, int iMaxSz, int *iReturnLength)
+		bool XMLReader::ToString(const char *sTag, char *sOutAttrib, int iMaxSz, int *iReturnLength)
 		{
 			int iLength = ToString(sTag, sOutAttrib, iMaxSz, "");
 			if (iLength >= 0)
@@ -707,7 +707,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CXMLReader::ToString(const char *sTag, char *sOutAttrib, int iMaxSz, const char *sDefaultValue, int *iReturnLength)
+		bool XMLReader::ToString(const char *sTag, char *sOutAttrib, int iMaxSz, const char *sDefaultValue, int *iReturnLength)
 		{
 			int iLength = ToString(sTag, sOutAttrib, iMaxSz, sDefaultValue);
 			if (iLength >= 0)
@@ -723,14 +723,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::ToString(const char *sTag, StringBuilder *OutAttrib)
+		int XMLReader::ToString(const char *sTag, StringBuilder *OutAttrib)
 		{
 			return this->ToString(sTag, OutAttrib, "");
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::ToString(const char *sTag, StringBuilder *OutAttrib, const char *sDefaultValue)
+		int XMLReader::ToString(const char *sTag, StringBuilder *OutAttrib, const char *sDefaultValue)
 		{
 			OutAttrib->Clear();
 
@@ -788,7 +788,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CXMLReader::ToString(const char *sTag, char *sOutAttrib, int iMaxSz, const char *sDefaultValue)
+		int XMLReader::ToString(const char *sTag, char *sOutAttrib, int iMaxSz, const char *sDefaultValue)
 		{
 			if (this->State.iOriginalXMLSz <= 0)
 			{
@@ -845,7 +845,7 @@ namespace NSWFL {
 		/*
 			//Writes XML to a file.
 		*/
-		bool CXMLReader::ToFile(const char *sFileName)
+		bool XMLReader::ToFile(const char *sFileName)
 		{
 			HANDLE hTarget = NULL;
 

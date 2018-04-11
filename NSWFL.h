@@ -10,6 +10,12 @@
 #define _NSWFL_H_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <Windows.H>
+#include <CommCtrl.H>
+#include <Stdio.H>
+#include <Stdlib.H>
+#include <WinLDAP.H> // Requires WLDAP32.Lib
+
 #include "NSWFL_Types.H"
 #include "NSWFL_Conversion.H"
 #include "NSWFL_DateTime.H"

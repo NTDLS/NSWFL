@@ -10,11 +10,9 @@
 #define _NSWFL_FILE_CPP_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <Windows.H>
-#include <StdIO.H>
-#include <IO.H>
-
 #include "NSWFL.H"
+
+#include <IO.H>
 
 #ifdef _USE_GLOBAL_MEMPOOL
 using namespace NSWFL::Memory;

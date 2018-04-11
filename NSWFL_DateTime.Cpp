@@ -10,14 +10,16 @@
 #define _NSWFL_DATETIME_CPP_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <Windows.H>
-
 #ifdef _MSC_VER //_MSC_VER is defined when compiling with Microsoft Visual Studio (2003, 2005, 2008+)
 #include <ATLTime.H>
 #endif
 
-#include "NSWFL_DateTime.H"
-#include "NSWFL_String.H"
+#include "NSWFL.H"
+
+#ifdef _USE_GLOBAL_MEMPOOL
+using namespace NSWFL::Memory;
+extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace NSWFL {

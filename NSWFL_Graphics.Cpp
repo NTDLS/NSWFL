@@ -10,14 +10,12 @@
 #define _NSWFL_GRAPHICS_CPP_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <Windows.H>
-#include <StdIO.H>
-#include <StdLib.H>
+#include "NSWFL.H"
 
-#include "NSWFL_Debug.H"
-
-#include "NSWFL_Graphics.H"
-#include "NSWFL_String.H"
+#ifdef _USE_GLOBAL_MEMPOOL
+using namespace NSWFL::Memory;
+extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace NSWFL {

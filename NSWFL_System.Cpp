@@ -10,12 +10,12 @@
 #define _NSWFL_SYSTEM_CPP_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <Windows.H>
-#include <StdIO.H>
+#include "NSWFL.H"
 
-#include "NSWFL_System.H"
-#include "NSWFL_Conversion.H"
-#include "NSWFL_Registry.H"
+#ifdef _USE_GLOBAL_MEMPOOL
+using namespace NSWFL::Memory;
+extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace NSWFL {

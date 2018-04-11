@@ -99,6 +99,18 @@
     <ClInclude Include="..\NSWFL_VectorString.H">
       <Filter>NSWFL</Filter>
     </ClInclude>
+    <ClInclude Include="..\NSWFL_URLEncoding.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_XML.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_XMLReader.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_XMLWriter.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\NSWFL_Conversion.Cpp">
@@ -178,6 +190,15 @@
       <Filter>NSWFL</Filter>
     </ClCompile>
     <ClCompile Include="..\NSWFL_SHA1.cpp">
+      <Filter>NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NSWFL_URLEncoding.Cpp">
+      <Filter>NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NSWFL_XMLReader.Cpp">
+      <Filter>NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NSWFL_XMLWriter.Cpp">
       <Filter>NSWFL</Filter>
     </ClCompile>
   </ItemGroup>

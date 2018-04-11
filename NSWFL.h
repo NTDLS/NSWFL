@@ -46,6 +46,10 @@
 #include "NSWFL_Stack.H"
 #include "NSWFL_VectorString.H"
 #include "NSWFL_VectorT.H"
+#include "NSWFL_XMLReader.H"
+#include "NSWFL_XMLWriter.H"
+#include "NSWFL_XML.H"
+#include "NSWFL_URLEncoding.H"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

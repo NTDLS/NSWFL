@@ -281,6 +281,7 @@
   <ItemGroup>
     <ClInclude Include="..\NSWFL.h" />
     <ClInclude Include="..\NSWFL_Base64.h" />
+    <ClInclude Include="..\NSWFL_URLEncoding.H" />
     <ClInclude Include="..\NSWFL_VectorBinary.H" />
     <ClInclude Include="..\NSWFL_CommandLineParser.H" />
     <ClInclude Include="..\NSWFL_Conversion.H" />
@@ -310,6 +311,9 @@
     <ClInclude Include="..\NSWFL_Types.H" />
     <ClInclude Include="..\NSWFL_VectorT.H" />
     <ClInclude Include="..\NSWFL_Windows.H" />
+    <ClInclude Include="..\NSWFL_XML.H" />
+    <ClInclude Include="..\NSWFL_XMLReader.H" />
+    <ClInclude Include="..\NSWFL_XMLWriter.H" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\%40TestApp\Entry.Cpp" />
@@ -338,7 +342,10 @@
     <ClCompile Include="..\NSWFL_StringBuilder.Cpp" />
     <ClCompile Include="..\NSWFL_System.Cpp" />
     <ClCompile Include="..\NSWFL_Types.Cpp" />
+    <ClCompile Include="..\NSWFL_URLEncoding.Cpp" />
     <ClCompile Include="..\NSWFL_Windows.Cpp" />
+    <ClCompile Include="..\NSWFL_XMLReader.Cpp" />
+    <ClCompile Include="..\NSWFL_XMLWriter.Cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />

@@ -13,8 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-using namespace NSWFL::Memory;
-extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

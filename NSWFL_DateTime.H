@@ -21,7 +21,7 @@ namespace NSWFL {
 #ifdef _TIME_T_DEFINED
 		__int64 FileTimeToInt64(FILETIME f);
 		FILETIME Int64ToFileTime(__int64 t);
-		FILETIME GetFileTimeFroear(WORD year);
+		FILETIME GetFileTimeFromYear(WORD year);
 		__time64_t GetYDayFromSystemTime(const SYSTEMTIME* s);
 		SYSTEMTIME TmToSystemTime(struct tm *t);
 		struct tm SystemTimeToTm(SYSTEMTIME *s);

@@ -10,6 +10,8 @@
 #define _NSWFL_WINDOWS_H_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <shtypes.h>
+
 namespace NSWFL {
 	namespace Windows {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +82,7 @@ namespace NSWFL {
 		bool BrowseDirectory(HWND hOwner, char *sInTitle, unsigned long ulFlags, char *sOutBuf, int iMaxOutBufSz, char *sInitialDirectory);
 		bool BrowseDirectory(HWND hOwner, char *sInTitle, unsigned long ulFlags, char *sOutBuf, int iMaxOutBufSz, char *sInitialDirectory, const char *sRoot);
 
-		//LPITEMIDLIST ConvertPathToLpItemIdList(const char *pszPath);
+		LPITEMIDLIST ConvertPathToLpItemIdList(const char *pszPath);
 		HFONT MakeFont(char *sFontName, int iPointSize);
 		void SetFont(HWND hWnd, HFONT hFont);
 		bool WaitOnWindow(HWND &hWnd);

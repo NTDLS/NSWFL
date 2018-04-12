@@ -13,8 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-using namespace NSWFL::Memory;
-extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,7 +135,7 @@ namespace NSWFL {
 		#ifdef _USE_GLOBAL_MEMPOOL
 			this->_sArray = (char **)pMem->ReAllocate(this->_sArray, sizeof(char *), _iCount + 1);
 			this->_iLength = (int *)pMem->ReAllocate(this->_iLength, sizeof(int), _iCount + 1);
-			this->_sArray[_iCount] = pMem->StrDup(sCommandLine);
+			this->_sArray[_iCount] = pMem->CloneString(sCommandLine);
 			this->_iLength[_iCount] = (int)strlen(this->_sArray[_iCount]);
 		#else
 			this->_sArray = (char **)realloc(this->_sArray, sizeof(char *) * _iCount + 1);

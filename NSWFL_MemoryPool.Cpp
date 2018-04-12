@@ -13,8 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-using namespace NSWFL::Memory;
-extern MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -477,9 +476,9 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		#if _MEMPOOL_DEBUG_LEVEL >= _MEMPOOL_DEBUG_ADVANCED
-		char *MemoryPool::_dbg_StrDupnSafe(char *&sOutBuffer, const char *sString, size_t iLength, const char *sCodeFile, const size_t iLineOfCode)
+		char *MemoryPool::_dbg_CloneStringNSafe(char *&sOutBuffer, const char *sString, size_t iLength, const char *sCodeFile, const size_t iLineOfCode)
 		#else
-		char *MemoryPool::StrDupnSafe(char *&sOutBuffer, const char *sString, size_t iLength)
+		char *MemoryPool::CloneStringNSafe(char *&sOutBuffer, const char *sString, size_t iLength)
 		#endif
 		{
 			if (sOutBuffer != NULL)
@@ -505,9 +504,9 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		#if _MEMPOOL_DEBUG_LEVEL >= _MEMPOOL_DEBUG_ADVANCED
-		char *MemoryPool::_dbg_StrDupn(const char *sString, size_t iLength, const char *sCodeFile, const size_t iLineOfCode)
+		char *MemoryPool::_dbg_CloneStringN(const char *sString, size_t iLength, const char *sCodeFile, const size_t iLineOfCode)
 		#else
-		char *MemoryPool::StrDupn(const char *sString, size_t iLength)
+		char *MemoryPool::CloneStringN(const char *sString, size_t iLength)
 		#endif
 		{
 			size_t iCount = iLength + 1;
@@ -526,9 +525,9 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		#if _MEMPOOL_DEBUG_LEVEL >= _MEMPOOL_DEBUG_ADVANCED
-		char *MemoryPool::_dbg_StrDupSafe(char *&sOutBuffer, const char *sString, const char *sCodeFile, const size_t iLineOfCode)
+		char *MemoryPool::_dbg_CloneStringSafe(char *&sOutBuffer, const char *sString, const char *sCodeFile, const size_t iLineOfCode)
 		#else
-		char *MemoryPool::StrDupSafe(char *&sOutBuffer, const char *sString)
+		char *MemoryPool::CloneStringSafe(char *&sOutBuffer, const char *sString)
 		#endif
 		{
 			if (sOutBuffer != NULL)
@@ -552,9 +551,9 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		#if _MEMPOOL_DEBUG_LEVEL >= _MEMPOOL_DEBUG_ADVANCED
-		char *MemoryPool::_dbg_StrDup(const char *sString, const char *sCodeFile, const size_t iLineOfCode)
+		char *MemoryPool::_dbg_CloneString(const char *sString, const char *sCodeFile, const size_t iLineOfCode)
 		#else
-		char *MemoryPool::StrDup(const char *sString)
+		char *MemoryPool::CloneString(const char *sString)
 		#endif
 		{
 			size_t iCount = strlen(sString) + 1;

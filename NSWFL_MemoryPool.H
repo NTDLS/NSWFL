@@ -42,11 +42,11 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		#if _MEMPOOL_DEBUG_LEVEL >= _MEMPOOL_DEBUG_ADVANCED
-		#define StrDupn(sString, iLength) _dbg_StrDupn(sString, iLength, __FILE__, __LINE__)
-		#define StrDup(sString) _dbg_StrDup(sString, __FILE__, __LINE__)
+		#define CloneStringN(sString, iLength) _dbg_CloneStringN(sString, iLength, __FILE__, __LINE__)
+		#define CloneString(sString) _dbg_CloneString(sString, __FILE__, __LINE__)
 
-		#define StrDupnSafe(sOutBuffer, sString, iLength) _dbg_StrDupnSafe(sOutBuffer, sString, iLength, __FILE__, __LINE__)
-		#define StrDupSafe(sOutBuffer, sString) _dbg_StrDupSafe(sOutBuffer, sString, __FILE__, __LINE__)
+		#define CloneStringNSafe(sOutBuffer, sString, iLength) _dbg_CloneStringNSafe(sOutBuffer, sString, iLength, __FILE__, __LINE__)
+		#define CloneStringSafe(sOutBuffer, sString) _dbg_CloneStringSafe(sOutBuffer, sString, __FILE__, __LINE__)
 
 		#define Allocate(iSize, iCount) _dbg_Allocate(iSize, iCount, __FILE__, __LINE__)
 		#define ReAllocate(lpMemory, iSize, iCount) _dbg_ReAllocate(lpMemory, iSize, iCount, __FILE__, __LINE__)
@@ -106,11 +106,11 @@ namespace NSWFL {
 			char sTempFile[MAX_PATH];
 			size_t ReservedBytes(void);
 
-			char *_dbg_StrDupn(const char *sString, size_t iLength, const char *sCodeFile, const size_t iLineOfCode);
-			char *_dbg_StrDup(const char *sString, const char *sCodeFile, const size_t iLineOfCode);
+			char *_dbg_CloneStringN(const char *sString, size_t iLength, const char *sCodeFile, const size_t iLineOfCode);
+			char *_dbg_CloneString(const char *sString, const char *sCodeFile, const size_t iLineOfCode);
 
-			char *_dbg_StrDupnSafe(char *&sOutBuffer, const char *sString, size_t iLength, const char *sCodeFile, const size_t iLineOfCode);
-			char *_dbg_StrDupSafe(char *&sOutBuffer, const char *sString, const char *sCodeFile, const size_t iLineOfCode);
+			char *_dbg_CloneStringNSafe(char *&sOutBuffer, const char *sString, size_t iLength, const char *sCodeFile, const size_t iLineOfCode);
+			char *_dbg_CloneStringSafe(char *&sOutBuffer, const char *sString, const char *sCodeFile, const size_t iLineOfCode);
 
 			void *_dbg_Allocate(const size_t iSize, const size_t iCount,
 				const char *sCodeFile, const size_t iLineOfCode);
@@ -118,10 +118,10 @@ namespace NSWFL {
 				const char *sCodeFile, const size_t iLineOfCode);
 			void *_dbg_TrackMemory(void *lpMemory, const char *sCodeFile, const size_t iLineOfCode);
 		#else
-			char *StrDupn(const char *sString, size_t iLength);
-			char *StrDup(const char *sString);
-			char *StrDupnSafe(char *&sOutBuffer, const char *sString, size_t iLength);
-			char *StrDupSafe(char *&sOutBuffer, const char *sString);
+			char *CloneStringN(const char *sString, size_t iLength);
+			char *CloneString(const char *sString);
+			char *CloneStringNSafe(char *&sOutBuffer, const char *sString, size_t iLength);
+			char *CloneStringSafe(char *&sOutBuffer, const char *sString);
 			void *Allocate(const size_t iSize, const size_t iCount);
 			void *ReAllocate(void *lpMemory, const size_t iSize, const size_t iCount);
 			void *TrackMemory(void *lpMemory);

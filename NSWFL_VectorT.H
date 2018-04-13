@@ -18,7 +18,7 @@ namespace NSWFL {
 		class VectorT
 		{
 		public:
-			T * *_Items;
+			T **_Items;
 			int _Allocated;
 			int _Used;
 
@@ -93,10 +93,7 @@ namespace NSWFL {
 				}
 
 				this->_Items[this->_Used] = (T *)calloc(length, 1);
-				if (value)
-				{
-					memcpy(this->_Items[this->_Used], &value, length);
-				}
+				memcpy(this->_Items[this->_Used], &value, length);
 
 				if (outIndex)
 				{
@@ -119,7 +116,7 @@ namespace NSWFL {
 
 			//Deletes all values from the vector matching on value.
 			//Returns the count of items which were deleted.
-			int DeleteAll(T value)
+			int DeleteAllValues(T value)
 			{
 				int iCount = 0;
 				for (int i = this->_Used - 1; i >= 0 && this->_Used > 0;)
@@ -140,7 +137,7 @@ namespace NSWFL {
 
 			//Deletes a value from the vector.
 			//Returns true if an item was found and removed.
-			bool DeleteOne(T value)
+			bool DeleteFirstValue(T value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -155,7 +152,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool Contiains(T value)
+			bool ContiainsValue(T value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -169,7 +166,7 @@ namespace NSWFL {
 
 			//Finds the index of a given value.
 			//Returns the index of the found value, otherwise returns -1.
-			int IndexOf(T value)
+			int IndexOfValue(T value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -183,7 +180,7 @@ namespace NSWFL {
 
 			//Deletes a value from the vector by it's index.
 			//Returns true if an item was deleted. 
-			bool DeleteAt(int index)
+			bool DeleteAtIndex(int index)
 			{
 				if (index >= 0 && index < this->_Used)
 				{
@@ -213,13 +210,59 @@ namespace NSWFL {
 			}
 
 			//Returns a pointer to the value by index.
-			T at(int index)
+			T GetValueAtIndex(int index)
 			{
 				if (index >= 0 && index < this->_Used)
 				{
 					return *this->_Items[index];
 				}
 				return (T)NULL;
+			}
+
+			//Returns a pointer to the value by index.
+			T* GetPointerAtIndex(int index)
+			{
+				if (index >= 0 && index < this->_Used)
+				{
+					return this->_Items[index];
+				}
+				return (T*)NULL;
+			}
+
+			T FirstValue()
+			{
+				if (index > 0)
+				{
+					return *this->_Items[0];
+				}
+				return (T)NULL;
+			}
+
+			T* FirstPointer()
+			{
+				if (this->_Used > 0)
+				{
+					return this->_Items[0];
+				}
+				return (T*)NULL;
+			}
+
+			T LastValue()
+			{
+				if (this->_Used > 0)
+				{
+					return *this->_Items[_Used - 1];
+				}
+				return (T)NULL;
+			}
+
+			T* LastPointer()
+			{
+				if (index > 0)
+				{
+					return this->_Items[_Used - 1];
+				}
+				return (T*)NULL;
 			}
 
 			void SortAscending()

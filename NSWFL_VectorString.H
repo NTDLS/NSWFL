@@ -116,14 +116,14 @@ namespace NSWFL {
 
 			//Deletes all values from the vector matching on value.
 			//Returns the count of items which were deleted.
-			int DeleteAll(char *value)
+			int DeleteAllValues(char *value)
 			{
 				int iCount = 0;
 				for (int i = this->_Used - 1; i >= 0 && this->_Used > 0;)
 				{
 					if (strcmp(value, this->_Items[i]) == 0)
 					{
-						this->DeleteAt(i);
+						this->DeleteAtIndex(i);
 						iCount++;
 					}
 					else
@@ -137,13 +137,13 @@ namespace NSWFL {
 
 			//Deletes a value from the vector.
 			//Returns true if an item was found and removed.
-			bool DeleteOne(char *value)
+			bool DeleteFirstValue(char *value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
 					if (strcmp(value, this->_Items[i]) == 0)
 					{
-						this->DeleteAt(i);
+						this->DeleteAtIndex(i);
 						return true;
 					}
 				}
@@ -208,7 +208,7 @@ namespace NSWFL {
 
 			//Finds the index of a given value.
 			//Returns the index of the found value, otherwise returns -1.
-			int IndexOf(char *value)
+			int IndexOfFirstValue(char *value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -222,7 +222,7 @@ namespace NSWFL {
 
 			//Deletes a value from the vector by it's index.
 			//Returns true if an item was deleted. 
-			bool DeleteAt(int index)
+			bool DeleteAtIndex(int index)
 			{
 				if (index >= 0 && index < this->_Used)
 				{
@@ -252,7 +252,7 @@ namespace NSWFL {
 			}
 
 			//Returns a pointer to the value by index.
-			char *at(int index)
+			char *GetByIndex(int index)
 			{
 				if (index >= 0 && index < this->_Used)
 				{

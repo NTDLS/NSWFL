@@ -6,18 +6,23 @@
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
 // PARTICULAR PURPOSE.
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifndef _NSWFL_VectorBinary_H_
-#define _NSWFL_VectorBinary_H_
+#ifndef _NSWFL_DictonaryString_H_
+#define _NSWFL_DictonaryString_H_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <Windows.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 namespace NSWFL {
 	namespace Collections {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		class VectorBinary
+		class DictonaryString
 		{
 		public:
 			struct VECTORVALUE {
+				char *Key;
 				char *Value;
 				int Length;
 			};
@@ -27,14 +32,14 @@ namespace NSWFL {
 			int _Used;
 
 		public:
-			VectorBinary()
+			DictonaryString()
 			{
 				this->_Allocated = 10;
 				this->_Used = 0;
 				this->_Items = (VECTORVALUE *)calloc(this->_Allocated, sizeof(VECTORVALUE));
 			}
 
-			~VectorBinary()
+			~DictonaryString()
 			{
 				this->Clear();
 				this->_Allocated = 0;
@@ -55,65 +60,47 @@ namespace NSWFL {
 			}
 
 			//Adds a new item to the vector.
-			VECTORVALUE *Add(char *value)
+			VECTORVALUE *Upsert(char *key, char *value)
 			{
-				return AddGetIndex(value, sizeof(value), NULL);
+				return UpsertGetIndex(key, value, sizeof(value), NULL);
 			}
 
 			//Adds a new item to the vector.
-			VECTORVALUE *Add(char *value, int length)
+			VECTORVALUE *Upsert(char *key, char *value, int length)
 			{
-				return AddGetIndex(value, length, NULL);
+				return UpsertGetIndex(key, value, length, NULL);
 			}
 
 			//Adds a new item to the vector.
-			VECTORVALUE *AddEmpty(int *outIndex)
+			VECTORVALUE *UpsertGetIndex(char *key, char *value, int length, int *outIndex)
 			{
-				if (this->_Used == this->_Allocated)
+				int iExistingIndex = IndexOfKey(key);
+
+				if (iExistingIndex >= 0)
 				{
-					//Keep a 10 percent overage for allocation efficiency.
-					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (VECTORVALUE *)realloc(this->_Items, this->_Allocated * sizeof(VECTORVALUE));
+					free(this->_Items[iExistingIndex].Value);
+					this->_Items[iExistingIndex].Value = _strdup(value);
+					return &this->_Items[iExistingIndex];
 				}
-
-				int length = 0;
-				this->_Items[this->_Used].Value = (char *)calloc(length + 1, 1);
-				(this->_Items[this->_Used].Value)[length] = '\0';
-				this->_Items[this->_Used].Length = length;
-
-				if (outIndex)
+				else
 				{
-					*outIndex = this->_Used;
+					if (this->_Used == this->_Allocated)
+					{
+						//Keep a 10 percent overage for allocation efficiency.
+						this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
+						this->_Items = (VECTORVALUE *)realloc(this->_Items, this->_Allocated * sizeof(VECTORVALUE));
+					}
+
+					this->_Items[this->_Used].Key = _strdup(key);
+					this->_Items[this->_Used].Value = _strdup(value);
+
+					if (outIndex)
+					{
+						*outIndex = this->_Used;
+					}
+
+					return &this->_Items[this->_Used++];
 				}
-
-
-				return &this->_Items[this->_Used++];
-			}
-
-			//Adds a new item to the vector.
-			VECTORVALUE *AddGetIndex(char *value, int length, int *outIndex)
-			{
-				if (this->_Used == this->_Allocated)
-				{
-					//Keep a 10 percent overage for allocation efficiency.
-					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (VECTORVALUE *)realloc(this->_Items, this->_Allocated * sizeof(VECTORVALUE));
-				}
-
-				this->_Items[this->_Used].Value = (char *)calloc(length + 1, 1);
-				if (value)
-				{
-					memcpy(this->_Items[this->_Used].Value, value, length);
-					(this->_Items[this->_Used].Value)[length] = '\0';
-					this->_Items[this->_Used].Length = length;
-				}
-
-				if (outIndex)
-				{
-					*outIndex = this->_Used;
-				}
-
-				return &this->_Items[this->_Used++];
 			}
 
 			void Compact()
@@ -131,7 +118,7 @@ namespace NSWFL {
 				{
 					if (strcmp(value, this->_Items[i].Value) == 0)
 					{
-						this->DeleteAtIndex(i);
+						this->DeleteAt(i);
 						iCount++;
 					}
 					else
@@ -151,7 +138,22 @@ namespace NSWFL {
 				{
 					if (strcmp(value, this->_Items[i].Value) == 0)
 					{
-						this->DeleteAtIndex(i);
+						this->DeleteAt(i);
+						return true;
+					}
+				}
+				return false;
+			}
+
+			//Deletes a value from the vector.
+			//Returns true if an item was found and removed.
+			bool RemoveByKey(char *key)
+			{
+				for (int i = this->_Used - 1; i >= 0; i--)
+				{
+					if (strcmp(key, this->_Items[i].Key) == 0)
+					{
+						this->DeleteAt(i);
 						return true;
 					}
 				}
@@ -160,11 +162,25 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool Contiains(char *value)
+			bool ContiainsValue(char *value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
 					if (strcmp(value, this->_Items[i].Value) == 0)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+
+			//Determines if a given value is in the vector.
+			//Returns true if an item was found, otherwise false.
+			bool ContiainsKey(char *key)
+			{
+				for (int i = this->_Used - 1; i >= 0; i--)
+				{
+					if (strcmp(key, this->_Items[i].Key) == 0)
 					{
 						return true;
 					}
@@ -174,11 +190,11 @@ namespace NSWFL {
 
 			//Finds the index of a given value.
 			//Returns the index of the found value, otherwise returns -1.
-			int IndexOfValue(char *value)
+			int IndexOfKey(char *key)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
-					if (strcmp(value, this->_Items[i].Value) == 0)
+					if (strcmp(key, this->_Items[i].Key) == 0)
 					{
 						return i;
 					}
@@ -188,7 +204,7 @@ namespace NSWFL {
 
 			//Deletes a value from the vector by it's index.
 			//Returns true if an item was deleted. 
-			bool DeleteAtIndex(int index)
+			bool DeleteAt(int index)
 			{
 				if (index >= 0 && index < this->_Used)
 				{
@@ -218,11 +234,22 @@ namespace NSWFL {
 			}
 
 			//Returns a pointer to the value by index.
-			VECTORVALUE *GetValueAtIndex(int index)
+			VECTORVALUE *GetByIndex(int index)
 			{
 				if (index >= 0 && index < this->_Used)
 				{
 					return &this->_Items[index];
+				}
+				return NULL;
+			}
+
+			//Returns a pointer to the value by key.
+			VECTORVALUE *GetByKey(char *key)
+			{
+				int iIndex = IndexOfKey(key);
+				if (iIndex >= 0)
+				{
+					return &this->_Items[iIndex];
 				}
 				return NULL;
 			}

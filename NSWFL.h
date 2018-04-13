@@ -49,6 +49,8 @@
 #include "NSWFL_XML.H"
 #include "NSWFL_URLEncoding.H"
 #include "NSWFL_IsolationLock.h"
+#include "NSWFL_DictonaryT.H"
+#include "NSWFL_DictonaryString.H"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

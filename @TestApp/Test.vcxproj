@@ -281,6 +281,12 @@
   <ItemGroup>
     <ClInclude Include="..\NSWFL.h" />
     <ClInclude Include="..\NSWFL_Base64.h" />
+    <ClInclude Include="..\NSWFL_DictonaryString.H" />
+    <ClInclude Include="..\NSWFL_DictonaryT.H" />
+    <ClInclude Include="..\NSWFL_IntegerStack.H" />
+    <ClInclude Include="..\NSWFL_IsolationLock.h" />
+    <ClInclude Include="..\NSWFL_Trace.H" />
+    <ClInclude Include="..\NSWFL_UIntegerStack.H" />
     <ClInclude Include="..\NSWFL_URLEncoding.H" />
     <ClInclude Include="..\NSWFL_VectorBinary.H" />
     <ClInclude Include="..\NSWFL_CommandLineParser.H" />
@@ -325,6 +331,8 @@
     <ClCompile Include="..\NSWFL_Debug.Cpp" />
     <ClCompile Include="..\NSWFL_File.Cpp" />
     <ClCompile Include="..\NSWFL_Graphics.Cpp" />
+    <ClCompile Include="..\NSWFL_IntegerStack.Cpp" />
+    <ClCompile Include="..\NSWFL_IsolationLock.cpp" />
     <ClCompile Include="..\NSWFL_SHA1.cpp" />
     <ClCompile Include="..\NSWFL_HighPrecisionTimer.cpp" />
     <ClCompile Include="..\NSWFL_InsecureInterface.Cpp" />
@@ -341,7 +349,9 @@
     <ClCompile Include="..\NSWFL_String.Cpp" />
     <ClCompile Include="..\NSWFL_StringBuilder.Cpp" />
     <ClCompile Include="..\NSWFL_System.Cpp" />
+    <ClCompile Include="..\NSWFL_Trace.cpp" />
     <ClCompile Include="..\NSWFL_Types.Cpp" />
+    <ClCompile Include="..\NSWFL_UIntegerStack.Cpp" />
     <ClCompile Include="..\NSWFL_URLEncoding.Cpp" />
     <ClCompile Include="..\NSWFL_Windows.Cpp" />
     <ClCompile Include="..\NSWFL_XMLReader.Cpp" />

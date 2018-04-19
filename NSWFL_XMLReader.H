@@ -10,8 +10,6 @@
 #define _NSWFL_XMLReader_H_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using namespace NSWFL::String;
-
 namespace NSWFL {
 	namespace XML {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,8 +59,8 @@ namespace NSWFL {
 			int ToString(const char *sTag, char *sOutAttrib, int iMaxSz, const char *sDefaultValue);
 			bool ToString(const char *sTag, char *sOutAttrib, int iMaxSz, const char *sDefaultValue, int *iReturnLength);
 			bool ToString(const char *sTag, char *sOutAttrib, int iMaxSz, int *iReturnLength);
-			int ToString(const char *sTag, StringBuilder *OutAttrib);
-			int ToString(const char *sTag, StringBuilder *OutAttrib, const char *sDefaultValue);
+			int ToString(const char *sTag, String::StringBuilder *OutAttrib);
+			int ToString(const char *sTag, String::StringBuilder *OutAttrib, const char *sDefaultValue);
 
 			unsigned int ToUInteger(const char *sTag);
 			bool ToUInteger(const char *sTag, unsigned int *uiOutValue);

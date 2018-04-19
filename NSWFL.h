@@ -51,6 +51,9 @@
 #include "NSWFL_IsolationLock.h"
 #include "NSWFL_DictonaryT.H"
 #include "NSWFL_DictonaryString.H"
+#include "NSWFL_IntegerStack.H"
+#include "NSWFL_UIntegerStack.H"
+#include "NSWFL_Trace.H"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

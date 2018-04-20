@@ -159,4 +159,11 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::Memory
 } //namespace::NSWFL
+
+#ifdef _USE_GLOBAL_MEMPOOL
+extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
 #endif
+
+#endif
+
+

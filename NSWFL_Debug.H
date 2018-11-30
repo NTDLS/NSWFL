@@ -31,6 +31,9 @@ namespace NSWFL {
 					__FUNCTION__, __FILE__, __DATE__, __TIME__, #sExpression, __LINE__, sMsg); \
 				MessageBox(NULL, sAssert, "Fatal Application Error!", MB_ICONSTOP | MB_SYSTEMMODAL); \
 			}
+		#else
+		#define Assert(sExpression, sMsg)
+		#endif
 
 		typedef bool(*DebugConsoleHandler)(const char *sText, int iTextLength);
 
@@ -47,11 +50,6 @@ namespace NSWFL {
 			DebugConsoleHandler Handler;
 		} _DEBUG_THREAD_DATA, *_LPDEBUG_THREAD_DATA;
 
-		#else
-		#define Assert(sExpression, sMsg)
-		#define OpenDebugConsole()
-		#define CloseDebugConsole()
-		#endif
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::Debug

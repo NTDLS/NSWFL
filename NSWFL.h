@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  Copyright © NetworkDLS 2010, All rights reserved
+//  Copyright ï¿½ NetworkDLS 2010, All rights reserved
 //
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
@@ -52,6 +52,8 @@
 #include "NSWFL_DictonaryT.H"
 #include "NSWFL_DictonaryString.H"
 #include "NSWFL_Network.H"
+#include "NSWFL_IntegerStack.H"
+#include "NSWFL_UIntegerStack.H"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

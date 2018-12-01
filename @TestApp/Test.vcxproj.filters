@@ -111,6 +111,24 @@
     <ClInclude Include="..\NSWFL_XMLWriter.H">
       <Filter>NSWFL</Filter>
     </ClInclude>
+    <ClInclude Include="..\NSWFL_DictonaryString.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_DictonaryT.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_IntegerStack.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_IsolationLock.h">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_Trace.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_UIntegerStack.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\NSWFL_Conversion.Cpp">
@@ -199,6 +217,18 @@
       <Filter>NSWFL</Filter>
     </ClCompile>
     <ClCompile Include="..\NSWFL_XMLWriter.Cpp">
+      <Filter>NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NSWFL_IntegerStack.Cpp">
+      <Filter>NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NSWFL_IsolationLock.cpp">
+      <Filter>NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NSWFL_Trace.cpp">
+      <Filter>NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NSWFL_UIntegerStack.Cpp">
       <Filter>NSWFL</Filter>
     </ClCompile>
   </ItemGroup>

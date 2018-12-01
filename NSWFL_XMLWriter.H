@@ -20,7 +20,7 @@ namespace NSWFL {
 			void *pUserData; //Use it for whatever you want!
 
 			typedef struct _tag_XMLWriter_State {
-				StringBuilder *pBuilder;
+				String::StringBuilder *pBuilder;
 				char sName[255];
 			} XMLWriterState, *LPXMLWriterState;
 
@@ -34,7 +34,7 @@ namespace NSWFL {
 			int GetName(char *sOutName, int iMaxOut);
 			void Destroy(void);
 
-			StringBuilder *GetBuilder(void);
+			String::StringBuilder *GetBuilder(void);
 
 			XMLReader *ToReader(XMLReader *lpXMLReader);
 
@@ -58,7 +58,7 @@ namespace NSWFL {
 			int Length(void);
 
 			int Text(char *sOutXML, int iMaxOutSz);
-			void Text(StringBuilder *textOut);
+			void Text(String::StringBuilder *textOut);
 			char *Text(void);
 			char *Text(int *iOutSz);
 			void FreePointer(void *pPointer);

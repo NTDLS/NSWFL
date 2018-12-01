@@ -29,6 +29,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#ifdef VER_PRODUCTMAJORVERSION
 #if VER_PRODUCTMAJORVERSION <= 6
 		int legacy_inet_pton(int af, const char *src, void *dst)
 		{
@@ -76,6 +77,7 @@ namespace NSWFL {
 			return (WSAAddressToString((struct sockaddr *)&ss, sizeof(ss), NULL, dst, &s) == 0) ?
 				dst : NULL;
 		}
+#endif
 #endif
 
 

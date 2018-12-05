@@ -100,38 +100,54 @@ namespace NSWFL {
 		//Open read/write console with a console input handler. If the handler returns false, the console is closed.
 		bool OpenDebugConsole(const char *sTitle, DebugConsoleHandler pHandler, char *sInitialText)
 		{
-			if (AllocConsole())
+			bool bIsAreadyOpen = (GetConsoleWindow() != NULL);
+
+			if (bIsAreadyOpen || AllocConsole())
 			{
 				bIsConsoleOpen = true;
 
 				SetConsoleTitle(sTitle);
-				DebugRedirectOutput();
+				if (bIsAreadyOpen == false)
+				{
+					DebugRedirectOutput();
+				}
+
+				if (sInitialText)
+				{
+					printf("%s", sInitialText);
+				}
+
+				if (bIsAreadyOpen == false)
+				{
+					DebugRedirectInput();
+				}
 
 				if (pHandler)
 				{
-					DebugRedirectInput();
-
-					if (sInitialText)
-					{
-						printf("%s", sInitialText);
-					}
-
-					_DEBUG_THREAD_DATA data;
-					memset(&data, 0, sizeof(data));
-
-					data.Handler = pHandler;
-
-					char sEventName[255];
-					sprintf_s(sEventName, sizeof(sEventName), "DCT_%d", GetTickCount());
-					data.hEvent = CreateEvent(NULL, FALSE, FALSE, sEventName);
-					CreateThread(0, NULL, DebugConsoleThread, &data, 0, NULL);
-					WaitForSingleObject(data.hEvent, INFINITE);
+					StartDebugConsoleHandler(pHandler);
 				}
 
 				return true;
 			}
 
 			return false;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		//Allows for interaction with the console.
+		void StartDebugConsoleHandler(DebugConsoleHandler pHandler)
+		{
+			_DEBUG_THREAD_DATA data;
+			memset(&data, 0, sizeof(data));
+
+			data.Handler = pHandler;
+
+			char sEventName[255];
+			sprintf_s(sEventName, sizeof(sEventName), "DCT_%d", GetTickCount());
+			data.hEvent = CreateEvent(NULL, FALSE, FALSE, sEventName);
+			CreateThread(0, NULL, DebugConsoleThread, &data, 0, NULL);
+			WaitForSingleObject(data.hEvent, INFINITE);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

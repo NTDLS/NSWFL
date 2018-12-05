@@ -40,6 +40,7 @@ namespace NSWFL {
 		void RedirectIO(FILE *hFrom, HANDLE hTo);
 		bool OpenDebugConsole(const char *sTitle, DebugConsoleHandler pHandler);
 		bool OpenDebugConsole(const char *sTitle, DebugConsoleHandler pHandler, char *sInitialText);
+		void StartDebugConsoleHandler(DebugConsoleHandler pHandler);
 		bool OpenDebugConsole(const char *sTitle);
 		void DebugRedirectOutput(void);
 		void DebugRedirectInput(void);

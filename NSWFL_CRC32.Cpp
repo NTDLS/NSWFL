@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  Copyright © NetworkDLS 2010, All rights reserved
+//  Copyright Â© NetworkDLS 2010, All rights reserved
 //
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
@@ -127,7 +127,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/*
-			Returns the calculated CRC23 for the given string.
+			Returns the calculated CRC32 for the given string.
 		*/
 
 		unsigned int CRC32::FullCRC(const unsigned char *sData, size_t iDataLength)

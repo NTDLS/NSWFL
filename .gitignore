@@ -10,3 +10,7 @@
 *.ilk
 *.ipch
 *.user
+
+\@TestApp/.vs/
+
+\@TestApp/Debug/

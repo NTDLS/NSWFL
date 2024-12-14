@@ -19,7 +19,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ namespace NSWFL {
 
 		const unsigned short usDaysInMonths[] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 		const bool bWeekDays[7] = { 0,1,1,1,1,1,0 };
-		const char *sDayNames[8] = {
+		const char* sDayNames[8] = {
 			"Sunday",
 			"Monday",
 			"Tuesday",
@@ -48,7 +48,7 @@ namespace NSWFL {
 			0 First file time is equal to second file time.
 			1 First file time is later than second file time.
 		*/
-		int CompareDateTime(SYSTEMTIME *t1, SYSTEMTIME *t2)
+		int CompareDateTime(SYSTEMTIME* t1, SYSTEMTIME* t2)
 		{
 			FILETIME f1;
 			FILETIME f2;
@@ -71,9 +71,9 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int GetWeekdayNumber(const char *name)
+		int GetWeekdayNumber(const char* name)
 		{
-			const char *sDays[6][8] =
+			const char* sDays[6][8] =
 			{
 				{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", NULL},
 				{"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa", NULL},
@@ -99,9 +99,9 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int GetMonthNumber(const char *name)
+		int GetMonthNumber(const char* name)
 		{
-			const char *sMonths[3][13] =
+			const char* sMonths[3][13] =
 			{
 				{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", NULL},
 				{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", NULL},
@@ -124,7 +124,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Get_Time(char *sOutVal, int iMaxSz, DWORD dwFlags)
+		int Get_Time(char* sOutVal, int iMaxSz, DWORD dwFlags)
 		{
 			SYSTEMTIME ST;
 			GetLocalTime(&ST);
@@ -133,7 +133,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Get_Time(char *sOutVal, int iMaxSz)
+		int Get_Time(char* sOutVal, int iMaxSz)
 		{
 			SYSTEMTIME ST;
 			GetLocalTime(&ST);
@@ -142,7 +142,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Get_LongDate(char *sOutVal, int iMaxSz)
+		int Get_LongDate(char* sOutVal, int iMaxSz)
 		{
 			SYSTEMTIME ST;
 			GetLocalTime(&ST);
@@ -151,7 +151,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Get_ShortDate(char *sOutVal, int iMaxSz)
+		int Get_ShortDate(char* sOutVal, int iMaxSz)
 		{
 			SYSTEMTIME ST;
 			GetLocalTime(&ST);
@@ -160,7 +160,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void Get_LocalDateTime(DWORD *dwDate, DWORD *dwTime)
+		void Get_LocalDateTime(DWORD* dwDate, DWORD* dwTime)
 		{
 			SYSTEMTIME ST;
 			GetLocalTime(&ST);
@@ -171,7 +171,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void Get_SystemDateTime(DWORD *dwDate, DWORD *dwTime)
+		void Get_SystemDateTime(DWORD* dwDate, DWORD* dwTime)
 		{
 			SYSTEMTIME ST;
 			GetSystemTime(&ST);
@@ -184,7 +184,7 @@ namespace NSWFL {
 		/*
 			Converts a day number into a day name. Example" DayNumberToName(0) return "Sunday"
 		*/
-		const char *DayNumberToName(const int iNumber)
+		const char* DayNumberToName(const int iNumber)
 		{
 			if (iNumber >= 0 && iNumber <= 7)
 			{
@@ -199,7 +199,7 @@ namespace NSWFL {
 		/*
 			Converts a day name into a day number. Example" DayNameToNumber("Monday") return 1
 		*/
-		int DayNameToNumber(const char *sDayName)
+		int DayNameToNumber(const char* sDayName)
 		{
 			for (int i = 0; sDayNames[i]; i++)
 			{
@@ -234,7 +234,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Convert Hour, Minute & Second To A DWORD Value
 
-		DWORD TimeToLong(SYSTEMTIME *ST)
+		DWORD TimeToLong(SYSTEMTIME* ST)
 		{
 			return NSWFL::DateTime::TimeToLong(ST->wHour, ST->wMinute, ST->wSecond);
 		}
@@ -250,7 +250,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Convert A DWORD Value To Hour, Minute & Second
 
-		void LongToTime(DWORD dwTime, int *piHour, int *piMin, int *piSec)
+		void LongToTime(DWORD dwTime, int* piHour, int* piMin, int* piSec)
 		{
 			*piSec = (int)dwTime % 60l;
 			dwTime /= 60l;
@@ -281,7 +281,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Convert Year, Month & Day To A DWORD Value
 
-		DWORD DateToLong(SYSTEMTIME *ST)
+		DWORD DateToLong(SYSTEMTIME* ST)
 		{
 			return NSWFL::DateTime::DateToLong(ST->wYear, ST->wMonth, ST->wDay);
 		}
@@ -324,7 +324,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Convert A DWORD Value To Year, Month & Day
 
-		void LongToDate(DWORD dwDate, int *piYear, int *piMonth, int *piDay)
+		void LongToDate(DWORD dwDate, int* piYear, int* piMonth, int* piDay)
 		{
 			DWORD a = 0;
 			DWORD b = 0;
@@ -418,7 +418,7 @@ namespace NSWFL {
 #if VER_PRODUCTMAJORVERSION > 6
 #ifdef _MSC_VER
 /* tm <--> SYSTEMTIME */
-		SYSTEMTIME TmToSystemTime(struct tm *t)
+		SYSTEMTIME TmToSystemTime(struct tm* t)
 		{
 			SYSTEMTIME s;
 
@@ -436,11 +436,11 @@ namespace NSWFL {
 #endif
 #endif
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if VER_PRODUCTMAJORVERSION > 6
 #ifdef _MSC_VER
-		struct tm SystemTimeToTm(SYSTEMTIME *s)
+		struct tm SystemTimeToTm(SYSTEMTIME* s)
 		{
 			struct tm t;
 
@@ -576,7 +576,7 @@ namespace NSWFL {
 
 #if VER_PRODUCTMAJORVERSION > 6
 #ifdef _MSC_VER
-		bool DateAddSystem(const char *sInterval, int iNumber, SYSTEMTIME *lpST)
+		bool DateAddSystem(const char* sInterval, int iNumber, SYSTEMTIME* lpST)
 		{
 			tm tmTimeStamp;
 			__time64_t tUnixTime;
@@ -610,7 +610,7 @@ namespace NSWFL {
 
 #if VER_PRODUCTMAJORVERSION > 6
 #ifdef _MSC_VER
-		bool DateAddLocal(const char *sInterval, int iNumber, SYSTEMTIME *lpST)
+		bool DateAddLocal(const char* sInterval, int iNumber, SYSTEMTIME* lpST)
 		{
 			tm tmTimeStamp;
 			__time64_t tUnixTime;
@@ -648,7 +648,7 @@ namespace NSWFL {
 
 #if VER_PRODUCTMAJORVERSION > 6
 #ifdef _MSC_VER
-		bool DateAddLocal(const char *sInterval, int iNumber, __time64_t *tUnixTime)
+		bool DateAddLocal(const char* sInterval, int iNumber, __time64_t* tUnixTime)
 		{
 			tm tmTimeStamp;
 			_localtime64_s(&tmTimeStamp, tUnixTime);
@@ -661,7 +661,7 @@ namespace NSWFL {
 
 #if VER_PRODUCTMAJORVERSION > 6
 #ifdef _MSC_VER
-		bool DateAddSystem(const char *sInterval, int iNumber, __time64_t *tUnixTime)
+		bool DateAddSystem(const char* sInterval, int iNumber, __time64_t* tUnixTime)
 		{
 			tm tmTimeStamp;
 			_gmtime64_s(&tmTimeStamp, tUnixTime);
@@ -674,7 +674,7 @@ namespace NSWFL {
 
 #if VER_PRODUCTMAJORVERSION > 6
 #ifdef _MSC_VER
-		bool DateAdd(const char *sInterval, int iNumber, tm *tmTimeStamp)
+		bool DateAdd(const char* sInterval, int iNumber, tm* tmTimeStamp)
 		{
 			if (NSWFL::String::StrEqlI(sInterval, "s")) //Second
 				tmTimeStamp->tm_sec += iNumber;

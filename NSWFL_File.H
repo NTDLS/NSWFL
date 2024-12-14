@@ -37,63 +37,63 @@ namespace NSWFL {
 		__int64 FileSeek(HANDLE hFile);
 		__int64 FileSeek(HANDLE hFile, __int64 l64Distance, DWORD dwMoveMethod);
 
-		void CorrectForwardPath(char *sPath, int iMaxSz);
-		void CorrectReversePath(char *sPath, int iMaxSz);
-		void CorrectReversePath(char *sPath, int iMaxSz, bool bPossibleNetworkPath);
-		void CleanFileName(char *sPath, int iMaxSz);
+		void CorrectForwardPath(char* sPath, int iMaxSz);
+		void CorrectReversePath(char* sPath, int iMaxSz);
+		void CorrectReversePath(char* sPath, int iMaxSz, bool bPossibleNetworkPath);
+		void CleanFileName(char* sPath, int iMaxSz);
 
-		char *FileSizeFriendly(__int64 i64FileSize, char *sOut, int iMaxOutSz);
-		char *FileSizeFriendly(__int64 i64FileSize, int iDecimalPlaces, char *sOut, int iMaxOutSz);
+		char* FileSizeFriendly(__int64 i64FileSize, char* sOut, int iMaxOutSz);
+		char* FileSizeFriendly(__int64 i64FileSize, int iDecimalPlaces, char* sOut, int iMaxOutSz);
 
-		char *FileSizeFriendly(unsigned __int64 i64FileSize, char *sOut, int iMaxOutSz);
-		char *FileSizeFriendly(unsigned __int64 i64FileSize, int iDecimalPlaces, char *sOut, int iMaxOutSz);
+		char* FileSizeFriendly(unsigned __int64 i64FileSize, char* sOut, int iMaxOutSz);
+		char* FileSizeFriendly(unsigned __int64 i64FileSize, int iDecimalPlaces, char* sOut, int iMaxOutSz);
 
-		char *FileSizeFriendly(int iFileSize, char *sOut, int iMaxOutSz);
-		char *FileSizeFriendly(int iFileSize, int iDecimalPlaces, char *sOut, int iMaxOutSz);
+		char* FileSizeFriendly(int iFileSize, char* sOut, int iMaxOutSz);
+		char* FileSizeFriendly(int iFileSize, int iDecimalPlaces, char* sOut, int iMaxOutSz);
 
-		char *FileSizeFriendly(double dFileSize, char *sOut, int iMaxOutSz);
-		char *FileSizeFriendly(double dFileSize, int iDecimalPlaces, char *sOut, int iMaxOutSz);
+		char* FileSizeFriendly(double dFileSize, char* sOut, int iMaxOutSz);
+		char* FileSizeFriendly(double dFileSize, int iDecimalPlaces, char* sOut, int iMaxOutSz);
 
-		bool FileAccess(const char *sFileName, short iMode);
+		bool FileAccess(const char* sFileName, short iMode);
 
-		bool FileSize(const char *sFileName, __int64 *i64FileSize);
-		bool FileSize(HANDLE hFile, __int64 *i64FileSize);
-		bool FileSize(const char *sFileName, unsigned long *lFileSize);
-		bool FileSize(HANDLE hFile, unsigned long *lFileSize);
-		bool FileSize(const char *sFileName, int *iFileSize);
+		bool FileSize(const char* sFileName, __int64* i64FileSize);
+		bool FileSize(HANDLE hFile, __int64* i64FileSize);
+		bool FileSize(const char* sFileName, unsigned long* lFileSize);
+		bool FileSize(HANDLE hFile, unsigned long* lFileSize);
+		bool FileSize(const char* sFileName, int* iFileSize);
 
 		bool TruncateFile(HANDLE hFile, __int64 i64Size);
-		bool TruncateFile(const char *sFile, __int64 i64Size);
+		bool TruncateFile(const char* sFile, __int64 i64Size);
 
-		bool BufferDataToFile(const char *sFile, const char *sBuf, const unsigned long ulBufSz);
+		bool BufferDataToFile(const char* sFile, const char* sBuf, const unsigned long ulBufSz);
 
-		bool CreateFolderStructure(const char *sPath);
-		bool DeleteFolderStructure(const char *sPath);
-		bool IsDirectory(const char *sPath);
+		bool CreateFolderStructure(const char* sPath);
+		bool DeleteFolderStructure(const char* sPath);
+		bool IsDirectory(const char* sPath);
 
-		DWORD Get_CurrentDirectory(char *sOutVal, int iMaxSz);
-		DWORD Get_TempDirectory(char *sOutVal, int iMaxSz);
-		DWORD Get_WindowsDirectory(char *sOutVal, int iMaxSz);
-		DWORD Get_SystemDirectory(char *sOutVal, int iMaxSz);
-		DWORD Get_DesktopDirectory(char *sOut, DWORD dwMaxOut);
-		DWORD Get_DocumentsDirectory(char *sOut, DWORD dwMaxOut);
-		DWORD Get_PicturesDirectory(char *sOut, DWORD dwMaxOut);
-		DWORD Get_MusicDirectory(char *sOut, DWORD dwMaxOut);
-		DWORD Get_VideosDirectory(char *sOut, DWORD dwMaxOut);
+		DWORD Get_CurrentDirectory(char* sOutVal, int iMaxSz);
+		DWORD Get_TempDirectory(char* sOutVal, int iMaxSz);
+		DWORD Get_WindowsDirectory(char* sOutVal, int iMaxSz);
+		DWORD Get_SystemDirectory(char* sOutVal, int iMaxSz);
+		DWORD Get_DesktopDirectory(char* sOut, DWORD dwMaxOut);
+		DWORD Get_DocumentsDirectory(char* sOut, DWORD dwMaxOut);
+		DWORD Get_PicturesDirectory(char* sOut, DWORD dwMaxOut);
+		DWORD Get_MusicDirectory(char* sOut, DWORD dwMaxOut);
+		DWORD Get_VideosDirectory(char* sOut, DWORD dwMaxOut);
 
-		bool GetFileExtension(const char *sFileNameAndPath, char *sOutExt, int iMaxSz);
-		bool GetFileNameOnly(const char *sFileNameAndPath, char *sOutFile, int iMaxSz);
-		bool GetFileName(const char *sFileNameAndPath, char *sOutPath, int iMaxSz);
-		bool GetFilePath(const char *sFileNameAndPath, char *sOutPath, int iMaxSz);
-		bool GetFileDrive(const char *sFileNameAndPath, char *sOutDrive, int iMaxSz);
+		bool GetFileExtension(const char* sFileNameAndPath, char* sOutExt, int iMaxSz);
+		bool GetFileNameOnly(const char* sFileNameAndPath, char* sOutFile, int iMaxSz);
+		bool GetFileName(const char* sFileNameAndPath, char* sOutPath, int iMaxSz);
+		bool GetFilePath(const char* sFileNameAndPath, char* sOutPath, int iMaxSz);
+		bool GetFileDrive(const char* sFileNameAndPath, char* sOutDrive, int iMaxSz);
 
-		bool GetModuleFilePath(char *sOutPath, int iMaxSz);
+		bool GetModuleFilePath(char* sOutPath, int iMaxSz);
 
-		bool ArePathsEqual(const char *sInPath1, const char *sInPath2);
-		bool IsChildPath(const char *sInParent, const char *sInChild);
-		int AppendPaths(char *sTarget, int iMaxTargetSize, const char *sPart1, const char *Part2);
+		bool ArePathsEqual(const char* sInPath1, const char* sInPath2);
+		bool IsChildPath(const char* sInParent, const char* sInChild);
+		int AppendPaths(char* sTarget, int iMaxTargetSize, const char* sPart1, const char* Part2);
 
-		char *MakeAttributeString(DWORD dwAttribs, char *sOut, int iMaxSz);
+		char* MakeAttributeString(DWORD dwAttribs, char* sOut, int iMaxSz);
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::File

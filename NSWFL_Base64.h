@@ -14,8 +14,8 @@ namespace NSWFL {
 	namespace Conversion {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Base64Encode(const unsigned char *input, int input_length, unsigned char *output, int output_length);
-		int Base64Decode(const unsigned char *input, int input_length, unsigned char *output, int output_length);
+		int Base64Encode(const unsigned char* input, int input_length, unsigned char* output, int output_length);
+		int Base64Decode(const unsigned char* input, int input_length, unsigned char* output, int output_length);
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::Conversion

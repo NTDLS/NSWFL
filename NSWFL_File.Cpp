@@ -15,7 +15,7 @@
 #include <IO.H>
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,15 +23,15 @@ namespace NSWFL {
 	namespace File {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void CorrectReversePath(char *sPath, int iMaxSz, bool bPossibleNetworkPath)
+		void CorrectReversePath(char* sPath, int iMaxSz, bool bPossibleNetworkPath)
 		{
 			int iAlloc = (int)strlen(sPath) + 1;
 			if (iAlloc > 0)
 			{
 #ifdef _USE_GLOBAL_MEMPOOL
-				char *sAltPath = (char *)pMem->Allocate(iAlloc, sizeof(char));
+				char* sAltPath = (char*)pMem->Allocate(iAlloc, sizeof(char));
 #else
-				char *sAltPath = (char *)calloc(iAlloc, sizeof(char));
+				char* sAltPath = (char*)calloc(iAlloc, sizeof(char));
 #endif
 
 				bool bIsNetPath = bPossibleNetworkPath && (_strnicmp(sPath, "\\\\", 2) == 0);
@@ -60,20 +60,20 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//This function replaces all ForwardSlashes with BackSlashs and removes duplicates.
-		void CorrectReversePath(char *sPath, int iMaxSz)
+		void CorrectReversePath(char* sPath, int iMaxSz)
 		{
 			return NSWFL::File::CorrectReversePath(sPath, iMaxSz, false);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		//This function replaces all BackSlashs with ForwardSlashes and removes duplicates.
-		void CorrectForwardPath(char *sPath, int iMaxSz)
+		//This function replaces all backslashes with ForwardSlashes and removes duplicates.
+		void CorrectForwardPath(char* sPath, int iMaxSz)
 		{
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sAltPath = (char *)pMem->Allocate(iMaxSz + 1, sizeof(char));
+			char* sAltPath = (char*)pMem->Allocate(iMaxSz + 1, sizeof(char));
 #else
-			char *sAltPath = (char *)calloc(iMaxSz + 1, sizeof(char));
+			char* sAltPath = (char*)calloc(iMaxSz + 1, sizeof(char));
 #endif
 
 			NSWFL::String::ReplaceStrings(sPath, "\\", "/", sAltPath, iMaxSz + 1);
@@ -92,10 +92,10 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void CleanFileName(char *sPath, int iMaxSz)
+		void CleanFileName(char* sPath, int iMaxSz)
 		{
 			int iLength = (int)strlen(sPath);
-			char *sInvalid = "`~!@#$%^&*()=+<>/?;:\"\'[{}]|\\\0";
+			char* sInvalid = "`~!@#$%^&*()=+<>/?;:\"\'[{}]|\\\0";
 			for (int iPos = 0; iPos < iLength; iPos++)
 			{
 				for (int iInv = 0; sInvalid[iInv]; iInv++)
@@ -108,9 +108,9 @@ namespace NSWFL {
 			}
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sAltPath = (char *)pMem->Allocate(iMaxSz + 1, sizeof(char));
+			char* sAltPath = (char*)pMem->Allocate(iMaxSz + 1, sizeof(char));
 #else
-			char *sAltPath = (char *)calloc(iMaxSz + 1, sizeof(char));
+			char* sAltPath = (char*)calloc(iMaxSz + 1, sizeof(char));
 #endif
 
 			NSWFL::String::ReplaceStrings(sPath, "__", "_", sAltPath, iMaxSz + 1);
@@ -129,7 +129,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool IsChildPath(const char *sInParent, const char *sInChild)
+		bool IsChildPath(const char* sInParent, const char* sInChild)
 		{
 			char sParent[MAX_PATH];
 			strcpy_s(sParent, sizeof(sParent), sInParent);
@@ -169,7 +169,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int AppendPaths(char *sTarget, int iMaxTargetSize, const char *sPart1, const char *Part2)
+		int AppendPaths(char* sTarget, int iMaxTargetSize, const char* sPart1, const char* Part2)
 		{
 			sprintf_s(sTarget, iMaxTargetSize, "%s\\%s", sPart1, Part2);
 			NSWFL::File::CorrectReversePath(sTarget, iMaxTargetSize);
@@ -178,7 +178,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool ArePathsEqual(const char *sInPath1, const char *sInPath2)
+		bool ArePathsEqual(const char* sInPath1, const char* sInPath2)
 		{
 			char sPath1[MAX_PATH];
 			strcpy_s(sPath1, sizeof(sPath1), sInPath1);
@@ -203,7 +203,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool GetFileDrive(const char *sFileNameAndPath, char *sOutDrive, int iMaxSz)
+		bool GetFileDrive(const char* sFileNameAndPath, char* sOutDrive, int iMaxSz)
 		{
 			return(_splitpath_s(sFileNameAndPath,
 				sOutDrive, iMaxSz,
@@ -214,7 +214,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool GetModuleFilePath(char *sOutPath, int iMaxSz)
+		bool GetModuleFilePath(char* sOutPath, int iMaxSz)
 		{
 			char fileandPath[MAX_PATH];
 			memset(fileandPath, 0, sizeof(fileandPath));
@@ -227,7 +227,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool GetFilePath(const char *sFileNameAndPath, char *sOutPath, int iMaxSz)
+		bool GetFilePath(const char* sFileNameAndPath, char* sOutPath, int iMaxSz)
 		{
 			char sDrive[MAX_PATH];
 			char sDir[MAX_PATH];
@@ -248,7 +248,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool GetFileName(const char *sFileNameAndPath, char *sOutPath, int iMaxSz)
+		bool GetFileName(const char* sFileNameAndPath, char* sOutPath, int iMaxSz)
 		{
 			char sFile[MAX_PATH];
 			char sExt[MAX_PATH];
@@ -268,7 +268,7 @@ namespace NSWFL {
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool GetFileNameOnly(const char *sFileNameAndPath, char *sOutFile, int iMaxSz)
+		bool GetFileNameOnly(const char* sFileNameAndPath, char* sOutFile, int iMaxSz)
 		{
 #ifdef _MSC_VER
 			return(_splitpath_s(sFileNameAndPath, NULL, NULL, NULL, NULL, sOutFile, iMaxSz, NULL, NULL) == 0);
@@ -280,7 +280,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool GetFileExtension(const char *sFileNameAndPath, char *sOutExt, int iMaxSz)
+		bool GetFileExtension(const char* sFileNameAndPath, char* sOutExt, int iMaxSz)
 		{
 #ifdef _MSC_VER
 			return(_splitpath_s(sFileNameAndPath, NULL, NULL, NULL, NULL, NULL, NULL, sOutExt, iMaxSz) == 0);
@@ -292,7 +292,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		DWORD Get_DesktopDirectory(char *sOut, DWORD dwMaxOut)
+		DWORD Get_DesktopDirectory(char* sOut, DWORD dwMaxOut)
 		{
 			memset(sOut, 0, dwMaxOut);
 
@@ -306,7 +306,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		DWORD Get_DocumentsDirectory(char *sOut, DWORD dwMaxOut)
+		DWORD Get_DocumentsDirectory(char* sOut, DWORD dwMaxOut)
 		{
 			memset(sOut, 0, dwMaxOut);
 
@@ -322,7 +322,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		DWORD Get_VideosDirectory(char *sOut, DWORD dwMaxOut)
+		DWORD Get_VideosDirectory(char* sOut, DWORD dwMaxOut)
 		{
 			memset(sOut, 0, dwMaxOut);
 
@@ -336,7 +336,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		DWORD Get_MusicDirectory(char *sOut, DWORD dwMaxOut)
+		DWORD Get_MusicDirectory(char* sOut, DWORD dwMaxOut)
 		{
 			memset(sOut, 0, dwMaxOut);
 
@@ -350,7 +350,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		DWORD Get_PicturesDirectory(char *sOut, DWORD dwMaxOut)
+		DWORD Get_PicturesDirectory(char* sOut, DWORD dwMaxOut)
 		{
 			memset(sOut, 0, dwMaxOut);
 
@@ -364,63 +364,63 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		DWORD Get_CurrentDirectory(char *sOutVal, int iMaxSz)
+		DWORD Get_CurrentDirectory(char* sOutVal, int iMaxSz)
 		{
 			return GetCurrentDirectory(iMaxSz, sOutVal);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		DWORD Get_TempDirectory(char *sOutVal, int iMaxSz)
+		DWORD Get_TempDirectory(char* sOutVal, int iMaxSz)
 		{
 			return GetTempPath(iMaxSz, sOutVal);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		DWORD Get_WindowsDirectory(char *sOutVal, int iMaxSz)
+		DWORD Get_WindowsDirectory(char* sOutVal, int iMaxSz)
 		{
 			return GetWindowsDirectory(sOutVal, iMaxSz);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		DWORD Get_SystemDirectory(char *sOutVal, int iMaxSz)
+		DWORD Get_SystemDirectory(char* sOutVal, int iMaxSz)
 		{
 			return GetSystemDirectory(sOutVal, iMaxSz);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FileSizeFriendly(int iFileSize, char *sOut, int iMaxOutSz)
+		char* FileSizeFriendly(int iFileSize, char* sOut, int iMaxOutSz)
 		{
 			return NSWFL::File::FileSizeFriendly((__int64)iFileSize, sOut, iMaxOutSz);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FileSizeFriendly(int iFileSize, int iDecimalPlaces, char *sOut, int iMaxOutSz)
+		char* FileSizeFriendly(int iFileSize, int iDecimalPlaces, char* sOut, int iMaxOutSz)
 		{
 			return NSWFL::File::FileSizeFriendly((__int64)iFileSize, iDecimalPlaces, sOut, iMaxOutSz);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FileSizeFriendly(unsigned __int64 i64FileSize, char *sOut, int iMaxOutSz)
+		char* FileSizeFriendly(unsigned __int64 i64FileSize, char* sOut, int iMaxOutSz)
 		{
 			return NSWFL::File::FileSizeFriendly(i64FileSize, -2, sOut, iMaxOutSz);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FileSizeFriendly(__int64 i64FileSize, char *sOut, int iMaxOutSz)
+		char* FileSizeFriendly(__int64 i64FileSize, char* sOut, int iMaxOutSz)
 		{
 			return NSWFL::File::FileSizeFriendly(i64FileSize, -2, sOut, iMaxOutSz);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FileSizeFriendly(__int64 i64FileSize, int iDecimalPlaces, char *sOut, int iMaxOutSz)
+		char* FileSizeFriendly(__int64 i64FileSize, int iDecimalPlaces, char* sOut, int iMaxOutSz)
 		{
 			bool bAllowChange = false;
 
@@ -432,7 +432,7 @@ namespace NSWFL {
 
 			__int64 i64DivideBy = 1;
 
-			char *sSzStr = "";
+			char* sSzStr = "";
 			char sFormatted[128];
 			char sFormat[10];
 
@@ -481,7 +481,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FileSizeFriendly(unsigned __int64 i64FileSize, int iDecimalPlaces, char *sOut, int iMaxOutSz)
+		char* FileSizeFriendly(unsigned __int64 i64FileSize, int iDecimalPlaces, char* sOut, int iMaxOutSz)
 		{
 			bool bAllowChange = false;
 
@@ -493,7 +493,7 @@ namespace NSWFL {
 
 			__int64 i64DivideBy = 1;
 
-			char *sSzStr = "";
+			char* sSzStr = "";
 			char sFormatted[128];
 			char sFormat[10];
 
@@ -541,7 +541,7 @@ namespace NSWFL {
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FileSizeFriendly(double dFileSize, char *sOut, int iMaxOutSz)
+		char* FileSizeFriendly(double dFileSize, char* sOut, int iMaxOutSz)
 		{
 			return NSWFL::File::FileSizeFriendly(dFileSize, 2, sOut, iMaxOutSz);
 		}
@@ -549,7 +549,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FileSizeFriendly(double dFileSize, int iDecimalPlaces, char *sOut, int iMaxOutSz)
+		char* FileSizeFriendly(double dFileSize, int iDecimalPlaces, char* sOut, int iMaxOutSz)
 		{
 			bool bAllowChange = false;
 
@@ -561,7 +561,7 @@ namespace NSWFL {
 
 			double dDivideBy = 1;
 
-			char *sSzStr = "";
+			char* sSzStr = "";
 			char sFormatted[128];
 			char sFormat[10];
 
@@ -655,7 +655,7 @@ namespace NSWFL {
 				FExecute - Execute (Ignored)
 				FExist   - Check for existence of file
 		*/
-		bool FileAccess(const char *sFileName, short iMode)
+		bool FileAccess(const char* sFileName, short iMode)
 		{
 			if (_access(sFileName, iMode) == 0)
 			{
@@ -669,7 +669,7 @@ namespace NSWFL {
 		/*
 			WARNING! - Will not handle files over 4GB.
 		*/
-		bool FileSize(const char *sFileName, unsigned long *lFileSize)
+		bool FileSize(const char* sFileName, unsigned long* lFileSize)
 		{
 			HANDLE hfSource = CreateFile(sFileName, 0, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 			if (hfSource != INVALID_HANDLE_VALUE)
@@ -685,7 +685,7 @@ namespace NSWFL {
 		/*
 			WARNING! - Will not handle files over 4GB.
 		*/
-		bool FileSize(HANDLE hFile, unsigned long *lFileSize)
+		bool FileSize(HANDLE hFile, unsigned long* lFileSize)
 		{
 			LARGE_INTEGER liFileSize;
 			memset(&liFileSize, 0, sizeof(liFileSize));
@@ -719,7 +719,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool FileSize(const char *sFileName, int *iFileSize)
+		bool FileSize(const char* sFileName, int* iFileSize)
 		{
 			HANDLE hfSource = CreateFile(sFileName, 0, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 			__int64 i64FileSize = 0;
@@ -731,7 +731,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool FileSize(const char *sFileName, __int64 *i64FileSize)
+		bool FileSize(const char* sFileName, __int64* i64FileSize)
 		{
 			HANDLE hfSource = CreateFile(sFileName, 0, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 			bool bResult = NSWFL::File::FileSize(hfSource, i64FileSize);
@@ -741,7 +741,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool FileSize(HANDLE hFile, __int64 *i64FileSize)
+		bool FileSize(HANDLE hFile, __int64* i64FileSize)
 		{
 #ifdef _MSC_VER
 			LARGE_INTEGER liFileSize;
@@ -758,7 +758,7 @@ namespace NSWFL {
 			LARGE_INTEGER liFileSize;
 			memset(&liFileSize, 0, sizeof(liFileSize));
 
-			if ((liFileSize.LowPart = (DWORD)GetFileSize(hFile, (DWORD *)&liFileSize.HighPart)) == INVALID_FILE_SIZE)
+			if ((liFileSize.LowPart = (DWORD)GetFileSize(hFile, (DWORD*)&liFileSize.HighPart)) == INVALID_FILE_SIZE)
 			{
 				return false;
 			}
@@ -771,14 +771,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool BufferDataToFile(const char *sFile, const char *sBuf, const unsigned long ulBufSz)
+		bool BufferDataToFile(const char* sFile, const char* sBuf, const unsigned long ulBufSz)
 		{
 			char sBuffer[FILECHUNKSIZE + 1];
 
 			unsigned long ulRPos = 0;
 			unsigned long ulWPos = 0;
 
-			FILE *hTarget = NULL;
+			FILE* hTarget = NULL;
 
 			if (fopen_s(&hTarget, sFile, "wb") != 0)
 			{
@@ -810,7 +810,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool DeleteFolderStructure(const char *sPath)
+		bool DeleteFolderStructure(const char* sPath)
 		{
 			char sDir[MAX_PATH];
 			int iNameSz = (int)strlen(sPath);
@@ -836,7 +836,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CreateFolderStructure(const char *sPath)
+		bool CreateFolderStructure(const char* sPath)
 		{
 			char sDir[MAX_PATH];
 
@@ -873,7 +873,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool IsDirectory(const char *sPath)
+		bool IsDirectory(const char* sPath)
 		{
 			int Attrib = GetFileAttributes(sPath);
 			if (Attrib != 0xFFFFFFFF)
@@ -896,7 +896,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool TruncateFile(const char *sFile, __int64 i64Size)
+		bool TruncateFile(const char* sFile, __int64 i64Size)
 		{
 			HANDLE hFile = CreateFile(
 				sFile,
@@ -906,7 +906,7 @@ namespace NSWFL {
 				OPEN_EXISTING,
 				FILE_ATTRIBUTE_NORMAL,
 				NULL
-				);
+			);
 			if (hFile == INVALID_HANDLE_VALUE)
 			{
 				return false;
@@ -921,26 +921,26 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *MakeAttributeString(DWORD dwAttribs, char *sOut, int iMaxSz)
+		char* MakeAttributeString(DWORD dwAttribs, char* sOut, int iMaxSz)
 		{
 			strcpy_s(sOut, iMaxSz, "");
 
-			if (dwAttribs &FILE_ATTRIBUTE_ARCHIVE)
+			if (dwAttribs & FILE_ATTRIBUTE_ARCHIVE)
 			{
 				strcat_s(sOut, iMaxSz, "A ");
 			}
 
-			if (dwAttribs &FILE_ATTRIBUTE_HIDDEN)
+			if (dwAttribs & FILE_ATTRIBUTE_HIDDEN)
 			{
 				strcat_s(sOut, iMaxSz, "H ");
 			}
 
-			if (dwAttribs &FILE_ATTRIBUTE_READONLY)
+			if (dwAttribs & FILE_ATTRIBUTE_READONLY)
 			{
 				strcat_s(sOut, iMaxSz, "R ");
 			}
 
-			if (dwAttribs &FILE_ATTRIBUTE_SYSTEM)
+			if (dwAttribs & FILE_ATTRIBUTE_SYSTEM)
 			{
 				strcat_s(sOut, iMaxSz, "S ");
 			}

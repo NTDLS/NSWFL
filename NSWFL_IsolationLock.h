@@ -38,11 +38,11 @@ namespace NSWFL {
 			bool UnlockShared(bool bValue);
 			bool UnlockExclusive(bool bValue);
 
-			char *UnlockShared(char *sValue);
-			char *UnlockExclusive(char *sValue);
+			char* UnlockShared(char* sValue);
+			char* UnlockExclusive(char* sValue);
 
-			void *UnlockShared(void *pValue);
-			void *UnlockExclusive(void *pValue);
+			void* UnlockShared(void* pValue);
+			void* UnlockExclusive(void* pValue);
 
 			double UnlockShared(double dValue);
 			double UnlockExclusive(double dValue);

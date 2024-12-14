@@ -34,9 +34,9 @@ namespace NSWFL {
 		int ReverseLong(long lIn);
 		int ReverseInt(int iIn);
 		unsigned long VersionToLong(int iBit1, int iBit2, int iBit3, int iBit4);
-		void LongToVersion(DWORD dwInVer, int *iBit1, int *iBit2, int *iBit3, int *iBit4);
-		__int64 *SortIntegerArrayASC(__int64 *i64Array, unsigned int iItems);
-		__int64 *SortIntegerArrayDESC(__int64 *i64Array, unsigned int iItems);
+		void LongToVersion(DWORD dwInVer, int* iBit1, int* iBit2, int* iBit3, int* iBit4);
+		__int64* SortIntegerArrayASC(__int64* i64Array, unsigned int iItems);
+		__int64* SortIntegerArrayDESC(__int64* i64Array, unsigned int iItems);
 		unsigned int RangeValue(unsigned int iValue, unsigned int iAtLeast, unsigned int iAtMost);
 		double RoundToNearest(double r);
 
@@ -45,7 +45,7 @@ namespace NSWFL {
 
 		bool WithinPercent(double dValue, int iPercent, double dOf);
 
-		char *ULongToBinary(DWORD_PTR iBitMask, char *sBinary, int iMaxOutSz);
+		char* ULongToBinary(DWORD_PTR iBitMask, char* sBinary, int iMaxOutSz);
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::Math

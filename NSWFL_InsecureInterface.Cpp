@@ -13,37 +13,37 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace NSWFL {
 	namespace InsecureInterface {
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	#ifdef NSWFL_USE_ALT_SECURE_PROCS
+#ifdef NSWFL_USE_ALT_SECURE_PROCS
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	bool fopen_s_Ex(FILE **Target, const char *sFile, const char * Mode)
-	{
-		return((*Target = fopen(sFile, Mode)) == NULL);
-	}
-
-	short _fcvt_s(char* buffer, size_t sizeInBytes, double value, int count, int *dec, int *sign)
-	{
-		char *sCVT = _fcvt(value, count, dec, sign);
-		if (sCVT != NULL)
+		bool fopen_s_Ex(FILE** Target, const char* sFile, const char* Mode)
 		{
-			strcpy(buffer, sCVT);
-			return true;
+			return((*Target = fopen(sFile, Mode)) == NULL);
 		}
-		return false;
-	}
+
+		short _fcvt_s(char* buffer, size_t sizeInBytes, double value, int count, int* dec, int* sign)
+		{
+			char* sCVT = _fcvt(value, count, dec, sign);
+			if (sCVT != NULL)
+			{
+				strcpy(buffer, sCVT);
+				return true;
+			}
+			return false;
+		}
 
 
-	#endif
+#endif
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::InsecureInterface

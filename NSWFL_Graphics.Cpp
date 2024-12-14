@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		/*
-			Replaces all occurrences of the first pixil's color with the suppled color.
+			Replaces all occurrences of the first pixels color with the suppled color.
 
 			//Example:
 			MakeBitmapTransparent(hBitmap, GetSysColor(COLOR_MENU))

@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ namespace NSWFL {
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  //Return 40+1 (hash+null) characters through sOut.
-		bool SimpleSHA1(const char *sStr, int iStrSz, char *sOut, int iMaxSz)
+		bool SimpleSHA1(const char* sStr, int iStrSz, char* sOut, int iMaxSz)
 		{
 			bool bResult = false;
 			SHA1 SHA;
@@ -71,7 +71,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Return 40+1 (hash+null) characters through sOut.
-		bool SimpleSHA1(const char *sStr, char *sOut, int iMaxSz)
+		bool SimpleSHA1(const char* sStr, char* sOut, int iMaxSz)
 		{
 			return SimpleSHA1(sStr, (int)strlen(sStr), sOut, iMaxSz);
 		}
@@ -127,7 +127,7 @@ namespace NSWFL {
 		 *		True if successful, false if it failed.
 		*/
 
-		bool SHA1::Result(unsigned long *message_digest_array)
+		bool SHA1::Result(unsigned long* message_digest_array)
 		{
 			int i = 0; // Counter
 
@@ -153,7 +153,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Returns 41 bytes: 40 for the hash 1 for the terminating null.
 
-		bool SHA1::ToString(char *sOut, int iMaxSz)
+		bool SHA1::ToString(char* sOut, int iMaxSz)
 		{
 			unsigned long ulDigest[5];
 			if (this->Result(ulDigest))
@@ -166,7 +166,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Returns 41 bytes: 40 for the hash 1 for the terminating null.
 
-		bool SHA1::ToString(unsigned long *MessageDigest, char *sOut, int iMaxSz)
+		bool SHA1::ToString(unsigned long* MessageDigest, char* sOut, int iMaxSz)
 		{
 			if (iMaxSz >= 41)
 			{
@@ -214,7 +214,7 @@ namespace NSWFL {
 		 *			message.
 		 *
 		*/
-		void SHA1::Input(const unsigned char*message_array, unsigned length)
+		void SHA1::Input(const unsigned char* message_array, unsigned length)
 		{
 			if (!length)
 			{
@@ -265,9 +265,9 @@ namespace NSWFL {
 		 *		length: [in]
 		 *			The length of the message_array
 		*/
-		void SHA1::Input(const char *message_array, unsigned length)
+		void SHA1::Input(const char* message_array, unsigned length)
 		{
-			Input((unsigned char *)message_array, length);
+			Input((unsigned char*)message_array, length);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -296,7 +296,7 @@ namespace NSWFL {
 		 */
 		void SHA1::Input(char message_element)
 		{
-			Input((unsigned char *)&message_element, 1);
+			Input((unsigned char*)&message_element, 1);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

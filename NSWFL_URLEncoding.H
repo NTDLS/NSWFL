@@ -14,11 +14,11 @@ namespace NSWFL {
 	namespace Conversion {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int URLDecode(char *sBuffer);
+		int URLDecode(char* sBuffer);
 
-		int URLEncode(const char *sIn, char *sOut, int iMaxOut);
-		int URLEncode(const char *sIn, int iLength, char *sOut, int iMaxOut);
-		int URLEncodeSimulate(const char *sIn, int iLength);
+		int URLEncode(const char* sIn, char* sOut, int iMaxOut);
+		int URLEncode(const char* sIn, int iLength, char* sOut, int iMaxOut);
+		int URLEncodeSimulate(const char* sIn, int iLength);
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::Conversion

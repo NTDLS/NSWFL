@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,12 +21,12 @@ namespace NSWFL {
 	namespace String {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//The returned pointer must be freed externally.
-		char *Space(size_t iSpaces)
+		char* Space(size_t iSpaces)
 		{
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sSpaces = (char *)pMem->Allocate(iSpaces + 1, 1);
+			char* sSpaces = (char*)pMem->Allocate(iSpaces + 1, 1);
 #else
-			char *sSpaces = (char *)malloc(iSpaces + 1);
+			char* sSpaces = (char*)malloc(iSpaces + 1);
 #endif
 
 			if (sSpaces)
@@ -40,7 +40,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *Space(char *sBuffer, size_t iSpaces)
+		char* Space(char* sBuffer, size_t iSpaces)
 		{
 			memset(sBuffer, ' ', iSpaces);
 			sBuffer[iSpaces] = '\0';
@@ -85,14 +85,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int IndexOf(const char *sBuf, const char cCharacter)
+		int IndexOf(const char* sBuf, const char cCharacter)
 		{
 			return NSWFL::String::IndexOf(sBuf, (int)strlen(sBuf), cCharacter);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int IndexOf(const char *sBuf, int iBufSz, const char cCharacter)
+		int IndexOf(const char* sBuf, int iBufSz, const char cCharacter)
 		{
 			for (int iPos = 0; iPos < iBufSz; iPos++)
 			{
@@ -106,14 +106,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int LastIndexOf(const char *sBuf, const char cCharacter)
+		int LastIndexOf(const char* sBuf, const char cCharacter)
 		{
 			return NSWFL::String::LastIndexOf(sBuf, (int)strlen(sBuf), cCharacter);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int LastIndexOf(const char *sBuf, int iBufSz, const char cCharacter)
+		int LastIndexOf(const char* sBuf, int iBufSz, const char cCharacter)
 		{
 			if (iBufSz > 0)
 			{
@@ -130,7 +130,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *UCase(char *sBuf, int iBufSz)
+		char* UCase(char* sBuf, int iBufSz)
 		{
 			for (int iPos = 0; iPos < iBufSz; iPos++)
 			{
@@ -141,7 +141,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *LCase(char *sBuf, int iBufSz)
+		char* LCase(char* sBuf, int iBufSz)
 		{
 			for (int iPos = 0; iPos < iBufSz; iPos++)
 			{
@@ -152,21 +152,21 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *UCase(char *sBuf)
+		char* UCase(char* sBuf)
 		{
 			return NSWFL::String::UCase(sBuf, (int)strlen(sBuf));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *LCase(char *sBuf)
+		char* LCase(char* sBuf)
 		{
 			return NSWFL::String::LCase(sBuf, (int)strlen(sBuf));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Trim(char *sInOutBuf, int iLen)
+		int Trim(char* sInOutBuf, int iLen)
 		{
 			int iLength = NSWFL::String::LTrim(sInOutBuf, iLen);
 			return NSWFL::String::RTrim(sInOutBuf, iLen);
@@ -174,14 +174,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Trim(char *sInOutBuf)
+		int Trim(char* sInOutBuf)
 		{
 			return NSWFL::String::Trim(sInOutBuf, (int)strlen(sInOutBuf));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int LTrim(char *sInOutBuf, int iLen)
+		int LTrim(char* sInOutBuf, int iLen)
 		{
 			if (iLen > 0)
 			{
@@ -195,14 +195,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int LTrim(char *sInOutBuf)
+		int LTrim(char* sInOutBuf)
 		{
 			return NSWFL::String::LTrim(sInOutBuf, (int)strlen(sInOutBuf));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int RTrim(char *sInOutBuf, int iLen)
+		int RTrim(char* sInOutBuf, int iLen)
 		{
 			if (iLen > 0)
 			{
@@ -214,7 +214,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int RTrim(char *sInOutBuf)
+		int RTrim(char* sInOutBuf)
 		{
 			return NSWFL::String::RTrim(sInOutBuf, (int)strlen(sInOutBuf));
 		}
@@ -223,7 +223,7 @@ namespace NSWFL {
 
 		//sInOutBuf returns the string passed into it with all white spaces
 		//	trimmed off the beginning and end of it.
-		int CleanWhiteSpaces(char *sInOutBuf, int iLen)
+		int CleanWhiteSpaces(char* sInOutBuf, int iLen)
 		{
 			if (iLen > 0)
 			{
@@ -237,24 +237,24 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CleanWhiteSpaces(char *sInOutBuf)
+		int CleanWhiteSpaces(char* sInOutBuf)
 		{
 			return NSWFL::String::CleanWhiteSpaces(sInOutBuf, (int)strlen(sInOutBuf));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ReplaceStringsI(const char *sInBuf, const char *sReplace, const char *sWith, char *sOutBuf, int iMaxSz)
+		int ReplaceStringsI(const char* sInBuf, const char* sReplace, const char* sWith, char* sOutBuf, int iMaxSz)
 		{
 			return NSWFL::String::ReplaceStringsI(sInBuf, sReplace, (int)strlen(sReplace), sWith, sOutBuf, iMaxSz);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ReplaceStringsI(const char *sInBuf, const char *sReplace, int iReplaceLen,
-			const char *sWith, char *sOutBuf, int iMaxSz)
+		int ReplaceStringsI(const char* sInBuf, const char* sReplace, int iReplaceLen,
+			const char* sWith, char* sOutBuf, int iMaxSz)
 		{
-			const char *sNULL = NULL;
+			const char* sNULL = NULL;
 
 			int iReplaces = 0;
 
@@ -281,17 +281,17 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ReplaceStrings(const char *sInBuf, const char *sReplace, const char *sWith, char *sOutBuf, int iMaxSz)
+		int ReplaceStrings(const char* sInBuf, const char* sReplace, const char* sWith, char* sOutBuf, int iMaxSz)
 		{
 			return NSWFL::String::ReplaceStrings(sInBuf, sReplace, (int)strlen(sReplace), sWith, sOutBuf, iMaxSz);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ReplaceStrings(const char *sInBuf, const char *sReplace, int iReplaceLen,
-			const char *sWith, char *sOutBuf, int iMaxSz)
+		int ReplaceStrings(const char* sInBuf, const char* sReplace, int iReplaceLen,
+			const char* sWith, char* sOutBuf, int iMaxSz)
 		{
-			const char *sNULL = NULL;
+			const char* sNULL = NULL;
 
 			int iReplaces = 0;
 
@@ -318,7 +318,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ReplaceCharacter(char *sInBuf, int iBufferLength, const char cReplace, const char cWith)
+		int ReplaceCharacter(char* sInBuf, int iBufferLength, const char cReplace, const char cWith)
 		{
 			int iOccur = 0;
 
@@ -336,7 +336,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ReplaceCharacter(const char *sInBuf, char *sOutBuf, const char cReplace, const char cWith)
+		int ReplaceCharacter(const char* sInBuf, char* sOutBuf, const char cReplace, const char cWith)
 		{
 			int iPos = 0;
 			int iOccur = 0;
@@ -359,17 +359,17 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int ReplaceCharacter(char *sInOutBuf, const char cReplace, const char cWith)
+		int ReplaceCharacter(char* sInOutBuf, const char cReplace, const char cWith)
 		{
 			return NSWFL::String::ReplaceCharacter(sInOutBuf, sInOutBuf, cReplace, cWith);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool ReverseString(char *sBuf, int iBufSz)
+		bool ReverseString(char* sBuf, int iBufSz)
 		{
-			char *String1 = NULL;
-			char *String2 = NULL;
+			char* String1 = NULL;
+			char* String2 = NULL;
 
 			if (!sBuf || !*sBuf)
 			{
@@ -388,7 +388,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InStrI(const char *sSearchFor, int sSearchForSz, const char *sInBuf, const int iBufSz, const int iStartPos)
+		int InStrI(const char* sSearchFor, int sSearchForSz, const char* sInBuf, const int iBufSz, const int iStartPos)
 		{
 			int iLookingLoop = 0;
 
@@ -427,7 +427,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InStr(const char *sSearchFor, int sSearchForSz, const char *sInBuf, const int iBufSz, const int iStartPos)
+		int InStr(const char* sSearchFor, int sSearchForSz, const char* sInBuf, const int iBufSz, const int iStartPos)
 		{
 			int iLookingLoop = 0;
 
@@ -466,35 +466,35 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InStr(const char *sSearchFor, const char *sInBuf, const int iBufSz, const int iStartPos)
+		int InStr(const char* sSearchFor, const char* sInBuf, const int iBufSz, const int iStartPos)
 		{
 			return InStr(sSearchFor, (int)strlen(sSearchFor), sInBuf, iBufSz, iStartPos);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InStr(const char *sSearchFor, const char *sInBuf)
+		int InStr(const char* sSearchFor, const char* sInBuf)
 		{
 			return InStr(sSearchFor, sInBuf, (int)strlen(sInBuf), 0);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InStrI(const char *sSearchFor, const char *sInBuf, const int iBufSz, const int iStartPos)
+		int InStrI(const char* sSearchFor, const char* sInBuf, const int iBufSz, const int iStartPos)
 		{
 			return InStrI(sSearchFor, (int)strlen(sSearchFor), sInBuf, iBufSz, iStartPos);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InStrI(const char *sSearchFor, const char *sInBuf)
+		int InStrI(const char* sSearchFor, const char* sInBuf)
 		{
 			return InStrI(sSearchFor, sInBuf, (int)strlen(sInBuf), 0);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CompareBinString(const char *sBuf1, int iStrSz1, const char *sBuf2, int iStrSz2)
+		bool CompareBinString(const char* sBuf1, int iStrSz1, const char* sBuf2, int iStrSz2)
 		{
 			if (iStrSz1 > iStrSz2) //Use the shortest string.
 			{
@@ -506,7 +506,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringScan(const char *sInBuf, int iStartPos, int iLength, char *sOutVal, int iMaxSz)
+		int StringScan(const char* sInBuf, int iStartPos, int iLength, char* sOutVal, int iMaxSz)
 		{
 			strncpy_s(sOutVal, iMaxSz, &sInBuf[iStartPos], iLength);
 			return iLength;
@@ -514,7 +514,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int AppendStrings(const char *sBuf1, const char *sBuf2, int iBuf1Sz, int iBuf2Sz, char *sOutBuf, int iMaxSz)
+		int AppendStrings(const char* sBuf1, const char* sBuf2, int iBuf1Sz, int iBuf2Sz, char* sOutBuf, int iMaxSz)
 		{
 			int iWPos = iBuf1Sz;
 			int iRPos = 0;
@@ -538,7 +538,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CompareFlagedString(const char *sBuf, const char *sFlag)
+		int CompareFlagedString(const char* sBuf, const char* sFlag)
 		{
 			int iFlagLength = (int)strlen(sFlag);
 
@@ -552,7 +552,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int GetFlagedValue(const char *sBuf, int iSkpLen, int iBufSz, char *sOutBuf, int iMaxSz)
+		int GetFlagedValue(const char* sBuf, int iSkpLen, int iBufSz, char* sOutBuf, int iMaxSz)
 		{
 			int iWPos = 0;
 			int iRPos = iSkpLen;
@@ -574,11 +574,11 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *SimpleCipherString(char *sBuf, int iBufSz)
+		char* SimpleCipherString(char* sBuf, int iBufSz)
 		{
 			for (int iPos = 0; iPos < iBufSz; iPos++)
 			{
-				((unsigned char *)sBuf)[iPos] += (unsigned char)128;
+				((unsigned char*)sBuf)[iPos] += (unsigned char)128;
 			}
 
 			return sBuf;
@@ -586,7 +586,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CopyString(char *sOutBuf, int iMaxSz, const char *sInBuf, int iInBufSz)
+		int CopyString(char* sOutBuf, int iMaxSz, const char* sInBuf, int iInBufSz)
 		{
 			int iPos = 0;
 
@@ -609,7 +609,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Returns the count of the Occurrences of "cLookFor" that are found in "sInStr".
 
-		int CountOccurrences(const char cLookFor, const char *sInStr, int iInStrSz)
+		int CountOccurrences(const char cLookFor, const char* sInStr, int iInStrSz)
 		{
 			int iOccurrences = 0;
 			for (int iPos = 0; iPos < iInStrSz; iPos++)
@@ -626,7 +626,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Returns the count of the Occurrences of "cLookFor" that are found in "sInStr".
 
-		int CountOccurrences(const char cLookFor, const char *sInStr)
+		int CountOccurrences(const char cLookFor, const char* sInStr)
 		{
 			return CountOccurrences(cLookFor, sInStr, (int)strlen(sInStr));
 		}
@@ -634,7 +634,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Returns the count of the Occurrences of "sLookFor" that are found in "sInStr".
 
-		int CountOccurrences(const char *sLookFor, const char *sInStr, int iInStrSz)
+		int CountOccurrences(const char* sLookFor, const char* sInStr, int iInStrSz)
 		{
 			int iPos = 0;
 			int iOccurrences = 0;
@@ -650,7 +650,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Returns the count of the Occurrences of "sLookFor" that are found in "sInStr".
 
-		int CountOccurrences(const char *sLookFor, const char *sInStr)
+		int CountOccurrences(const char* sLookFor, const char* sInStr)
 		{
 			return CountOccurrences(sLookFor, sInStr, (int)strlen(sInStr));
 		}
@@ -679,7 +679,7 @@ namespace NSWFL {
 				FreeSplitStringEx(sArray, iItems);
 		*/
 
-		char **Split(const char *sBuf, int iBufSz, int *iOutItemCount, const char *sSplitOn, int iSplitOnSz)
+		char** Split(const char* sBuf, int iBufSz, int* iOutItemCount, const char* sSplitOn, int iSplitOnSz)
 		{
 			int iStartPos = 0;
 
@@ -710,18 +710,18 @@ namespace NSWFL {
 			//Allocate enough RAM to hold all the sub-strings and the last NULL array item.
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char **sArray = (char **)pMem->Allocate(sizeof(char *), iItemCount + 1);
+			char** sArray = (char**)pMem->Allocate(sizeof(char*), iItemCount + 1);
 #else
-			char **sArray = (char **)calloc(sizeof(char *), iItemCount + 1);
+			char** sArray = (char**)calloc(sizeof(char*), iItemCount + 1);
 #endif
 
 			while ((iStartPos = InStr(sSplitOn, iSplitOnSz, sBuf, iBufSz, iRPos)) >= 0)
 			{
 				//Allocate enough RAM to hold the sub-string.
 #ifdef _USE_GLOBAL_MEMPOOL
-				sArray[iItems] = (char *)pMem->Allocate(sizeof(char), (iStartPos - iRPos) + 1);
+				sArray[iItems] = (char*)pMem->Allocate(sizeof(char), (iStartPos - iRPos) + 1);
 #else
-				sArray[iItems] = (char *)calloc(sizeof(char), (iStartPos - iRPos) + 1);
+				sArray[iItems] = (char*)calloc(sizeof(char), (iStartPos - iRPos) + 1);
 #endif
 
 				iWPos = 0;
@@ -742,9 +742,9 @@ namespace NSWFL {
 			{
 				//Allocate enough RAM to hold the sub-string.
 #ifdef _USE_GLOBAL_MEMPOOL
-				sArray[iItems] = (char *)pMem->Allocate(sizeof(char), (iBufSz - iRPos) + 1);
+				sArray[iItems] = (char*)pMem->Allocate(sizeof(char), (iBufSz - iRPos) + 1);
 #else
-				sArray[iItems] = (char *)calloc(sizeof(char), (iBufSz - iRPos) + 1);
+				sArray[iItems] = (char*)calloc(sizeof(char), (iBufSz - iRPos) + 1);
 #endif
 
 				iWPos = 0;
@@ -773,7 +773,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char **Split(const char *sBuf, int iBufSz, int *iOutItemCount, const char *sSplitOn)
+		char** Split(const char* sBuf, int iBufSz, int* iOutItemCount, const char* sSplitOn)
 		{
 			return Split(sBuf, iBufSz, iOutItemCount, sSplitOn, (int)strlen(sSplitOn));
 		}
@@ -801,14 +801,14 @@ namespace NSWFL {
 				FreeSplitString(sArray);
 		*/
 
-		char **Split(const char *sBuf, const char *sSplitOn)
+		char** Split(const char* sBuf, const char* sSplitOn)
 		{
 			return Split(sBuf, (int)strlen(sBuf), NULL, sSplitOn, (int)strlen(sSplitOn));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char **Split(const char *sBuf, int iBufSz, const char *sSplitOn)
+		char** Split(const char* sBuf, int iBufSz, const char* sSplitOn)
 		{
 			return Split(sBuf, iBufSz, NULL, sSplitOn, (int)strlen(sSplitOn));
 		}
@@ -821,7 +821,7 @@ namespace NSWFL {
 
 			Intended for use with the Split() and SplitEx functions.
 		*/
-		void FreeArray(char **sArray, int iItems)
+		void FreeArray(char** sArray, int iItems)
 		{
 			if (sArray)
 			{
@@ -849,7 +849,7 @@ namespace NSWFL {
 
 			Intended for use with the Split() and SplitEx functions.
 		*/
-		void FreeArray(char **sArray)
+		void FreeArray(char** sArray)
 		{
 			NSWFL::String::FreeArray(sArray, NSWFL::String::UBound(sArray));
 		}
@@ -861,7 +861,7 @@ namespace NSWFL {
 
 			Intended for use with the Split() and SplitEx functions.
 		*/
-		int UBound(char **sArray)
+		int UBound(char** sArray)
 		{
 			int iItem = 0;
 
@@ -883,7 +883,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Returns true if the passed string is in the following formats:
 			//0, -0.0, 0.0, -0, -0.0
-		bool IsNumeric(const char *sText, int iLength)
+		bool IsNumeric(const char* sText, int iLength)
 		{
 			int iRPos = 0;
 			bool bHasDecimal = false;
@@ -931,14 +931,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool IsNumeric(const char *sText)
+		bool IsNumeric(const char* sText)
 		{
 			return IsNumeric(sText, (int)strlen(sText));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Mid(const char *sInBuf, int iInBufSz, int iStartPos, int iRChars, char *sOutBuf, int iMaxSz)
+		int Mid(const char* sInBuf, int iInBufSz, int iStartPos, int iRChars, char* sOutBuf, int iMaxSz)
 		{
 			int iRPos = iStartPos;
 			int iWPos = 0;
@@ -967,7 +967,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StrCat(char *sDest, int iMaxSz, int iDestLen, const char *sAppend, int iAppendLen)
+		int StrCat(char* sDest, int iMaxSz, int iDestLen, const char* sAppend, int iAppendLen)
 		{
 			int iRPos = 0;
 			int iWPos = iDestLen;
@@ -987,7 +987,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Right(char *sOutBuf, int iMaxSz, const char *sInBuf, int iInLen, int iRight)
+		int Right(char* sOutBuf, int iMaxSz, const char* sInBuf, int iInLen, int iRight)
 		{
 			int iLen = iInLen;
 			int iRPos = iLen - iRight;
@@ -1016,7 +1016,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Left(char *sOutBuf, int iMaxSz, const char *sInBuf, int iInLen, int iLeft)
+		int Left(char* sOutBuf, int iMaxSz, const char* sInBuf, int iInLen, int iLeft)
 		{
 			int iLen = iInLen;
 			int iRPos = 0;
@@ -1067,7 +1067,7 @@ namespace NSWFL {
 
 		//Returns the position of the first valid character in the string passed into sInBuf.
 		//iInBufSz should be the length of the string being passed into sInBuf
-		int GetFirstCharPos(const char *sInBuf, int iInBufSz)
+		int GetFirstCharPos(const char* sInBuf, int iInBufSz)
 		{
 			for (int iRPos = 0; iRPos < iInBufSz; iRPos++)
 			{
@@ -1081,7 +1081,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int GetFirstCharPos(const char *sInBuf)
+		int GetFirstCharPos(const char* sInBuf)
 		{
 			return GetFirstCharPos(sInBuf, (int)strlen(sInBuf));
 		}
@@ -1090,7 +1090,7 @@ namespace NSWFL {
 
 		//Returns the position of the last valid character in the string passed into sInBuf.
 		//iInBufSz should be the length of the string being passed into sInBuf
-		int GetLastCharPos(const char *sInBuf, int iInBufSz)
+		int GetLastCharPos(const char* sInBuf, int iInBufSz)
 		{
 			int iRPos = iInBufSz - 1;
 			while (iRPos != -1)
@@ -1106,20 +1106,20 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int GetLastCharPos(const char *sInBuf)
+		int GetLastCharPos(const char* sInBuf)
 		{
 			return GetLastCharPos(sInBuf, (int)strlen(sInBuf));
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CharIndex(const char *sBuf, const char cChar)
+		int CharIndex(const char* sBuf, const char cChar)
 		{
 			return NSWFL::String::CharIndex(sBuf, (int)strlen(sBuf), cChar);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CharIndex(const char *sBuf, int iBufSz, const char cChar)
+		int CharIndex(const char* sBuf, int iBufSz, const char cChar)
 		{
 			for (int iPos = 0; iPos < iBufSz; iPos++)
 			{
@@ -1134,7 +1134,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int SkipWhiteSpaces(const char *sBuf, int iBufSz, int iRPos)
+		int SkipWhiteSpaces(const char* sBuf, int iBufSz, int iRPos)
 		{
 			while (NSWFL::String::IsWhiteSpace(sBuf[iRPos]) && iRPos < iBufSz)
 			{
@@ -1146,7 +1146,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int SkipWhiteSpaces(const char *sBuf, int iBufSz, int *iRPos)
+		int SkipWhiteSpaces(const char* sBuf, int iBufSz, int* iRPos)
 		{
 			while (NSWFL::String::IsWhiteSpace(sBuf[((int)*iRPos)]) && *iRPos < iBufSz)
 			{
@@ -1158,7 +1158,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool IsCharInArrayU(const unsigned char cTokChar, const unsigned char *sChars, unsigned int iChars)
+		bool IsCharInArrayU(const unsigned char cTokChar, const unsigned char* sChars, unsigned int iChars)
 		{
 			for (unsigned int iChar = 0; iChar < iChars; iChar++)
 			{
@@ -1172,7 +1172,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool IsCharInArrayS(const char cTokChar, const char *sChars, unsigned int iChars)
+		bool IsCharInArrayS(const char cTokChar, const char* sChars, unsigned int iChars)
 		{
 			for (unsigned int iChar = 0; iChar < iChars; iChar++)
 			{
@@ -1188,8 +1188,8 @@ namespace NSWFL {
 		/*
 			Returns the size in characters of the token.
 		*/
-		int GetToken(const char *sBuf, int iBufSz, char *sOutToken, int iMaxTokSz,
-			const char *sInvalidChars, int iInvalidCount)
+		int GetToken(const char* sBuf, int iBufSz, char* sOutToken, int iMaxTokSz,
+			const char* sInvalidChars, int iInvalidCount)
 		{
 			return NSWFL::String::GetNextToken(sBuf, iBufSz, sOutToken,
 				iMaxTokSz, (int)0, sInvalidChars, iInvalidCount);
@@ -1199,7 +1199,7 @@ namespace NSWFL {
 		/*
 			Returns the size in characters of the token.
 		*/
-		int GetToken(const char *sBuf, int iBufSz, char *sOutToken, int iMaxTokSz)
+		int GetToken(const char* sBuf, int iBufSz, char* sOutToken, int iMaxTokSz)
 		{
 			return NSWFL::String::GetNextToken(sBuf, iBufSz, sOutToken, iMaxTokSz, (int)0);
 		}
@@ -1208,9 +1208,9 @@ namespace NSWFL {
 		/*
 			Returns the size in characters of the token.
 		*/
-		int GetNextToken(const char *sBuf, int iBufSz, char *sOutToken,
-			int iMaxTokSz, int *iInOutRPos,
-			const char *sInvalidChars, int iInvalidCount)
+		int GetNextToken(const char* sBuf, int iBufSz, char* sOutToken,
+			int iMaxTokSz, int* iInOutRPos,
+			const char* sInvalidChars, int iInvalidCount)
 		{
 			int iRPos = *iInOutRPos;
 			int iWPos = 0;
@@ -1219,7 +1219,7 @@ namespace NSWFL {
 
 			if (sOutToken)
 			{
-				while (!NSWFL::String::IsCharInArrayU(sBuf[iRPos], (unsigned char *)sInvalidChars, iInvalidCount) && iRPos < iBufSz)
+				while (!NSWFL::String::IsCharInArrayU(sBuf[iRPos], (unsigned char*)sInvalidChars, iInvalidCount) && iRPos < iBufSz)
 				{
 					if (iWPos < iMaxTokSz)
 					{
@@ -1251,8 +1251,8 @@ namespace NSWFL {
 		/*
 			Returns the size in characters of the token.
 		*/
-		int GetNextToken(const char *sBuf, int iBufSz, char *sOutToken,
-			int iMaxTokSz, int *iInOutRPos)
+		int GetNextToken(const char* sBuf, int iBufSz, char* sOutToken,
+			int iMaxTokSz, int* iInOutRPos)
 		{
 			int iRPos = *iInOutRPos;
 			int iWPos = 0;
@@ -1292,9 +1292,9 @@ namespace NSWFL {
 		/*
 			Returns the size in characters of the token.
 		*/
-		int GetNextToken(const char *sBuf, int iBufSz, char *sOutToken,
+		int GetNextToken(const char* sBuf, int iBufSz, char* sOutToken,
 			int iMaxTokSz, int iStartPos,
-			const char *sInvalidChars, int iInvalidCount)
+			const char* sInvalidChars, int iInvalidCount)
 		{
 			int iInOutRPos = iStartPos;
 			return NSWFL::String::GetNextToken(sBuf, iBufSz, sOutToken, iMaxTokSz, &iInOutRPos, sInvalidChars, iInvalidCount);
@@ -1304,7 +1304,7 @@ namespace NSWFL {
 		/*
 			Returns the size in characters of the token.
 		*/
-		int GetNextToken(const char *sBuf, int iBufSz, char *sOutToken, int iMaxTokSz, int iStartPos)
+		int GetNextToken(const char* sBuf, int iBufSz, char* sOutToken, int iMaxTokSz, int iStartPos)
 		{
 			int iInOutRPos = iStartPos;
 			return NSWFL::String::GetNextToken(sBuf, iBufSz, sOutToken, iMaxTokSz, &iInOutRPos);
@@ -1312,7 +1312,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Abbreviate(const char *sString, char *Abbr, int iMaxSz)
+		bool Abbreviate(const char* sString, char* Abbr, int iMaxSz)
 		{
 			int iLen = (int)strlen(sString);
 			int iRPos = 0;
@@ -1374,7 +1374,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool IsAlNum(const char *sString, int iLength)
+		bool IsAlNum(const char* sString, int iLength)
 		{
 			for (int i = 0; i < iLength; i++)
 			{
@@ -1395,7 +1395,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool IsAlpha(const char *sString, int iLength)
+		bool IsAlpha(const char* sString, int iLength)
 		{
 			for (int i = 0; i < iLength; i++)
 			{
@@ -1420,7 +1420,7 @@ namespace NSWFL {
 		/*
 			Compare case-sensitive string.
 		*/
-		bool StrEql(const char *sOne, const char *sTwo)
+		bool StrEql(const char* sOne, const char* sTwo)
 		{
 			while (*sOne == *sTwo && *sOne && *sTwo)
 			{
@@ -1439,7 +1439,7 @@ namespace NSWFL {
 		/*
 			Compare case-insensitive string.
 		*/
-		bool StrEqlI(const char *sOne, const char *sTwo)
+		bool StrEqlI(const char* sOne, const char* sTwo)
 		{
 			while (*sOne && *sTwo && (*sOne <= 65 || *sOne <= 90 ? (*sOne) + 32 : (*sOne)) == (*sTwo <= 65 || *sTwo <= 90 ? (*sTwo) + 32 : (*sTwo)))
 			{
@@ -1458,7 +1458,7 @@ namespace NSWFL {
 		/*
 			Compare case-sensitive string.
 		*/
-		bool StrEql(const char *sOne, int iOneSz, const char *sTwo, int iTwoSz)
+		bool StrEql(const char* sOne, int iOneSz, const char* sTwo, int iTwoSz)
 		{
 			if (iOneSz != iTwoSz)
 			{
@@ -1480,7 +1480,7 @@ namespace NSWFL {
 		/*
 			Compare case-insensitive string.
 		*/
-		bool StrEqlI(const char *sOne, int iOneSz, const char *sTwo, int iTwoSz)
+		bool StrEqlI(const char* sOne, int iOneSz, const char* sTwo, int iTwoSz)
 		{
 			if (iOneSz != iTwoSz)
 			{
@@ -1501,9 +1501,9 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *StrnDup(const char* sString, size_t iLength)
+		char* StrnDup(const char* sString, size_t iLength)
 		{
-			char *sNew = (char*)malloc(iLength + 1);
+			char* sNew = (char*)malloc(iLength + 1);
 			if (sNew)
 			{
 				memcpy(sNew, sString, iLength);
@@ -1514,7 +1514,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool NewGUID(char *sOut, int iMaxOutSz)
+		bool NewGUID(char* sOut, int iMaxOutSz)
 		{
 			GUID lGUID;
 			memset(&lGUID, 0, sizeof(GUID));

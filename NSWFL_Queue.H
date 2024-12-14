@@ -17,12 +17,12 @@ namespace NSWFL {
 		class Queue {
 
 			typedef struct _QUEUECOLLECTION {
-				char **Data;
-				int *DataSize;
+				char** Data;
+				int* DataSize;
 				int Used;
 				int Allocated;
 				int AllocIncrement;
-			} QUEUECOLLECTION, *LPQUEUECOLLECTION;
+			} QUEUECOLLECTION, * LPQUEUECOLLECTION;
 
 		public:
 
@@ -34,17 +34,17 @@ namespace NSWFL {
 			bool Initialize(void);
 			bool Destroy();
 
-			bool Pop(void *pOutBuf, int iMaxSz, int *iOutSz);
-			bool Pop(void *pOutBuf, int iMaxSz);
-			bool Pop(char *sOutBuf, int iMaxSz);
+			bool Pop(void* pOutBuf, int iMaxSz, int* iOutSz);
+			bool Pop(void* pOutBuf, int iMaxSz);
+			bool Pop(char* sOutBuf, int iMaxSz);
 
-			bool Peek(void *pOutBuf, int iMaxSz, int *iOutSz);
-			bool Peek(void *pOutBuf, int iMaxSz);
-			bool Peek(char *sOutBuf, int iMaxSz);
-			void *Peek(void);
+			bool Peek(void* pOutBuf, int iMaxSz, int* iOutSz);
+			bool Peek(void* pOutBuf, int iMaxSz);
+			bool Peek(char* sOutBuf, int iMaxSz);
+			void* Peek(void);
 
-			bool Push(const void *vInBuf, int iInBufSz);
-			bool Push(const char *sInBuf);
+			bool Push(const void* vInBuf, int iInBufSz);
+			bool Push(const char* sInBuf);
 
 			bool Pop(void);
 

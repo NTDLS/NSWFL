@@ -16,7 +16,7 @@
 #include <float.H>
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ namespace NSWFL {
 
 		int LoByte(unsigned int iInput)
 		{
-			return ((unsigned char)((iInput)& 0xff));
+			return ((unsigned char)((iInput) & 0xff));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void LongToVersion(DWORD dwInVer, int *iBit1, int *iBit2, int *iBit3, int *iBit4)
+		void LongToVersion(DWORD dwInVer, int* iBit1, int* iBit2, int* iBit3, int* iBit4)
 		{
 
 			*iBit4 = (int)dwInVer % 10l;
@@ -164,7 +164,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		__int64 *SortIntegerArrayDESC(__int64 *i64Array, unsigned int iItems)
+		__int64* SortIntegerArrayDESC(__int64* i64Array, unsigned int iItems)
 		{
 			if (iItems <= 0)
 			{
@@ -193,7 +193,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		__int64 *SortIntegerArrayASC(__int64 *i64Array, unsigned int iItems)
+		__int64* SortIntegerArrayASC(__int64* i64Array, unsigned int iItems)
 		{
 			if (iItems <= 0)
 			{
@@ -222,7 +222,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *ULongToBinary(DWORD_PTR iBitMask, char *sBinary, int iMaxOutSz)
+		char* ULongToBinary(DWORD_PTR iBitMask, char* sBinary, int iMaxOutSz)
 		{
 			memset(sBinary, 0, iMaxOutSz);
 

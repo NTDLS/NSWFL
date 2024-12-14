@@ -18,12 +18,12 @@ namespace NSWFL {
 			int iPriorityClass, short iThreadPriority,
 			bool bProcessBoost, bool bThreadBoost);
 
-		bool Get_MachineName(char *sOutVal, int iMaxSz);
-		bool Get_UserName(char *sOutVal, int iMaxSz);
-		bool Get_OsVersion(char *sOutVal, int iMaxSz);
+		bool Get_MachineName(char* sOutVal, int iMaxSz);
+		bool Get_UserName(char* sOutVal, int iMaxSz);
+		bool Get_OsVersion(char* sOutVal, int iMaxSz);
 		bool ResetWindowsSys(unsigned int iFlags);
 		void Hang(void);
-		bool CreateGenericSecurityDescriptor(SECURITY_DESCRIPTOR *pSD, SECURITY_ATTRIBUTES *pSA);
+		bool CreateGenericSecurityDescriptor(SECURITY_DESCRIPTOR* pSD, SECURITY_ATTRIBUTES* pSA);
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::System

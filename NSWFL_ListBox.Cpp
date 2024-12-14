@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@ namespace NSWFL {
 		/*
 			MAX Length: 32,767 Items
 		*/
-		int InsertListBoxItem(HWND hWnd, char *sInStr, int iMaxItems, int iInsertPos)
+		int InsertListBoxItem(HWND hWnd, char* sInStr, int iMaxItems, int iInsertPos)
 		{
 			int NumberOfLines = 0;
 
@@ -49,21 +49,21 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InsertListBoxItem(HWND hWnd, char *sInStr, int iInsertPos)
+		int InsertListBoxItem(HWND hWnd, char* sInStr, int iInsertPos)
 		{
 			return InsertListBoxItem(hWnd, sInStr, 10240, iInsertPos);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InsertListBoxItem(HWND hWnd, char *sInStr)
+		int InsertListBoxItem(HWND hWnd, char* sInStr)
 		{
 			return InsertListBoxItem(hWnd, sInStr, 10240, -1);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InsertListBoxItemNoDuplicate(HWND hWnd, char *sInStr, int iInsertPos)
+		int InsertListBoxItemNoDuplicate(HWND hWnd, char* sInStr, int iInsertPos)
 		{
 			if (NSWFL::ListBox::FindExactListBoxString(hWnd, sInStr) < 0)
 			{
@@ -74,7 +74,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int InsertListBoxItemNoDuplicate(HWND hWnd, char *sInStr)
+		int InsertListBoxItemNoDuplicate(HWND hWnd, char* sInStr)
 		{
 			return NSWFL::ListBox::InsertListBoxItemNoDuplicate(hWnd, sInStr, -1);
 		}
@@ -140,7 +140,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int GetListBoxItemText(char *sOutVal, int iMaxSz, HWND hWnd)
+		int GetListBoxItemText(char* sOutVal, int iMaxSz, HWND hWnd)
 		{
 			int iItemPos = NSWFL::ListBox::GetCurrentListBoxItem(hWnd);
 			if (iItemPos >= 0)
@@ -153,7 +153,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int GetListBoxItemText(char *sOutVal, int iMaxSz, HWND hWnd, int iItemPos)
+		int GetListBoxItemText(char* sOutVal, int iMaxSz, HWND hWnd, int iItemPos)
 		{
 			Assert(NSWFL::ListBox::GetListBoxItemLength(hWnd, iItemPos) >= iMaxSz, "Buffer too small.");
 			return (int)SendMessage(hWnd, LB_GETTEXT, (WPARAM)iItemPos, (LPARAM)sOutVal);
@@ -168,28 +168,28 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int FindListBoxString(HWND hWnd, const char *sString, int iStartIndex)
+		int FindListBoxString(HWND hWnd, const char* sString, int iStartIndex)
 		{
 			return (int)SendMessage(hWnd, (UINT)LB_FINDSTRING, (WPARAM)iStartIndex, (LPARAM)sString);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int FindListBoxString(HWND hWnd, const char *sString)
+		int FindListBoxString(HWND hWnd, const char* sString)
 		{
 			return (int)FindListBoxString(hWnd, sString, -1);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int FindExactListBoxString(HWND hWnd, const char *sString, int iStartIndex)
+		int FindExactListBoxString(HWND hWnd, const char* sString, int iStartIndex)
 		{
 			return (int)SendMessage(hWnd, (UINT)LB_FINDSTRINGEXACT, (WPARAM)iStartIndex, (LPARAM)sString);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int FindExactListBoxString(HWND hWnd, const char *sString)
+		int FindExactListBoxString(HWND hWnd, const char* sString)
 		{
 			return (int)FindListBoxString(hWnd, sString, -1);
 		}
@@ -204,7 +204,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int PopListBoxFromIntegerArray(HWND hWnd, int *iItemList, int iItems)
+		int PopListBoxFromIntegerArray(HWND hWnd, int* iItemList, int iItems)
 		{
 			char sText[64];
 
@@ -218,7 +218,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int PopListBoxFromStringArray(HWND hWnd, char **sItemList, int iItems)
+		int PopListBoxFromStringArray(HWND hWnd, char** sItemList, int iItems)
 		{
 			for (int iItem = 0; iItem < iItems; iItem++)
 			{
@@ -229,7 +229,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//This functions return value must be free externally! Use: FreeArray(sArray, iItems) in the String.Cpp
-		char **ListBoxToCharacterArray(HWND hWnd, int *iOutItemCount)
+		char** ListBoxToCharacterArray(HWND hWnd, int* iOutItemCount)
 		{
 			int iItems = CountListBoxItems(hWnd);
 			int iItem = 0;
@@ -237,9 +237,9 @@ namespace NSWFL {
 			int iLength = 0;
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char **sArray = (char **)pMem->Allocate(sizeof(char *), iItems);
+			char** sArray = (char**)pMem->Allocate(sizeof(char*), iItems);
 #else
-			char **sArray = (char **)calloc(sizeof(char *), iItems);
+			char** sArray = (char**)calloc(sizeof(char*), iItems);
 #endif
 
 			while (iItem < iItems)
@@ -247,9 +247,9 @@ namespace NSWFL {
 				if ((iLength = GetListBoxItemLength(hWnd, iItem)) > 0)
 				{
 #ifdef _USE_GLOBAL_MEMPOOL
-					sArray[iAdded] = (char *)pMem->Allocate(sizeof(char), iLength + 1);
+					sArray[iAdded] = (char*)pMem->Allocate(sizeof(char), iLength + 1);
 #else
-					sArray[iAdded] = (char *)calloc(sizeof(char), iLength + 1);
+					sArray[iAdded] = (char*)calloc(sizeof(char), iLength + 1);
 #endif
 
 					if (GetListBoxItemText(sArray[iAdded], iLength + 1, hWnd, iItem) > 0)
@@ -275,7 +275,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//This functions return value must be free externally!
-		int *ListBoxToIntegerArray(HWND hWnd, int *iOutItemCount)
+		int* ListBoxToIntegerArray(HWND hWnd, int* iOutItemCount)
 		{
 			int iItems = CountListBoxItems(hWnd);
 			int iItem = 0;
@@ -284,9 +284,9 @@ namespace NSWFL {
 			char sBuffer[64];
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			int *iArray = (int *)pMem->Allocate(sizeof(int), iItems);
+			int* iArray = (int*)pMem->Allocate(sizeof(int), iItems);
 #else
-			int *iArray = (int *)calloc(sizeof(int), iItems);
+			int* iArray = (int*)calloc(sizeof(int), iItems);
 #endif
 
 			while (iItem < iItems)

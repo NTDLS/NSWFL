@@ -103,11 +103,11 @@ HTTP URL encoding.
 **NSWFL_IsolationLock**
 An attempt to create a better critical section for thread locking.
 
-**NSWFL_DictonaryT**
-A dictonary template class.
+**NSWFL_DictionaryT**
+A dictionary template class.
 
-**NSWFL_DictonaryString**
-A dictonary of string(char*) class.
+**NSWFL_DictionaryString**
+A dictionary of string(char*) class.
 
 **NSWFL_Network**
 INET/TCP/IP functions. If you really want more, see https://github.com/NTDLS/CSocketServer

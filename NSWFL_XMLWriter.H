@@ -17,58 +17,58 @@ namespace NSWFL {
 		class XMLWriter {
 
 		public:
-			void *pUserData; //Use it for whatever you want!
+			void* pUserData; //Use it for whatever you want!
 
 			typedef struct _tag_XMLWriter_State {
-				String::StringBuilder *pBuilder;
+				String::StringBuilder* pBuilder;
 				char sName[255];
-			} XMLWriterState, *LPXMLWriterState;
+			} XMLWriterState, * LPXMLWriterState;
 
-			XMLWriter(const char *sChildName);
+			XMLWriter(const char* sChildName);
 			XMLWriter(void);
 			~XMLWriter(void);
 
 			bool Initialize(void);
-			bool Initialize(const char *sChildName);
-			bool ChangeName(const char *sChildName);
-			int GetName(char *sOutName, int iMaxOut);
+			bool Initialize(const char* sChildName);
+			bool ChangeName(const char* sChildName);
+			int GetName(char* sOutName, int iMaxOut);
 			void Destroy(void);
 
-			String::StringBuilder *GetBuilder(void);
+			String::StringBuilder* GetBuilder(void);
 
-			XMLReader *ToReader(XMLReader *lpXMLReader);
+			XMLReader* ToReader(XMLReader* lpXMLReader);
 
-			bool Add(const char *sAttributeName, const char *sValue);
-			bool Add(const char *sAttributeName, const char *sValue, const int iValueSz);
-			bool Add(const char *sAttributeName, const unsigned int iValue);
-			bool Add(const char *sAttributeName, const DWORD dwValue);
-			bool Add(const char *sAttributeName, const signed int iValue);
-			bool Add(const char *sAttributeName, const double dValue);
-			bool Add(const char *sAttributeName, const double dValue, const int iDecimalPlaces);
-			bool Add(const char *sAttributeName, const __int64 i64Value);
-			bool Add(const char *sAttributeName, const unsigned __int64 i64Value);
-			bool AddBool(const char *sAttributeName, const bool bValue);
+			bool Add(const char* sAttributeName, const char* sValue);
+			bool Add(const char* sAttributeName, const char* sValue, const int iValueSz);
+			bool Add(const char* sAttributeName, const unsigned int iValue);
+			bool Add(const char* sAttributeName, const DWORD dwValue);
+			bool Add(const char* sAttributeName, const signed int iValue);
+			bool Add(const char* sAttributeName, const double dValue);
+			bool Add(const char* sAttributeName, const double dValue, const int iDecimalPlaces);
+			bool Add(const char* sAttributeName, const __int64 i64Value);
+			bool Add(const char* sAttributeName, const unsigned __int64 i64Value);
+			bool AddBool(const char* sAttributeName, const bool bValue);
 
-			bool Add(const char *sAttributeName, XMLWriter *XML);
-			bool Add(const char *sAttributeName, XMLReader *XML);
+			bool Add(const char* sAttributeName, XMLWriter* XML);
+			bool Add(const char* sAttributeName, XMLReader* XML);
 
-			bool Add(XMLReader *XML);
-			bool Add(XMLWriter *XML);
+			bool Add(XMLReader* XML);
+			bool Add(XMLWriter* XML);
 
 			int Length(void);
 
-			int Text(char *sOutXML, int iMaxOutSz);
-			void Text(String::StringBuilder *textOut);
-			char *Text(void);
-			char *Text(int *iOutSz);
-			void FreePointer(void *pPointer);
+			int Text(char* sOutXML, int iMaxOutSz);
+			void Text(String::StringBuilder* textOut);
+			char* Text(void);
+			char* Text(int* iOutSz);
+			void FreePointer(void* pPointer);
 
 #ifdef _XML_USE_COMPRESSION
-			char *Compress(int *iOutLength);
-			char *Compress(int *iOutLength, int iCompressionLevel);
+			char* Compress(int* iOutLength);
+			char* Compress(int* iOutLength, int iCompressionLevel);
 #endif
 
-			bool ToFile(const char *sFileName);
+			bool ToFile(const char* sFileName);
 
 		protected:
 			XMLWriterState State;

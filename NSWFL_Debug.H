@@ -14,13 +14,13 @@ namespace NSWFL {
 	namespace Debug {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		#ifdef _DEBUG
-		#define Assert(sExpression, sMsg) \
+#ifdef _DEBUG
+#define Assert(sExpression, sMsg) \
 			if(sExpression)\
 			{ \
 				char sAssert[2048]; \
 				sprintf_s(sAssert, sizeof(sAssert), \
-					"A fatal error has occured and the application must terminate.\r\n" \
+					"A fatal error has occurred and the application must terminate.\r\n" \
 					"\tPlease take note of the following error message and conditions.\t\n\r\n" \
 					"Procedure: %s\r\n" \
 					"Source File: %s\r\n" \
@@ -31,17 +31,17 @@ namespace NSWFL {
 					__FUNCTION__, __FILE__, __DATE__, __TIME__, #sExpression, __LINE__, sMsg); \
 				MessageBox(NULL, sAssert, "Fatal Application Error!", MB_ICONSTOP | MB_SYSTEMMODAL); \
 			}
-		#else
-		#define Assert(sExpression, sMsg)
-		#endif
+#else
+#define Assert(sExpression, sMsg)
+#endif
 
-		typedef bool(*DebugConsoleHandler)(const char *sText, int iTextLength);
+		typedef bool(*DebugConsoleHandler)(const char* sText, int iTextLength);
 
-		void RedirectIO(FILE *hFrom, HANDLE hTo);
-		bool OpenDebugConsole(const char *sTitle, DebugConsoleHandler pHandler);
-		bool OpenDebugConsole(const char *sTitle, DebugConsoleHandler pHandler, char *sInitialText);
+		void RedirectIO(FILE* hFrom, HANDLE hTo);
+		bool OpenDebugConsole(const char* sTitle, DebugConsoleHandler pHandler);
+		bool OpenDebugConsole(const char* sTitle, DebugConsoleHandler pHandler, char* sInitialText);
 		void StartDebugConsoleHandler(DebugConsoleHandler pHandler);
-		bool OpenDebugConsole(const char *sTitle);
+		bool OpenDebugConsole(const char* sTitle);
 		void DebugRedirectOutput(void);
 		void DebugRedirectInput(void);
 		void CloseDebugConsole(void);
@@ -49,7 +49,7 @@ namespace NSWFL {
 		typedef struct _tag_DEBUG_THREAD_DATA {
 			HANDLE hEvent;
 			DebugConsoleHandler Handler;
-		} _DEBUG_THREAD_DATA, *_LPDEBUG_THREAD_DATA;
+		} _DEBUG_THREAD_DATA, * _LPDEBUG_THREAD_DATA;
 
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -34,19 +34,19 @@ namespace NSWFL {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		typedef struct _tag_Stack_Item {
-			void *Value;
+			void* Value;
 			size_t Size;
 			StackDataType Type;
-		} _STACKITEM, *_LPSTACKITEM;
+		} _STACKITEM, * _LPSTACKITEM;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		typedef struct _tag_Stack {
-			_STACKITEM *Item;
+			_STACKITEM* Item;
 			size_t Used;
 			size_t Ceiling;
 			size_t AllocationIncrement;
-		} _STACK, *_LPSTACK;
+		} _STACK, * _LPSTACK;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -55,7 +55,7 @@ namespace NSWFL {
 		public:
 			Stack();
 			Stack(StackBehavior iBehavior);
-			Stack(Stack *pStackToCopy);
+			Stack(Stack* pStackToCopy);
 			~Stack();
 
 			StackBehavior Behavior(void);
@@ -69,52 +69,52 @@ namespace NSWFL {
 			bool Push(int iValue);
 			bool Push(float fValue);
 			bool Push(double dValue);
-			bool Push(const char *sValue, size_t uLength);
-			bool Push(const char *sValue);
-			bool Push(const WCHAR *wcValue, size_t uLength);
-			bool Push(const WCHAR *wcValue);
-			bool Push(const void *pValue, size_t uLength, StackDataType uType);
-			bool Push(const void *pValue, size_t uLength);
+			bool Push(const char* sValue, size_t uLength);
+			bool Push(const char* sValue);
+			bool Push(const WCHAR* wcValue, size_t uLength);
+			bool Push(const WCHAR* wcValue);
+			bool Push(const void* pValue, size_t uLength, StackDataType uType);
+			bool Push(const void* pValue, size_t uLength);
 
-			bool Pop(unsigned __int64 *u64Value);
-			bool Pop(__int64 *i64Value);
-			bool Pop(unsigned int *uValue);
-			bool Pop(int *iValue);
-			bool Pop(float *fValue);
-			bool Pop(double *dValue);
-			bool Pop(char *sValue, size_t *uLength);
-			bool Pop(WCHAR *wcValue, size_t *uLength);
-			bool Pop(void *pValue);
-			bool Pop(void *pValue, size_t *uLength);
-			bool Pop(void *pValue, size_t *uLength, StackDataType *uType);
+			bool Pop(unsigned __int64* u64Value);
+			bool Pop(__int64* i64Value);
+			bool Pop(unsigned int* uValue);
+			bool Pop(int* iValue);
+			bool Pop(float* fValue);
+			bool Pop(double* dValue);
+			bool Pop(char* sValue, size_t* uLength);
+			bool Pop(WCHAR* wcValue, size_t* uLength);
+			bool Pop(void* pValue);
+			bool Pop(void* pValue, size_t* uLength);
+			bool Pop(void* pValue, size_t* uLength, StackDataType* uType);
 
 			bool Pop(void);
 
-			_STACKITEM *Peek(void);
-			bool Peek(unsigned __int64 *u64Value);
-			bool Peek(__int64 *i64Value);
-			bool Peek(unsigned int *uValue);
-			bool Peek(int *iValue);
-			bool Peek(float *fValue);
-			bool Peek(double *dValue);
-			bool Peek(char *sValue, size_t *uLength);
-			bool Peek(WCHAR *wcValue, size_t *uLength);
-			bool Peek(void *pValue);
-			bool Peek(void *pValue, size_t *uLength);
-			bool Peek(void *pValue, size_t *uLength, StackDataType *uType);
+			_STACKITEM* Peek(void);
+			bool Peek(unsigned __int64* u64Value);
+			bool Peek(__int64* i64Value);
+			bool Peek(unsigned int* uValue);
+			bool Peek(int* iValue);
+			bool Peek(float* fValue);
+			bool Peek(double* dValue);
+			bool Peek(char* sValue, size_t* uLength);
+			bool Peek(WCHAR* wcValue, size_t* uLength);
+			bool Peek(void* pValue);
+			bool Peek(void* pValue, size_t* uLength);
+			bool Peek(void* pValue, size_t* uLength, StackDataType* uType);
 
-			_STACKITEM *Peek(size_t uIndex);
-			bool Peek(size_t uIndex, unsigned __int64 *u64Value);
-			bool Peek(size_t uIndex, __int64 *i64Value);
-			bool Peek(size_t uIndex, unsigned int *uValue);
-			bool Peek(size_t uIndex, int *iValue);
-			bool Peek(size_t uIndex, float *fValue);
-			bool Peek(size_t uIndex, double *dValue);
-			bool Peek(size_t uIndex, char *sValue, size_t *uLength);
-			bool Peek(size_t uIndex, WCHAR *wcValue, size_t *uLength);
-			bool Peek(size_t uIndex, void *pValue);
-			bool Peek(size_t uIndex, void *pValue, size_t *uLength);
-			bool Peek(size_t uIndex, void *pValue, size_t *uLength, StackDataType *uType);
+			_STACKITEM* Peek(size_t uIndex);
+			bool Peek(size_t uIndex, unsigned __int64* u64Value);
+			bool Peek(size_t uIndex, __int64* i64Value);
+			bool Peek(size_t uIndex, unsigned int* uValue);
+			bool Peek(size_t uIndex, int* iValue);
+			bool Peek(size_t uIndex, float* fValue);
+			bool Peek(size_t uIndex, double* dValue);
+			bool Peek(size_t uIndex, char* sValue, size_t* uLength);
+			bool Peek(size_t uIndex, WCHAR* wcValue, size_t* uLength);
+			bool Peek(size_t uIndex, void* pValue);
+			bool Peek(size_t uIndex, void* pValue, size_t* uLength);
+			bool Peek(size_t uIndex, void* pValue, size_t* uLength, StackDataType* uType);
 
 			size_t StackSize(void);
 			size_t Allocated(void);

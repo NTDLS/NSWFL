@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@ namespace NSWFL {
 	namespace Collections {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		Stack::Stack(Stack *pStackToCopy)
+		Stack::Stack(Stack* pStackToCopy)
 		{
 #ifndef _STACK_SINGLE_THREADED_ACCESS
 			InitializeCriticalSection(&CS);
@@ -38,9 +38,9 @@ namespace NSWFL {
 			this->ciBehavior = pStackToCopy->ciBehavior;
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			if (!(this->Collection.Item = (_STACKITEM *)pMem->Allocate(this->Collection.Ceiling, sizeof(_STACKITEM))))
+			if (!(this->Collection.Item = (_STACKITEM*)pMem->Allocate(this->Collection.Ceiling, sizeof(_STACKITEM))))
 #else
-			if (!(this->Collection.Item = (_STACKITEM *)calloc(this->Collection.Ceiling, sizeof(_STACKITEM))))
+			if (!(this->Collection.Item = (_STACKITEM*)calloc(this->Collection.Ceiling, sizeof(_STACKITEM))))
 #endif
 			{
 				memset(&this->Collection, 0, sizeof(this->Collection));
@@ -49,7 +49,7 @@ namespace NSWFL {
 			}
 
 			size_t uAllocate;
-			_STACKITEM *pItem;
+			_STACKITEM* pItem;
 			for (unsigned uItem = 0; uItem < pStackToCopy->Collection.Used; uItem++)
 			{
 				pItem = &pStackToCopy->Collection.Item[uItem];
@@ -77,11 +77,11 @@ namespace NSWFL {
 
 				if (pItem->Type == ITEM_TYPE_STRING)
 				{
-					((unsigned char *)this->Collection.Item[uItem].Value)[pItem->Size] = '\0';
+					((unsigned char*)this->Collection.Item[uItem].Value)[pItem->Size] = '\0';
 				}
 				else if (pItem->Type == ITEM_TYPE_WSTRING)
 				{
-					((WCHAR *)this->Collection.Item[uItem].Value)[pItem->Size] = '\0';
+					((WCHAR*)this->Collection.Item[uItem].Value)[pItem->Size] = '\0';
 				}
 			}
 
@@ -210,82 +210,82 @@ namespace NSWFL {
 
 		bool Stack::Push(unsigned __int64 u64Value)
 		{
-			return this->Push((void *)&u64Value, sizeof(u64Value), ITEM_TYPE_UINT64);
+			return this->Push((void*)&u64Value, sizeof(u64Value), ITEM_TYPE_UINT64);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		bool Stack::Push(__int64 i64Value)
 		{
-			return this->Push((void *)&i64Value, sizeof(i64Value), ITEM_TYPE_INT64);
+			return this->Push((void*)&i64Value, sizeof(i64Value), ITEM_TYPE_INT64);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		bool Stack::Push(unsigned int uValue)
 		{
-			return this->Push((void *)&uValue, sizeof(uValue), ITEM_TYPE_UINT);
+			return this->Push((void*)&uValue, sizeof(uValue), ITEM_TYPE_UINT);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		bool Stack::Push(int iValue)
 		{
-			return this->Push((void *)&iValue, sizeof(iValue), ITEM_TYPE_INT);
+			return this->Push((void*)&iValue, sizeof(iValue), ITEM_TYPE_INT);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		bool Stack::Push(float fValue)
 		{
-			return this->Push((void *)&fValue, sizeof(fValue), ITEM_TYPE_FLOAT);
+			return this->Push((void*)&fValue, sizeof(fValue), ITEM_TYPE_FLOAT);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		bool Stack::Push(double dValue)
 		{
-			return this->Push((void *)&dValue, sizeof(dValue), ITEM_TYPE_DOUBLE);
+			return this->Push((void*)&dValue, sizeof(dValue), ITEM_TYPE_DOUBLE);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Push(const char *sValue)
+		bool Stack::Push(const char* sValue)
 		{
-			return this->Push((void *)sValue, strlen(sValue), ITEM_TYPE_STRING);
+			return this->Push((void*)sValue, strlen(sValue), ITEM_TYPE_STRING);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Push(const char *sValue, size_t uLength)
+		bool Stack::Push(const char* sValue, size_t uLength)
 		{
-			return this->Push((void *)sValue, uLength, ITEM_TYPE_STRING);
+			return this->Push((void*)sValue, uLength, ITEM_TYPE_STRING);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Push(const WCHAR *wcValue)
+		bool Stack::Push(const WCHAR* wcValue)
 		{
-			return this->Push((void *)wcValue, wcslen(wcValue), ITEM_TYPE_WSTRING);
+			return this->Push((void*)wcValue, wcslen(wcValue), ITEM_TYPE_WSTRING);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Push(const WCHAR *wcValue, size_t uLength)
+		bool Stack::Push(const WCHAR* wcValue, size_t uLength)
 		{
-			return this->Push((void *)wcValue, uLength, ITEM_TYPE_WSTRING);
+			return this->Push((void*)wcValue, uLength, ITEM_TYPE_WSTRING);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Push(const void *pValue, size_t uLength)
+		bool Stack::Push(const void* pValue, size_t uLength)
 		{
-			return this->Push((void *)pValue, uLength, ITEM_TYPE_BINARY);
+			return this->Push((void*)pValue, uLength, ITEM_TYPE_BINARY);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Push(const void *pValue, size_t uLength, StackDataType uType)
+		bool Stack::Push(const void* pValue, size_t uLength, StackDataType uType)
 		{
 			this->Lock();
 			if (this->Collection.Used == this->Collection.Ceiling)
@@ -294,9 +294,9 @@ namespace NSWFL {
 				this->Collection.Ceiling += this->Collection.AllocationIncrement;
 
 #ifdef _USE_GLOBAL_MEMPOOL
-				if (!(this->Collection.Item = (_STACKITEM *)pMem->ReAllocate(this->Collection.Item, this->Collection.Ceiling, sizeof(_STACKITEM))))
+				if (!(this->Collection.Item = (_STACKITEM*)pMem->ReAllocate(this->Collection.Item, this->Collection.Ceiling, sizeof(_STACKITEM))))
 #else
-				if (!(this->Collection.Item = (_STACKITEM *)realloc(this->Collection.Item, this->Collection.Ceiling * sizeof(_STACKITEM))))
+				if (!(this->Collection.Item = (_STACKITEM*)realloc(this->Collection.Item, this->Collection.Ceiling * sizeof(_STACKITEM))))
 #endif
 				{
 					this->UnLock();
@@ -342,11 +342,11 @@ namespace NSWFL {
 
 			if (uType == ITEM_TYPE_STRING)
 			{
-				((unsigned char *)this->Collection.Item[iNewItemIndex].Value)[uLength] = '\0';
+				((unsigned char*)this->Collection.Item[iNewItemIndex].Value)[uLength] = '\0';
 			}
 			else if (uType == ITEM_TYPE_WSTRING)
 			{
-				((WCHAR *)this->Collection.Item[iNewItemIndex].Value)[uLength] = '\0';
+				((WCHAR*)this->Collection.Item[iNewItemIndex].Value)[uLength] = '\0';
 			}
 
 			this->Collection.Used++;
@@ -358,63 +358,63 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(unsigned __int64 *u64Value)
+		bool Stack::Pop(unsigned __int64* u64Value)
 		{
-			return this->Pop((void *)u64Value);
+			return this->Pop((void*)u64Value);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(__int64 *i64Value)
+		bool Stack::Pop(__int64* i64Value)
 		{
-			return this->Pop((void *)i64Value);
+			return this->Pop((void*)i64Value);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(unsigned int *uValue)
+		bool Stack::Pop(unsigned int* uValue)
 		{
-			return this->Pop((void *)uValue);
+			return this->Pop((void*)uValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(int *iValue)
+		bool Stack::Pop(int* iValue)
 		{
-			return this->Pop((void *)iValue);
+			return this->Pop((void*)iValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(float *fValue)
+		bool Stack::Pop(float* fValue)
 		{
-			return this->Pop((void *)fValue);
+			return this->Pop((void*)fValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(double *dValue)
+		bool Stack::Pop(double* dValue)
 		{
-			return this->Pop((void *)dValue);
+			return this->Pop((void*)dValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(char *sValue, size_t *uLength)
+		bool Stack::Pop(char* sValue, size_t* uLength)
 		{
-			return this->Pop((void *)sValue, uLength);
+			return this->Pop((void*)sValue, uLength);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(WCHAR *wcValue, size_t *uLength)
+		bool Stack::Pop(WCHAR* wcValue, size_t* uLength)
 		{
-			return this->Pop((void *)wcValue, uLength);
+			return this->Pop((void*)wcValue, uLength);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(void *pValue, size_t *uLength)
+		bool Stack::Pop(void* pValue, size_t* uLength)
 		{
 			StackDataType uType;
 			return this->Pop(pValue, uLength, &uType);
@@ -422,7 +422,7 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(void *pValue)
+		bool Stack::Pop(void* pValue)
 		{
 			size_t uLength;
 			StackDataType uType;
@@ -436,7 +436,7 @@ namespace NSWFL {
 			this->Lock();
 			if (this->Collection.Used)
 			{
-				_STACKITEM *pItem = &this->Collection.Item[--this->Collection.Used];
+				_STACKITEM* pItem = &this->Collection.Item[--this->Collection.Used];
 #ifdef _USE_GLOBAL_MEMPOOL
 				pMem->Free(pItem->Value);
 #else
@@ -451,12 +451,12 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Pop(void *pValue, size_t *uLength, StackDataType *uType)
+		bool Stack::Pop(void* pValue, size_t* uLength, StackDataType* uType)
 		{
 			this->Lock();
 			if (this->Collection.Used)
 			{
-				_STACKITEM *pItem = &this->Collection.Item[--this->Collection.Used];
+				_STACKITEM* pItem = &this->Collection.Item[--this->Collection.Used];
 				memcpy_s(pValue, pItem->Size, pItem->Value, pItem->Size);
 
 				*uLength = pItem->Size;
@@ -477,70 +477,70 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		_STACKITEM *Stack::Peek(void)
+		_STACKITEM* Stack::Peek(void)
 		{
 			return &this->Collection.Item[this->Collection.Used - 1];
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(unsigned __int64 *u64Value)
+		bool Stack::Peek(unsigned __int64* u64Value)
 		{
-			return this->Peek((void *)u64Value);
+			return this->Peek((void*)u64Value);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(__int64 *i64Value)
+		bool Stack::Peek(__int64* i64Value)
 		{
-			return this->Peek((void *)i64Value);
+			return this->Peek((void*)i64Value);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(unsigned int *uValue)
+		bool Stack::Peek(unsigned int* uValue)
 		{
-			return this->Peek((void *)uValue);
+			return this->Peek((void*)uValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(int *iValue)
+		bool Stack::Peek(int* iValue)
 		{
-			return this->Peek((void *)iValue);
+			return this->Peek((void*)iValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(float *fValue)
+		bool Stack::Peek(float* fValue)
 		{
-			return this->Peek((void *)fValue);
+			return this->Peek((void*)fValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(double *dValue)
+		bool Stack::Peek(double* dValue)
 		{
-			return this->Peek((void *)dValue);
+			return this->Peek((void*)dValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(char *sValue, size_t *uLength)
+		bool Stack::Peek(char* sValue, size_t* uLength)
 		{
-			return this->Peek((void *)sValue, uLength);
+			return this->Peek((void*)sValue, uLength);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(WCHAR *wcValue, size_t *uLength)
+		bool Stack::Peek(WCHAR* wcValue, size_t* uLength)
 		{
-			return this->Peek((void *)wcValue, uLength);
+			return this->Peek((void*)wcValue, uLength);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(void *pValue, size_t *uLength)
+		bool Stack::Peek(void* pValue, size_t* uLength)
 		{
 			StackDataType uType;
 			return this->Peek(pValue, uLength, &uType);
@@ -548,7 +548,7 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(void *pValue)
+		bool Stack::Peek(void* pValue)
 		{
 			size_t uLength;
 			StackDataType uType;
@@ -557,13 +557,13 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(void *pValue, size_t *uLength, StackDataType *uType)
+		bool Stack::Peek(void* pValue, size_t* uLength, StackDataType* uType)
 		{
 			this->Lock();
 
 			if (this->Collection.Used)
 			{
-				_STACKITEM *pItem = &this->Collection.Item[this->Collection.Used - 1];
+				_STACKITEM* pItem = &this->Collection.Item[this->Collection.Used - 1];
 				memcpy_s(pValue, pItem->Size, pItem->Value, pItem->Size);
 
 				*uLength = pItem->Size;
@@ -579,7 +579,7 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		_STACKITEM *Stack::Peek(size_t uIndex)
+		_STACKITEM* Stack::Peek(size_t uIndex)
 		{
 			if (uIndex >= this->Collection.Used || uIndex < 0)
 			{
@@ -590,64 +590,64 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, unsigned __int64 *u64Value)
+		bool Stack::Peek(size_t uIndex, unsigned __int64* u64Value)
 		{
-			return this->Peek(uIndex, (void *)u64Value);
+			return this->Peek(uIndex, (void*)u64Value);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, __int64 *i64Value)
+		bool Stack::Peek(size_t uIndex, __int64* i64Value)
 		{
-			return this->Peek(uIndex, (void *)i64Value);
+			return this->Peek(uIndex, (void*)i64Value);
 		}
 
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, unsigned int *uValue)
+		bool Stack::Peek(size_t uIndex, unsigned int* uValue)
 		{
-			return this->Peek(uIndex, (void *)uValue);
+			return this->Peek(uIndex, (void*)uValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, int *iValue)
+		bool Stack::Peek(size_t uIndex, int* iValue)
 		{
-			return this->Peek(uIndex, (void *)iValue);
+			return this->Peek(uIndex, (void*)iValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, float *fValue)
+		bool Stack::Peek(size_t uIndex, float* fValue)
 		{
-			return this->Peek(uIndex, (void *)fValue);
+			return this->Peek(uIndex, (void*)fValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, double *dValue)
+		bool Stack::Peek(size_t uIndex, double* dValue)
 		{
-			return this->Peek(uIndex, (void *)dValue);
+			return this->Peek(uIndex, (void*)dValue);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, char *sValue, size_t *uLength)
+		bool Stack::Peek(size_t uIndex, char* sValue, size_t* uLength)
 		{
-			return this->Peek(uIndex, (void *)sValue, uLength);
+			return this->Peek(uIndex, (void*)sValue, uLength);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, WCHAR *wcValue, size_t *uLength)
+		bool Stack::Peek(size_t uIndex, WCHAR* wcValue, size_t* uLength)
 		{
-			return this->Peek(uIndex, (void *)wcValue, uLength);
+			return this->Peek(uIndex, (void*)wcValue, uLength);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, void *pValue, size_t *uLength)
+		bool Stack::Peek(size_t uIndex, void* pValue, size_t* uLength)
 		{
 			StackDataType uType;
 			return this->Peek(uIndex, pValue, uLength, &uType);
@@ -655,7 +655,7 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, void *pValue)
+		bool Stack::Peek(size_t uIndex, void* pValue)
 		{
 			size_t uLength;
 			StackDataType uType;
@@ -664,7 +664,7 @@ namespace NSWFL {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Stack::Peek(size_t uIndex, void *pValue, size_t *uLength, StackDataType *uType)
+		bool Stack::Peek(size_t uIndex, void* pValue, size_t* uLength, StackDataType* uType)
 		{
 			this->Lock();
 
@@ -675,7 +675,7 @@ namespace NSWFL {
 
 			if (this->Collection.Used)
 			{
-				_STACKITEM *pItem = &this->Collection.Item[uIndex];
+				_STACKITEM* pItem = &this->Collection.Item[uIndex];
 				memcpy_s(pValue, pItem->Size, pItem->Value, pItem->Size);
 
 				*uLength = pItem->Size;

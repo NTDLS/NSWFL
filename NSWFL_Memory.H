@@ -14,13 +14,13 @@ namespace NSWFL {
 	namespace Memory {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void *ClearMem(void *vBuffer, int iBufSz);
-		void *MemCopy(void *vTarget, void *vSource, int iLen);
-		int MemCopyLong(char *sOutBuf, long lIn);
-		int MemCopyInt(char *sOutBuf, int iIn);
-		void NukeMem(char *sBuf);
-		void NukeMem(void *pBuf, size_t iBufSz);
-		void *MemDup(const void* d, size_t s);
+		void* ClearMem(void* vBuffer, int iBufSz);
+		void* MemCopy(void* vTarget, void* vSource, int iLen);
+		int MemCopyLong(char* sOutBuf, long lIn);
+		int MemCopyInt(char* sOutBuf, int iIn);
+		void NukeMem(char* sBuf);
+		void NukeMem(void* pBuf, size_t iBufSz);
+		void* MemDup(const void* d, size_t s);
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::Memory

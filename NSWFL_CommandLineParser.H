@@ -16,15 +16,15 @@ namespace NSWFL {
 
 		class CommandLineParser {
 		private:
-			char **_sArray;
+			char** _sArray;
 			int _iCount;
-			int *_iLength;
+			int* _iLength;
 
 		public:
 			CommandLineParser();
 			~CommandLineParser();
 
-			const char *Item(int iIndex)
+			const char* Item(int iIndex)
 			{
 				return _sArray[iIndex];
 			}
@@ -39,15 +39,15 @@ namespace NSWFL {
 				return _iLength[iIndex];
 			}
 
-			bool AddCommand(const char *sCommandLine);
+			bool AddCommand(const char* sCommandLine);
 
-			int IsCommand(const int iArg, const char *sCommandName);
-			int IsCommand(const int iArg, const char *sCommandName, char *sOutCmdData, int iMaxOutSize);
-			int GetArgumentData(const int iArg, const int iSkpLen, char *sOutBuf, int iMaxSz);
-			int GetArgumentData(const int iArg, const int iSkpLen, int *iValue);
+			int IsCommand(const int iArg, const char* sCommandName);
+			int IsCommand(const int iArg, const char* sCommandName, char* sOutCmdData, int iMaxOutSize);
+			int GetArgumentData(const int iArg, const int iSkpLen, char* sOutBuf, int iMaxSz);
+			int GetArgumentData(const int iArg, const int iSkpLen, int* iValue);
 
 		private:
-			bool ParseCmd(char *sCmdLine, int *iOutMaxLen, bool bEval);
+			bool ParseCmd(char* sCmdLine, int* iOutMaxLen, bool bEval);
 		};
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

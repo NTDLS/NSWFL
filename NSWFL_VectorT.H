@@ -18,7 +18,7 @@ namespace NSWFL {
 		class VectorT
 		{
 		public:
-			T **_Items;
+			T** _Items;
 			int _Allocated;
 			int _Used;
 
@@ -27,7 +27,7 @@ namespace NSWFL {
 			{
 				this->_Allocated = 10;
 				this->_Used = 0;
-				this->_Items = (T **)calloc(this->_Allocated, sizeof(T));
+				this->_Items = (T**)calloc(this->_Allocated, sizeof(T));
 			}
 
 			~VectorT()
@@ -51,25 +51,25 @@ namespace NSWFL {
 			}
 
 			//Adds a new item to the vector.
-			T *Add(T value)
+			T* Add(T value)
 			{
 				return AddGetIndex(value, sizeof(value), NULL);
 			}
 
 			//Adds a new item to the vector.
-			T *Add(T value, int length)
+			T* Add(T value, int length)
 			{
 				return AddGetIndex(value, length, NULL);
 			}
 
 			//Adds a new item to the vector.
-			T *AddEmpty(int *outIndex)
+			T* AddEmpty(int* outIndex)
 			{
 				if (this->_Used == this->_Allocated)
 				{
 					//Keep a 10 percent overage for allocation efficiency.
 					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (T **)realloc(this->_Items, this->_Allocated * sizeof(T));
+					this->_Items = (T**)realloc(this->_Items, this->_Allocated * sizeof(T));
 				}
 
 				if (outIndex)
@@ -77,22 +77,22 @@ namespace NSWFL {
 					*outIndex = this->_Used;
 				}
 
-				this->_Items[this->_Used] = (T *)calloc(1, sizeof(T));
+				this->_Items[this->_Used] = (T*)calloc(1, sizeof(T));
 
 				return this->_Items[this->_Used++];
 			}
 
 			//Adds a new item to the vector.
-			T *AddGetIndex(T value, int length, int *outIndex)
+			T* AddGetIndex(T value, int length, int* outIndex)
 			{
 				if (this->_Used == this->_Allocated)
 				{
 					//Keep a 10 percent overage for allocation efficiency.
 					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (T **)realloc(this->_Items, this->_Allocated * sizeof(T));
+					this->_Items = (T**)realloc(this->_Items, this->_Allocated * sizeof(T));
 				}
 
-				this->_Items[this->_Used] = (T *)calloc(length, 1);
+				this->_Items[this->_Used] = (T*)calloc(length, 1);
 				memcpy(this->_Items[this->_Used], &value, length);
 
 				if (outIndex)
@@ -110,7 +110,7 @@ namespace NSWFL {
 				if (iCompact < this->_Allocated)
 				{
 					this->_Allocated = iCompact;
-					this->_Items = (T **)realloc(this->_Items, this->_Allocated * sizeof(T));
+					this->_Items = (T**)realloc(this->_Items, this->_Allocated * sizeof(T));
 				}
 			}
 
@@ -204,7 +204,7 @@ namespace NSWFL {
 			{
 				while (this->_Used != 0)
 				{
-					free((void *)this->_Items[this->_Used - 1]);
+					free((void*)this->_Items[this->_Used - 1]);
 					this->_Used--;
 				}
 			}

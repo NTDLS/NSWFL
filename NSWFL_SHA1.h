@@ -19,8 +19,8 @@ namespace NSWFL {
 		//	in FIPS PUB 180-1 published April 17, 1995.
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool SimpleSHA1(const char *sStr, char *sOut, int iMaxSz);
-		bool SimpleSHA1(const char *sStr, int iStrSz, char *sOut, int iMaxSz);
+		bool SimpleSHA1(const char* sStr, char* sOut, int iMaxSz);
+		bool SimpleSHA1(const char* sStr, int iStrSz, char* sOut, int iMaxSz);
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,15 +34,15 @@ namespace NSWFL {
 			void Reset();
 
 			//Returns the message digest
-			bool Result(unsigned long *message_digest_array);
+			bool Result(unsigned long* message_digest_array);
 
 			//Provide input to SHA1
-			void Input(const unsigned char	*message_array, unsigned length);
-			void Input(const char *message_array, unsigned length);
+			void Input(const unsigned char* message_array, unsigned length);
+			void Input(const char* message_array, unsigned length);
 			void Input(unsigned char message_element);
 			void Input(char message_element);
-			bool ToString(unsigned long *MessageDigest, char *sOut, int iMaxSz);
-			bool ToString(char *sOut, int iMaxSz);
+			bool ToString(unsigned long* MessageDigest, char* sOut, int iMaxSz);
+			bool ToString(char* sOut, int iMaxSz);
 
 		private:
 

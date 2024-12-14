@@ -15,7 +15,7 @@
 #include <tchar.h>
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CreateRegKeyStructure(HKEY hKey, const char *sPath)
+		int CreateRegKeyStructure(HKEY hKey, const char* sPath)
 		{
 			char sDir[MAX_PATH];
 
@@ -123,7 +123,7 @@ namespace NSWFL {
 				&SA,
 				&hKey,
 				&dwFunc
-				);
+			);
 
 			if (lRet == ERROR_SUCCESS)
 			{
@@ -227,7 +227,7 @@ namespace NSWFL {
 
 		// Fetch a little endian DWORD from the registry
 		//(see platform SDK "Registry Value Types")
-		bool Get_DWORDRegistryValue(HKEY hKeyRoot, LPCTSTR pszSubKey, LPCTSTR pszValue, unsigned __int64 &u64Buff)
+		bool Get_DWORDRegistryValue(HKEY hKeyRoot, LPCTSTR pszSubKey, LPCTSTR pszValue, unsigned __int64& u64Buff)
 		{
 			HKEY hKey;
 			DWORD dwType = REG_QWORD;
@@ -264,7 +264,7 @@ namespace NSWFL {
 
 		// Fetch a little endian DWORD from the registry
 		//(see platform SDK "Registry Value Types")
-		bool Get_DWORDRegistryValue(HKEY hKeyRoot, LPCTSTR pszSubKey, LPCTSTR pszValue, unsigned long &ulBuff)
+		bool Get_DWORDRegistryValue(HKEY hKeyRoot, LPCTSTR pszSubKey, LPCTSTR pszValue, unsigned long& ulBuff)
 		{
 			HKEY hKey;
 			DWORD dwType = REG_DWORD;

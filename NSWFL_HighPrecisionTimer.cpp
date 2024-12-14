@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,14 +24,19 @@ namespace NSWFL {
 
 		HighPrecisionTimer::HighPrecisionTimer(void)
 		{
-			this->_bIsHighPrecision = (QueryPerformanceFrequency(&this->_liFrequency) != 0); 
+			this->_bIsHighPrecision = (QueryPerformanceFrequency(&this->_liFrequency) != 0);
+		}
+
+		bool HighPrecisionTimer::IsHighPrecision(void)
+		{
+			return this->_bIsHighPrecision;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		void HighPrecisionTimer::Start(void)
 		{
-			if(this->_bIsHighPrecision)
+			if (this->_bIsHighPrecision)
 			{
 				QueryPerformanceCounter(&this->_liStart);
 			}
@@ -44,7 +49,7 @@ namespace NSWFL {
 
 		void HighPrecisionTimer::Stop(void)
 		{
-			if(this->_bIsHighPrecision)
+			if (this->_bIsHighPrecision)
 			{
 				QueryPerformanceCounter(&this->_liStop);
 			}
@@ -64,7 +69,7 @@ namespace NSWFL {
 
 		__int64 HighPrecisionTimer::Frequency(void)
 		{
-			if(this->_bIsHighPrecision)
+			if (this->_bIsHighPrecision)
 			{
 				return this->_liFrequency.QuadPart;
 			}
@@ -77,7 +82,7 @@ namespace NSWFL {
 
 		__int64 HighPrecisionTimer::TickCount(void)
 		{
-			if(this->_bIsHighPrecision)
+			if (this->_bIsHighPrecision)
 			{
 				LARGE_INTEGER liTickCount;
 				QueryPerformanceCounter(&liTickCount);
@@ -92,14 +97,14 @@ namespace NSWFL {
 
 		double HighPrecisionTimer::Calculate(__int64 i64StartTime, __int64 i64StopTime)
 		{
-			return ((double) (i64StopTime - i64StartTime) * 1000.0) / (double) this->_liFrequency.QuadPart;
+			return ((double)(i64StopTime - i64StartTime) * 1000.0) / (double)this->_liFrequency.QuadPart;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		double HighPrecisionTimer::Calculate(void)
 		{
-			return ((double) (this->_liStop.QuadPart - this->_liStart.QuadPart) * 1000.0) / (double) this->_liFrequency.QuadPart;
+			return ((double)(this->_liStop.QuadPart - this->_liStart.QuadPart) * 1000.0) / (double)this->_liFrequency.QuadPart;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

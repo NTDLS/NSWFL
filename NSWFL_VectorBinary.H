@@ -18,11 +18,11 @@ namespace NSWFL {
 		{
 		public:
 			struct VECTORVALUE {
-				char *Value;
+				char* Value;
 				int Length;
 			};
 
-			VECTORVALUE *_Items;
+			VECTORVALUE* _Items;
 			int _Allocated;
 			int _Used;
 
@@ -31,7 +31,7 @@ namespace NSWFL {
 			{
 				this->_Allocated = 10;
 				this->_Used = 0;
-				this->_Items = (VECTORVALUE *)calloc(this->_Allocated, sizeof(VECTORVALUE));
+				this->_Items = (VECTORVALUE*)calloc(this->_Allocated, sizeof(VECTORVALUE));
 			}
 
 			~VectorBinary()
@@ -55,29 +55,29 @@ namespace NSWFL {
 			}
 
 			//Adds a new item to the vector.
-			VECTORVALUE *Add(char *value)
+			VECTORVALUE* Add(char* value)
 			{
 				return AddGetIndex(value, sizeof(value), NULL);
 			}
 
 			//Adds a new item to the vector.
-			VECTORVALUE *Add(char *value, int length)
+			VECTORVALUE* Add(char* value, int length)
 			{
 				return AddGetIndex(value, length, NULL);
 			}
 
 			//Adds a new item to the vector.
-			VECTORVALUE *AddEmpty(int *outIndex)
+			VECTORVALUE* AddEmpty(int* outIndex)
 			{
 				if (this->_Used == this->_Allocated)
 				{
 					//Keep a 10 percent overage for allocation efficiency.
 					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (VECTORVALUE *)realloc(this->_Items, this->_Allocated * sizeof(VECTORVALUE));
+					this->_Items = (VECTORVALUE*)realloc(this->_Items, this->_Allocated * sizeof(VECTORVALUE));
 				}
 
 				int length = 0;
-				this->_Items[this->_Used].Value = (char *)calloc(length + 1, 1);
+				this->_Items[this->_Used].Value = (char*)calloc(length + 1, 1);
 				(this->_Items[this->_Used].Value)[length] = '\0';
 				this->_Items[this->_Used].Length = length;
 
@@ -91,16 +91,16 @@ namespace NSWFL {
 			}
 
 			//Adds a new item to the vector.
-			VECTORVALUE *AddGetIndex(char *value, int length, int *outIndex)
+			VECTORVALUE* AddGetIndex(char* value, int length, int* outIndex)
 			{
 				if (this->_Used == this->_Allocated)
 				{
 					//Keep a 10 percent overage for allocation efficiency.
 					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (VECTORVALUE *)realloc(this->_Items, this->_Allocated * sizeof(VECTORVALUE));
+					this->_Items = (VECTORVALUE*)realloc(this->_Items, this->_Allocated * sizeof(VECTORVALUE));
 				}
 
-				this->_Items[this->_Used].Value = (char *)calloc(length + 1, 1);
+				this->_Items[this->_Used].Value = (char*)calloc(length + 1, 1);
 				if (value)
 				{
 					memcpy(this->_Items[this->_Used].Value, value, length);
@@ -119,12 +119,12 @@ namespace NSWFL {
 			void Compact()
 			{
 				this->_Allocated = this->_Used;
-				this->_Items = (VECTORVALUE *)realloc(this->_Items, this->_Allocated * sizeof(VECTORVALUE));
+				this->_Items = (VECTORVALUE*)realloc(this->_Items, this->_Allocated * sizeof(VECTORVALUE));
 			}
 
 			//Deletes all values from the vector matching on value.
 			//Returns the count of items which were deleted.
-			int DeleteAllValues(char *value)
+			int DeleteAllValues(char* value)
 			{
 				int iCount = 0;
 				for (int i = this->_Used - 1; i >= 0 && this->_Used > 0;)
@@ -145,7 +145,7 @@ namespace NSWFL {
 
 			//Deletes a value from the vector.
 			//Returns true if an item was found and removed.
-			bool DeleteFirstValue(char *value)
+			bool DeleteFirstValue(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -160,7 +160,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool Contiains(char *value)
+			bool Contiains(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -174,7 +174,7 @@ namespace NSWFL {
 
 			//Finds the index of a given value.
 			//Returns the index of the found value, otherwise returns -1.
-			int IndexOfValue(char *value)
+			int IndexOfValue(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -218,7 +218,7 @@ namespace NSWFL {
 			}
 
 			//Returns a pointer to the value by index.
-			VECTORVALUE *GetValueAtIndex(int index)
+			VECTORVALUE* GetValueAtIndex(int index)
 			{
 				if (index >= 0 && index < this->_Used)
 				{

@@ -15,7 +15,7 @@
 #include <Math.H>
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,11 +44,11 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Base64Encode(const unsigned char *input, int input_length, unsigned char *output, int output_length)
+		int Base64Encode(const unsigned char* input, int input_length, unsigned char* output, int output_length)
 		{
 			int	i = 0, j = 0;
 			int	pad;
-			int requiredLength = (int)((ceil((double)input_length / 3.0)*4.0) + 1.0) + 10;
+			int requiredLength = (int)((ceil((double)input_length / 3.0) * 4.0) + 1.0) + 10;
 
 			if (output_length < requiredLength)
 			{
@@ -88,7 +88,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Base64Decode(const unsigned char *input, int input_length, unsigned char *output, int output_length)
+		int Base64Decode(const unsigned char* input, int input_length, unsigned char* output, int output_length)
 		{
 			int		i = 0, j = 0, pad;
 			unsigned char	c[4];

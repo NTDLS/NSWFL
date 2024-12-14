@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,23 +38,23 @@ namespace NSWFL {
 
 			while (iArg < _iCount)
 			{
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 				pMem->Free(this->_sArray[iArg]);
-		#else
+#else
 				free(this->_sArray[iArg]);
-		#endif
+#endif
 				this->_sArray[iArg] = NULL;
 
 				iArg++;
 			}
 
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 			pMem->Free(this->_sArray);
 			pMem->Free(this->_iLength);
-		#else
+#else
 			free(this->_sArray);
 			free(this->_iLength);
-		#endif
+#endif
 
 			this->_sArray = NULL;
 			this->_iCount = 0;
@@ -63,7 +63,7 @@ namespace NSWFL {
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CommandLineParser::IsCommand(const int iArg, const char *sCommandName, char *sOutCmdData, int iMaxOutSize)
+		int CommandLineParser::IsCommand(const int iArg, const char* sCommandName, char* sOutCmdData, int iMaxOutSize)
 		{
 			int iArgSz = (int)strlen(sCommandName);
 			if (_strnicmp(this->_sArray[iArg], sCommandName, iArgSz) == 0)
@@ -77,7 +77,7 @@ namespace NSWFL {
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CommandLineParser::IsCommand(const int iArg, const char *sCommandName)
+		int CommandLineParser::IsCommand(const int iArg, const char* sCommandName)
 		{
 			int iArgSz = (int)strlen(sCommandName);
 			if (_strnicmp(this->_sArray[iArg], sCommandName, iArgSz) == 0)
@@ -91,7 +91,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CommandLineParser::GetArgumentData(const int iArg, const int iSkpLen, int *iValue)
+		int CommandLineParser::GetArgumentData(const int iArg, const int iSkpLen, int* iValue)
 		{
 			char sValue[64];
 			int iReturnValue = GetArgumentData(iArg, iSkpLen, sValue, sizeof(sValue));
@@ -101,7 +101,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CommandLineParser::GetArgumentData(const int iArg, const int iSkpLen, char *sOutBuf, int iMaxSz)
+		int CommandLineParser::GetArgumentData(const int iArg, const int iSkpLen, char* sOutBuf, int iMaxSz)
 		{
 			int iWPos = 0;
 			int iRPos = iSkpLen;
@@ -130,19 +130,19 @@ namespace NSWFL {
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CommandLineParser::AddCommand(const char *sCommandLine)
+		bool CommandLineParser::AddCommand(const char* sCommandLine)
 		{
-		#ifdef _USE_GLOBAL_MEMPOOL
-			this->_sArray = (char **)pMem->ReAllocate(this->_sArray, sizeof(char *), _iCount + 1);
-			this->_iLength = (int *)pMem->ReAllocate(this->_iLength, sizeof(int), _iCount + 1);
+#ifdef _USE_GLOBAL_MEMPOOL
+			this->_sArray = (char**)pMem->ReAllocate(this->_sArray, sizeof(char*), _iCount + 1);
+			this->_iLength = (int*)pMem->ReAllocate(this->_iLength, sizeof(int), _iCount + 1);
 			this->_sArray[_iCount] = pMem->CloneString(sCommandLine);
 			this->_iLength[_iCount] = (int)strlen(this->_sArray[_iCount]);
-		#else
-			this->_sArray = (char **)realloc(this->_sArray, sizeof(char *) * _iCount + 1);
-			this->_iLength = (int *)realloc(this->_iLength, sizeof(int) * _iCount + 1);
+#else
+			this->_sArray = (char**)realloc(this->_sArray, sizeof(char*) * _iCount + 1);
+			this->_iLength = (int*)realloc(this->_iLength, sizeof(int) * _iCount + 1);
 			this->_sArray[_iCount] = _strdup(sCommandLine);
 			this->_iLength[_iCount] = (int)strlen(this->_sArray[_iCount]);
-		#endif
+#endif
 
 			this->_iCount++;
 
@@ -151,11 +151,11 @@ namespace NSWFL {
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CommandLineParser::ParseCmd(char *sCmdLine, int *iOutMaxLen, bool bEval)
+		bool CommandLineParser::ParseCmd(char* sCmdLine, int* iOutMaxLen, bool bEval)
 		{
 			bool bInQuote = false;
 
-			char *sBuf = NULL;
+			char* sBuf = NULL;
 
 			int iCmdSz = (int)strlen(sCmdLine);
 			int iMaxLen = 0;
@@ -169,15 +169,15 @@ namespace NSWFL {
 					return false;
 				}
 
-		#ifdef _USE_GLOBAL_MEMPOOL
-				sBuf = (char *)pMem->Allocate(sizeof(char), iMaxLen + 1);
-				this->_sArray = (char **)pMem->Allocate(sizeof(char *), _iCount);
-				this->_iLength = (int *)pMem->Allocate(sizeof(int), _iCount);
-		#else
-				this->_sArray = (char **)calloc(sizeof(char *), _iCount);
-				sBuf = (char *)calloc(sizeof(char), iMaxLen + 1);
-				this->_iLength = (int *)calloc(sizeof(int), _iCount);
-		#endif
+#ifdef _USE_GLOBAL_MEMPOOL
+				sBuf = (char*)pMem->Allocate(sizeof(char), iMaxLen + 1);
+				this->_sArray = (char**)pMem->Allocate(sizeof(char*), _iCount);
+				this->_iLength = (int*)pMem->Allocate(sizeof(int), _iCount);
+#else
+				this->_sArray = (char**)calloc(sizeof(char*), _iCount);
+				sBuf = (char*)calloc(sizeof(char), iMaxLen + 1);
+				this->_iLength = (int*)calloc(sizeof(int), _iCount);
+#endif
 
 				_iCount = 0;
 			}
@@ -198,11 +198,11 @@ namespace NSWFL {
 						sBuf[iWPos] = '\0';
 
 						this->_iLength[_iCount] = iWPos;
-		#ifdef _USE_GLOBAL_MEMPOOL
-						this->_sArray[_iCount] = (char *)pMem->Allocate(sizeof(char), iWPos + 1);
-		#else
-						this->_sArray[_iCount] = (char *)calloc(sizeof(char), iWPos + 1);
-		#endif
+#ifdef _USE_GLOBAL_MEMPOOL
+						this->_sArray[_iCount] = (char*)pMem->Allocate(sizeof(char), iWPos + 1);
+#else
+						this->_sArray[_iCount] = (char*)calloc(sizeof(char), iWPos + 1);
+#endif
 						strcpy_s(this->_sArray[_iCount], iWPos + 1, sBuf);
 					}
 					else {
@@ -241,11 +241,11 @@ namespace NSWFL {
 					sBuf[iWPos] = '\0';
 
 					this->_iLength[_iCount] = iWPos;
-		#ifdef _USE_GLOBAL_MEMPOOL
-					this->_sArray[_iCount] = (char *)pMem->Allocate(sizeof(char), iWPos + 1);
-		#else
-					this->_sArray[_iCount] = (char *)calloc(sizeof(char), iWPos + 1);
-		#endif
+#ifdef _USE_GLOBAL_MEMPOOL
+					this->_sArray[_iCount] = (char*)pMem->Allocate(sizeof(char), iWPos + 1);
+#else
+					this->_sArray[_iCount] = (char*)calloc(sizeof(char), iWPos + 1);
+#endif
 					strcpy_s(this->_sArray[_iCount], iWPos + 1, sBuf);
 				}
 				else {
@@ -260,16 +260,16 @@ namespace NSWFL {
 
 			if (!bEval)
 			{
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 				pMem->Free(sBuf);
-		#else
+#else
 				free(sBuf);
-		#endif
+#endif
 			}
 
 			return true;
 		}
-		
+
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //namespace::CommandLine
 } //namespace::NSWFL

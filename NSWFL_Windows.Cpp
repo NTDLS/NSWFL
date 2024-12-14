@@ -15,7 +15,7 @@
 #include <shlobj.h>
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@ namespace NSWFL {
 	namespace Windows {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void CopyToClipboard(char *str)
+		void CopyToClipboard(char* str)
 		{
 			OpenClipboard(NULL);
 			EmptyClipboard();
@@ -82,7 +82,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void TextBoxInsert(HWND hWnd, const char *sInBuf)
+		void TextBoxInsert(HWND hWnd, const char* sInBuf)
 		{
 			LRESULT iLen = SendMessage(hWnd, WM_GETTEXTLENGTH, 0, 0);
 			SendMessage(hWnd, EM_REPLACESEL, 0, (LPARAM)(LPSTR)sInBuf);
@@ -90,7 +90,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void TextBoxWrite(HWND hWnd, const char *sInBuf)
+		void TextBoxWrite(HWND hWnd, const char* sInBuf)
 		{
 			LRESULT iLen = SendMessage(hWnd, WM_GETTEXTLENGTH, 0, 0);
 			SendMessage(hWnd, EM_SETSEL, (WPARAM)iLen, (LPARAM)iLen);
@@ -99,14 +99,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void MsgBox(const char *sValue)
+		void MsgBox(const char* sValue)
 		{
 			MessageBox(GetActiveWindow(), sValue, "Message", MB_TASKMODAL);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int MsgBoxF(HWND hWnd, const char *sCaption, DWORD dwFlags, const char *sFormat, ...)
+		int MsgBoxF(HWND hWnd, const char* sCaption, DWORD dwFlags, const char* sFormat, ...)
 		{
 			va_list ArgList;
 			va_start(ArgList, sFormat);
@@ -114,9 +114,9 @@ namespace NSWFL {
 			int iMemoryRequired = _vscprintf(sFormat, ArgList);
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sBuf = (char *)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
 #else
-			char *sBuf = (char *)calloc(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)calloc(sizeof(char), iMemoryRequired + 1);
 #endif
 
 			int iSz = _vsprintf_s_l(sBuf, iMemoryRequired + 1, sFormat, NULL, ArgList);
@@ -135,7 +135,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int MsgBoxF(HWND hWnd, const char *sCaption, const char *sFormat, ...)
+		int MsgBoxF(HWND hWnd, const char* sCaption, const char* sFormat, ...)
 		{
 			va_list ArgList;
 			va_start(ArgList, sFormat);
@@ -143,9 +143,9 @@ namespace NSWFL {
 			int iMemoryRequired = _vscprintf(sFormat, ArgList);
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sBuf = (char *)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
 #else
-			char *sBuf = (char *)calloc(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)calloc(sizeof(char), iMemoryRequired + 1);
 #endif
 
 			int iSz = _vsprintf_s_l(sBuf, iMemoryRequired + 1, sFormat, NULL, ArgList);
@@ -164,7 +164,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int MsgBoxF(HWND hWnd, const char *sFormat, ...)
+		int MsgBoxF(HWND hWnd, const char* sFormat, ...)
 		{
 			va_list ArgList;
 			va_start(ArgList, sFormat);
@@ -172,9 +172,9 @@ namespace NSWFL {
 			int iMemoryRequired = _vscprintf(sFormat, ArgList);
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sBuf = (char *)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
 #else
-			char *sBuf = (char *)calloc(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)calloc(sizeof(char), iMemoryRequired + 1);
 #endif
 
 			int iSz = _vsprintf_s_l(sBuf, iMemoryRequired + 1, sFormat, NULL, ArgList);
@@ -193,7 +193,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int MsgBoxF(const char *sFormat, ...)
+		int MsgBoxF(const char* sFormat, ...)
 		{
 			va_list ArgList;
 			va_start(ArgList, sFormat);
@@ -201,9 +201,9 @@ namespace NSWFL {
 			int iMemoryRequired = _vscprintf(sFormat, ArgList);
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sBuf = (char *)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
 #else
-			char *sBuf = (char *)calloc(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)calloc(sizeof(char), iMemoryRequired + 1);
 #endif
 
 			int iSz = _vsprintf_s_l(sBuf, iMemoryRequired + 1, sFormat, NULL, ArgList);
@@ -258,7 +258,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void ErrorMessage(HWND hWnd, const char *sInBuf)
+		void ErrorMessage(HWND hWnd, const char* sInBuf)
 		{
 			HWND hOwner = NULL;
 
@@ -273,7 +273,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void AlertMessage(HWND hWnd, const char *sInBuf, const char *sTitle)
+		void AlertMessage(HWND hWnd, const char* sInBuf, const char* sTitle)
 		{
 			HWND hOwner = NULL;
 
@@ -403,14 +403,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void Set_Text(HWND hWnd, const char *sInBuf)
+		void Set_Text(HWND hWnd, const char* sInBuf)
 		{
 			SendMessage(hWnd, (UINT)WM_SETTEXT, (WPARAM)0, (LPARAM)sInBuf);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Set_TextF(HWND hWnd, const char *sFormat, ...)
+		int Set_TextF(HWND hWnd, const char* sFormat, ...)
 		{
 			va_list ArgList;
 			va_start(ArgList, sFormat);
@@ -418,9 +418,9 @@ namespace NSWFL {
 			int iMemoryRequired = _vscprintf(sFormat, ArgList);
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sBuf = (char *)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
 #else
-			char *sBuf = (char *)calloc(sizeof(char), iMemoryRequired + 1);
+			char* sBuf = (char*)calloc(sizeof(char), iMemoryRequired + 1);
 #endif
 
 			int iSz = _vsprintf_s_l(sBuf, iMemoryRequired + 1, sFormat, NULL, ArgList);
@@ -440,15 +440,15 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//The pointer returned through [sOutBuf] must be freed externally.
-		int Get_Text(HWND hWnd, char *&sOutBuf)
+		int Get_Text(HWND hWnd, char*& sOutBuf)
 		{
 			int iLength = NSWFL::Windows::Get_TextLength(hWnd);
 			if (iLength > 0)
 			{
 #ifdef _USE_GLOBAL_MEMPOOL
-				sOutBuf = (char *)pMem->Allocate(sizeof(char), iLength + 1);
+				sOutBuf = (char*)pMem->Allocate(sizeof(char), iLength + 1);
 #else
-				sOutBuf = (char *)calloc(sizeof(char), iLength + 1);
+				sOutBuf = (char*)calloc(sizeof(char), iLength + 1);
 #endif
 
 				return GetWindowText(hWnd, sOutBuf, iLength + 1);
@@ -458,7 +458,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Get_Text(HWND hWnd, char *sOutBuf, int iMaxSize)
+		int Get_Text(HWND hWnd, char* sOutBuf, int iMaxSize)
 		{
 			int iLen = GetWindowTextLength(hWnd);
 
@@ -662,13 +662,13 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int OSFileDialog(HWND hOwner, char *sInOutFileName, int iMaxOutBufSz, char *sInDfltExt,
-			char *sInTitle, char *sInFilters, char *sInDfltDir,
+		int OSFileDialog(HWND hOwner, char* sInOutFileName, int iMaxOutBufSz, char* sInDfltExt,
+			char* sInTitle, char* sInFilters, char* sInDfltDir,
 			NSWFL::Windows::OpenOrSaveDialogType iDlgType, DWORD dwFlags)
 		{
 			char sFileName[MAX_PATH];
 			int iRetVal = 0;
-			char *sCurrDir = NULL;
+			char* sCurrDir = NULL;
 
 			OPENFILENAME OFN;
 
@@ -712,9 +712,9 @@ namespace NSWFL {
 			if (!sInDfltDir)
 			{
 #ifdef _USE_GLOBAL_MEMPOOL
-				if ((sCurrDir = (char *)pMem->Allocate(sizeof(char), MAX_PATH + 1)))
+				if ((sCurrDir = (char*)pMem->Allocate(sizeof(char), MAX_PATH + 1)))
 #else
-				if ((sCurrDir = (char *)calloc(sizeof(char), MAX_PATH + 1)))
+				if ((sCurrDir = (char*)calloc(sizeof(char), MAX_PATH + 1)))
 #endif
 				{
 					if (NSWFL::File::Get_CurrentDirectory(sCurrDir, MAX_PATH))
@@ -773,7 +773,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		LPITEMIDLIST ConvertPathToLpItemIdList(const char *pszPath)
+		LPITEMIDLIST ConvertPathToLpItemIdList(const char* pszPath)
 		{
 			LPITEMIDLIST  pidl = NULL;
 			LPSHELLFOLDER pDesktopFolder = NULL;
@@ -796,8 +796,8 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Assumes that sOutBuf is at least MAX_PATH, because SHGetPathFromIDList does not check for buffer size.
-		bool BrowseDirectory(HWND hOwner, char *sInTitle,
-			unsigned long ulFlags, char *sOutBuf, int iMaxOutBufSz)
+		bool BrowseDirectory(HWND hOwner, char* sInTitle,
+			unsigned long ulFlags, char* sOutBuf, int iMaxOutBufSz)
 		{
 			return NSWFL::Windows::BrowseDirectory(hOwner, sInTitle, ulFlags, sOutBuf, iMaxOutBufSz, NULL, NULL);
 		}
@@ -805,7 +805,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Assumes that sOutBuf is at least MAX_PATH, because SHGetPathFromIDList does not check for buffer size.
-		bool BrowseDirectory(HWND hOwner, char *sInTitle, unsigned long ulFlags, char *sOutBuf, int iMaxOutBufSz, char *sInitialDirectory)
+		bool BrowseDirectory(HWND hOwner, char* sInTitle, unsigned long ulFlags, char* sOutBuf, int iMaxOutBufSz, char* sInitialDirectory)
 		{
 			return BrowseDirectory(hOwner, sInTitle, ulFlags, sOutBuf, iMaxOutBufSz, sInitialDirectory, NULL);
 		}
@@ -816,7 +816,7 @@ namespace NSWFL {
 		/*
 			BrowseDirectory(hWnd, "Select a folder.", BIF_RETURNONLYFSDIRS|BIF_USENEWUI, sDeleteFolder, sizeof(sDeleteFolder));
 		*/
-		bool BrowseDirectory(HWND hOwner, char *sInTitle, unsigned long ulFlags, char *sOutBuf, int iMaxOutBufSz, char *sInitialDirectory, const char *sRoot)
+		bool BrowseDirectory(HWND hOwner, char* sInTitle, unsigned long ulFlags, char* sOutBuf, int iMaxOutBufSz, char* sInitialDirectory, const char* sRoot)
 		{
 			LPMALLOC pMalloc;
 			LPITEMIDLIST lpItemIDList;
@@ -877,7 +877,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		HFONT MakeFont(char *sFontName, int iPointSize)
+		HFONT MakeFont(char* sFontName, int iPointSize)
 		{
 			HDC hDC;
 			int CyPixels = 0;
@@ -901,7 +901,7 @@ namespace NSWFL {
 
 		//This function will wait for the window specified by hWnd to become visible,
 		//	it will then set the window to the foreground and return.
-		bool WaitOnWindow(HWND &hWnd)
+		bool WaitOnWindow(HWND& hWnd)
 		{
 			while (!hWnd) //Wait on valid handle.
 			{
@@ -926,7 +926,7 @@ namespace NSWFL {
 		//This function will wait for a specified amount of time for the
 		//	window specified by hWnd to become visible, it will then set
 		//	the window to the foreground and return.
-		bool WaitOnWindow(HWND &hWnd, int iMilliSeconds)
+		bool WaitOnWindow(HWND& hWnd, int iMilliSeconds)
 		{
 			while (!hWnd) //Wait on valid handle.
 			{
@@ -962,13 +962,13 @@ namespace NSWFL {
 			DWORD dwCurrentStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
 			if (bShow)
 			{
-				if (!(dwCurrentStyle &WS_EX_APPWINDOW))
+				if (!(dwCurrentStyle & WS_EX_APPWINDOW))
 				{
 					SetWindowLong(hWnd, GWL_EXSTYLE, dwCurrentStyle | WS_EX_APPWINDOW);
 				}
 			}
 			else {
-				if ((dwCurrentStyle &WS_EX_APPWINDOW))
+				if ((dwCurrentStyle & WS_EX_APPWINDOW))
 				{
 					SetWindowLong(hWnd, GWL_EXSTYLE, (GetWindowLong(hWnd, GWL_EXSTYLE) & ~WS_EX_APPWINDOW));
 				}
@@ -977,7 +977,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool SelectComboItem(HWND hCombo, const char *sText, int iMatchLength)
+		bool SelectComboItem(HWND hCombo, const char* sText, int iMatchLength)
 		{
 			LRESULT iIndex = -1;
 
@@ -987,9 +987,9 @@ namespace NSWFL {
 			}
 			else {
 #ifdef _USE_GLOBAL_MEMPOOL
-				char *sShortText = (char *)pMem->Allocate(iMatchLength + 1, sizeof(char));
+				char* sShortText = (char*)pMem->Allocate(iMatchLength + 1, sizeof(char));
 #else
-				char *sShortText = (char *)calloc(iMatchLength + 1, sizeof(char));
+				char* sShortText = (char*)calloc(iMatchLength + 1, sizeof(char));
 #endif
 
 				strncpy_s(sShortText, iMatchLength + 1, sText, iMatchLength);
@@ -1011,7 +1011,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool SelectComboItem(HWND hCombo, const char *sText)
+		bool SelectComboItem(HWND hCombo, const char* sText)
 		{
 			return SelectComboItem(hCombo, sText, -1);
 		}
@@ -1025,7 +1025,7 @@ namespace NSWFL {
 			the Property sheet callback procedure should return TRUE if you call this function.
 
 		*/
-		int PropPageMsg(HWND hWnd, const char *sText, const char *sTitle, int iMsgBoxStyle)
+		int PropPageMsg(HWND hWnd, const char* sText, const char* sTitle, int iMsgBoxStyle)
 		{
 			SendMessage(GetParent(hWnd), PSM_SETCURSEL, NULL, (LPARAM)hWnd);
 			int iResult = MessageBox(hWnd, sText, sTitle, iMsgBoxStyle);
@@ -1037,7 +1037,7 @@ namespace NSWFL {
 		/*
 			See [PropPageMsg] overload for notes.
 		*/
-		int PropPageMsg(HWND hWnd, const char *sText, const char *sTitle)
+		int PropPageMsg(HWND hWnd, const char* sText, const char* sTitle)
 		{
 			return PropPageMsg(hWnd, sText, sTitle, MB_ICONINFORMATION);
 		}

@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ namespace NSWFL {
 	namespace Conversion {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Bin2HexFriendly(void *lpTarget, int iMaxSz, const void *lpSrc, int iSz, int iBytes, int iWidth)
+		int Bin2HexFriendly(void* lpTarget, int iMaxSz, const void* lpSrc, int iSz, int iBytes, int iWidth)
 		{
 			int iWPos = 0;
 			int iRPos = 0;
@@ -41,31 +41,31 @@ namespace NSWFL {
 
 				while (iByte >= 0)
 				{
-					((char *)lpTarget)[iWPos++] = "0123456789ABCDEF"[((((char *)lpSrc)[iRPos] >> (iByte--) * 4) & 0xF)];
+					((char*)lpTarget)[iWPos++] = "0123456789ABCDEF"[((((char*)lpSrc)[iRPos] >> (iByte--) * 4) & 0xF)];
 					iCurrentWidth++;
 				}
 
 				if (iCurrentWidth >= iWidth)
 				{
-					((char *)lpTarget)[iWPos++] = '\r';
-					((char *)lpTarget)[iWPos++] = '\n';
+					((char*)lpTarget)[iWPos++] = '\r';
+					((char*)lpTarget)[iWPos++] = '\n';
 					iCurrentWidth = 0;
 				}
 				else {
-					((char *)lpTarget)[iWPos++] = ' ';
+					((char*)lpTarget)[iWPos++] = ' ';
 				}
 
 				iRPos++;
 			}
 
-			((char *)lpTarget)[iWPos] = '\0';
+			((char*)lpTarget)[iWPos] = '\0';
 
 			return iWPos;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Bin2Hex(void *lpTarget, int iMaxSz, const void *lpSrc, int iSz, int iBytes, bool bPrefix)
+		int Bin2Hex(void* lpTarget, int iMaxSz, const void* lpSrc, int iSz, int iBytes, bool bPrefix)
 		{
 			int iWPos = 0;
 			int iRPos = 0;
@@ -80,8 +80,8 @@ namespace NSWFL {
 
 			if (bPrefix)
 			{
-				((char *)lpTarget)[iWPos++] = '0';
-				((char *)lpTarget)[iWPos++] = 'x';
+				((char*)lpTarget)[iWPos++] = '0';
+				((char*)lpTarget)[iWPos++] = 'x';
 			}
 
 			while (iRPos < iSz)
@@ -90,26 +90,26 @@ namespace NSWFL {
 
 				while (iByte >= 0)
 				{
-					((char *)lpTarget)[iWPos++] = "0123456789ABCDEF"[((((char *)lpSrc)[iRPos] >> (iByte--) * 4) & 0xF)];
+					((char*)lpTarget)[iWPos++] = "0123456789ABCDEF"[((((char*)lpSrc)[iRPos] >> (iByte--) * 4) & 0xF)];
 				}
 				iRPos++;
 			}
 
-			((char *)lpTarget)[iWPos] = '\0';
+			((char*)lpTarget)[iWPos] = '\0';
 
 			return iWPos;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Bin2Hex(void *lpTarget, int iMaxSz, const void *lpSrc, int iSz, int iBytes)
+		int Bin2Hex(void* lpTarget, int iMaxSz, const void* lpSrc, int iSz, int iBytes)
 		{
 			return NSWFL::Conversion::Bin2Hex(lpTarget, iMaxSz, lpSrc, iSz, iBytes, true);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int HexToDecI(const char *sHexString)
+		int HexToDecI(const char* sHexString)
 		{
 			struct CHexMap
 			{
@@ -128,9 +128,9 @@ namespace NSWFL {
 			};
 
 			char sAlloc[64];
-			strcpy_s(sAlloc, sizeof(sAlloc), NSWFL::String::UCase((char *)sHexString));
+			strcpy_s(sAlloc, sizeof(sAlloc), NSWFL::String::UCase((char*)sHexString));
 
-			char *sHex = sAlloc;
+			char* sHex = sAlloc;
 			int iResult = 0;
 			bool bFirstTime = true;
 
@@ -170,7 +170,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		unsigned int HexToDecU(const char *sHexString)
+		unsigned int HexToDecU(const char* sHexString)
 		{
 			struct CHexMap
 			{
@@ -189,9 +189,9 @@ namespace NSWFL {
 			};
 
 			char sAlloc[64];
-			strcpy_s(sAlloc, sizeof(sAlloc), NSWFL::String::UCase((char *)sHexString));
+			strcpy_s(sAlloc, sizeof(sAlloc), NSWFL::String::UCase((char*)sHexString));
 
-			char *sHex = sAlloc;
+			char* sHex = sAlloc;
 			unsigned int iResult = 0;
 			bool bFirstTime = true;
 
@@ -231,7 +231,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		unsigned __int64 HexToDecU64(const char *sHexString)
+		unsigned __int64 HexToDecU64(const char* sHexString)
 		{
 			struct CHexMap
 			{
@@ -250,9 +250,9 @@ namespace NSWFL {
 			};
 
 			char sAlloc[64];
-			strcpy_s(sAlloc, sizeof(sAlloc), NSWFL::String::UCase((char *)sHexString));
+			strcpy_s(sAlloc, sizeof(sAlloc), NSWFL::String::UCase((char*)sHexString));
 
-			char *sHex = sAlloc;
+			char* sHex = sAlloc;
 			unsigned __int64 iResult = 0;
 			bool bFirstTime = true;
 
@@ -292,7 +292,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		__int64 HexToDecI64(const char *sHexString)
+		__int64 HexToDecI64(const char* sHexString)
 		{
 			struct CHexMap
 			{
@@ -311,9 +311,9 @@ namespace NSWFL {
 			};
 
 			char sAlloc[64];
-			strcpy_s(sAlloc, sizeof(sAlloc), NSWFL::String::UCase((char *)sHexString));
+			strcpy_s(sAlloc, sizeof(sAlloc), NSWFL::String::UCase((char*)sHexString));
 
-			char *sHex = sAlloc;
+			char* sHex = sAlloc;
 			__int64 iResult = 0;
 			bool bFirstTime = true;
 
@@ -353,7 +353,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *LongChar(char *sOutVal, int iMaxSz, DWORD dwInput)
+		char* LongChar(char* sOutVal, int iMaxSz, DWORD dwInput)
 		{
 			_ultoa_s(dwInput, sOutVal, iMaxSz, 10);
 			return sOutVal;
@@ -361,7 +361,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FloatChar(char *sOutVal, int iMaxSz, float fInput, int iDecPlaces)
+		char* FloatChar(char* sOutVal, int iMaxSz, float fInput, int iDecPlaces)
 		{
 			_gcvt_s(sOutVal, iMaxSz, fInput, iDecPlaces);
 			return sOutVal;
@@ -369,7 +369,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FloatChar(char *sOutVal, int iMaxSz, float fInput)
+		char* FloatChar(char* sOutVal, int iMaxSz, float fInput)
 		{
 			FloatChar(sOutVal, iMaxSz, fInput, 12);
 			return sOutVal;
@@ -377,7 +377,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *DoubleChar(char *sOutVal, int iMaxSz, double dInput)
+		char* DoubleChar(char* sOutVal, int iMaxSz, double dInput)
 		{
 			sprintf_s(sOutVal, iMaxSz, "%.1f", dInput);
 			return sOutVal;
@@ -385,7 +385,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *IntChar(char *sOutVal, int iMaxSz, int iInput)
+		char* IntChar(char* sOutVal, int iMaxSz, int iInput)
 		{
 			_itoa_s(iInput, sOutVal, iMaxSz, 10);
 			return sOutVal;
@@ -393,28 +393,28 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		long CharLong(const char *sInput)
+		long CharLong(const char* sInput)
 		{
 			return (long)atol(sInput);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		float CharFloat(const char *sInput)
+		float CharFloat(const char* sInput)
 		{
 			return (float)atof(sInput);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		double CharDouble(const char *sInput)
+		double CharDouble(const char* sInput)
 		{
 			return (double)atof(sInput);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int CharInt(const char *sInput)
+		int CharInt(const char* sInput)
 		{
 			return (int)atoi(sInput);
 		}
@@ -432,7 +432,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int Round(double dValue, int iDecimalPlaces, char *sOutput, int iSizeOfOutput)
+		int Round(double dValue, int iDecimalPlaces, char* sOutput, int iSizeOfOutput)
 		{
 			char sFormat[64];
 			sprintf_s(sFormat, sizeof(sFormat), "%%.%df", iDecimalPlaces);
@@ -440,7 +440,7 @@ namespace NSWFL {
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FormatDouble(char *sOut, int iMaxSz, double dValue, int iDecimalPlaces)
+		char* FormatDouble(char* sOut, int iMaxSz, double dValue, int iDecimalPlaces)
 		{
 			char sFormat[64];
 			char sTemp[64];
@@ -457,21 +457,21 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FormatFloat(char *sOut, int iMaxSz, float fValue, int iDecimalPlaces)
+		char* FormatFloat(char* sOut, int iMaxSz, float fValue, int iDecimalPlaces)
 		{
 			return FormatDouble(sOut, iMaxSz, fValue, iDecimalPlaces);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FormatFloatString(char *sOut, int iMaxSz, const char *sIn)
+		char* FormatFloatString(char* sOut, int iMaxSz, const char* sIn)
 		{
 			return NSWFL::Conversion::FormatDoubleString(sOut, iMaxSz, sIn);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FormatDoubleString(char *sOut, int iMaxSz, const char *sIn)
+		char* FormatDoubleString(char* sOut, int iMaxSz, const char* sIn)
 		{
 			int iRPos = (int)strlen(sIn) - 1;
 			int iWPos = 0;
@@ -516,7 +516,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FormatiString(char *sOut, int iMaxSz, const char *sIn)
+		char* FormatiString(char* sOut, int iMaxSz, const char* sIn)
 		{
 			int iRPos = (int)strlen(sIn) - 1;
 			int iWPos = 0;
@@ -550,7 +550,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *FormatInteger(char *sOut, int iMaxSz, const long lIn)
+		char* FormatInteger(char* sOut, int iMaxSz, const long lIn)
 		{
 			char sLong[64];
 			_ultoa_s(lIn, sLong, sizeof(sLong), 10);
@@ -559,7 +559,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *I64FormatInteger(char *sOut, int iMaxSz, __int64 i64)
+		char* I64FormatInteger(char* sOut, int iMaxSz, __int64 i64)
 		{
 			char sLong[128];
 			_i64toa_s(i64, sLong, sizeof(sLong), 10);
@@ -568,14 +568,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		float fFormattedValue(const char *sFormatted)
+		float fFormattedValue(const char* sFormatted)
 		{
 			return (float)NSWFL::Conversion::dFormattedValue(sFormatted);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		double dFormattedValue(const char *sFormatted)
+		double dFormattedValue(const char* sFormatted)
 		{
 			int iLength = (int)strlen(sFormatted);
 			int iRPos = 0;
@@ -602,7 +602,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		__int64 i64FormattedValue(const char *sFormatted)
+		__int64 i64FormattedValue(const char* sFormatted)
 		{
 			int iLength = (int)strlen(sFormatted);
 			int iRPos = 0;
@@ -634,7 +634,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int iFormattedValue(const char *sFormatted)
+		int iFormattedValue(const char* sFormatted)
 		{
 			int iLength = (int)strlen(sFormatted);
 			int iRPos = 0;
@@ -679,7 +679,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		unsigned int uiFormattedValue(const char *sFormatted)
+		unsigned int uiFormattedValue(const char* sFormatted)
 		{
 			return (unsigned int)NSWFL::Conversion::iFormattedValue(sFormatted);
 		}
@@ -693,7 +693,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool ParseBoolean(const char *sText)
+		bool ParseBoolean(const char* sText)
 		{
 			if (NSWFL::String::StrEqlI(sText, "yes") || NSWFL::String::StrEqlI(sText, "true") || NSWFL::String::StrEqlI(sText, "on"))
 			{

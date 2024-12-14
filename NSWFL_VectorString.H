@@ -17,7 +17,7 @@ namespace NSWFL {
 		class VectorString
 		{
 		public:
-			char **_Items;
+			char** _Items;
 			int _Allocated;
 			int _Used;
 
@@ -26,7 +26,7 @@ namespace NSWFL {
 			{
 				this->_Allocated = 10;
 				this->_Used = 0;
-				this->_Items = (char **)calloc(this->_Allocated, sizeof(char *));
+				this->_Items = (char**)calloc(this->_Allocated, sizeof(char*));
 			}
 
 			~VectorString()
@@ -50,50 +50,50 @@ namespace NSWFL {
 			}
 
 			//Adds a new item to the vector.
-			char *Add(char *value)
+			char* Add(char* value)
 			{
 				return AddGetIndex(value, (int)strlen(value), NULL);
 			}
 
 			//Adds a new item to the vector.
-			char *Add(char *value, int length)
+			char* Add(char* value, int length)
 			{
 				return AddGetIndex(value, length, NULL);
 			}
 
 			//Adds a new item to the vector.
-			char *AddEmpty(int *outIndex)
+			char* AddEmpty(int* outIndex)
 			{
 				if (this->_Used == this->_Allocated)
 				{
 					//Keep a 10 percent overage for allocation efficiency.
 					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (char **)realloc(this->_Items, this->_Allocated * sizeof(char *));
+					this->_Items = (char**)realloc(this->_Items, this->_Allocated * sizeof(char*));
 				}
 
-				this->_Items[this->_Used] = (char *)calloc(1, sizeof(char *));
+				this->_Items[this->_Used] = (char*)calloc(1, sizeof(char*));
 
 				if (outIndex)
 				{
 					*outIndex = this->_Used;
 				}
 
-				this->_Items[this->_Used] = (char *)calloc(1, sizeof(char *));
+				this->_Items[this->_Used] = (char*)calloc(1, sizeof(char*));
 
 				return this->_Items[this->_Used++];
 			}
 
 			//Adds a new item to the vector.
-			char *AddGetIndex(char *value, int length, int *outIndex)
+			char* AddGetIndex(char* value, int length, int* outIndex)
 			{
 				if (this->_Used == this->_Allocated)
 				{
 					//Keep a 10 percent overage for allocation efficiency.
 					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (char **)realloc(this->_Items, this->_Allocated * sizeof(char *));
+					this->_Items = (char**)realloc(this->_Items, this->_Allocated * sizeof(char*));
 				}
 
-				this->_Items[this->_Used] = (char *)calloc(length + 1, 1);
+				this->_Items[this->_Used] = (char*)calloc(length + 1, 1);
 				if (value)
 				{
 					memcpy(this->_Items[this->_Used], value, length);
@@ -111,12 +111,12 @@ namespace NSWFL {
 			void Compact()
 			{
 				this->_Allocated = this->_Used;
-				this->_Items = (char **)realloc(this->_Items, this->_Allocated * sizeof(char *));
+				this->_Items = (char**)realloc(this->_Items, this->_Allocated * sizeof(char*));
 			}
 
 			//Deletes all values from the vector matching on value.
 			//Returns the count of items which were deleted.
-			int DeleteAllValues(char *value)
+			int DeleteAllValues(char* value)
 			{
 				int iCount = 0;
 				for (int i = this->_Used - 1; i >= 0 && this->_Used > 0;)
@@ -137,7 +137,7 @@ namespace NSWFL {
 
 			//Deletes a value from the vector.
 			//Returns true if an item was found and removed.
-			bool DeleteFirstValue(char *value)
+			bool DeleteFirstValue(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -152,7 +152,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool Contiains(char *value)
+			bool Contiains(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -166,7 +166,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool ContiainsI(char *value)
+			bool ContiainsI(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -180,7 +180,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool ContiainsNI(char *value, int iLenght)
+			bool ContiainsNI(char* value, int iLenght)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -194,7 +194,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool ContiainsN(char *value, int iLenght)
+			bool ContiainsN(char* value, int iLenght)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -208,7 +208,7 @@ namespace NSWFL {
 
 			//Finds the index of a given value.
 			//Returns the index of the found value, otherwise returns -1.
-			int IndexOfFirstValue(char *value)
+			int IndexOfFirstValue(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -252,23 +252,23 @@ namespace NSWFL {
 			}
 
 			//Returns a pointer to the value by index.
-			char *GetByIndex(int index)
+			char* GetByIndex(int index)
 			{
 				if (index >= 0 && index < this->_Used)
 				{
 					return this->_Items[index];
 				}
-				return (char *)NULL;
+				return (char*)NULL;
 			}
 
-			char **ToArray()
+			char** ToArray()
 			{
 				return ToArray(NULL);
 			}
 
-			char **ToArray(int *iNumberOfElements)
+			char** ToArray(int* iNumberOfElements)
 			{
-				char **sArray = (char **)calloc(this->_Used, sizeof(char *));
+				char** sArray = (char**)calloc(this->_Used, sizeof(char*));
 
 				if (iNumberOfElements != NULL)
 				{
@@ -278,7 +278,7 @@ namespace NSWFL {
 				for (int i = 0; i < _Used; i++)
 				{
 					int iLength = (int)strlen(this->_Items[i]);
-					sArray[i] = (char *)calloc(iLength + 1, 1);
+					sArray[i] = (char*)calloc(iLength + 1, 1);
 					strcpy_s(sArray[i], iLength + 1, this->_Items[i]);
 				}
 

@@ -29,7 +29,7 @@
 //Random number an string generator.
 #include "NSWFL_KeyGeneration.H"
 
-//Functions for working with WinAPI listboxes.
+//Functions for working with WinAPI list boxes.
 #include "NSWFL_ListBox.H"
 
 //Its math. What did you expect?
@@ -38,7 +38,7 @@
 //Memory operations, clear, set, copy, etc.
 #include "NSWFL_Memory.H"
 
-//Everyhting you need to access the registry.
+//Everything you need to access the registry.
 #include "NSWFL_Registry.H"
 
 //String manipulation.
@@ -47,16 +47,16 @@
 //OS level functions, like get system name.
 #include "NSWFL_System.H"
 
-//Lots of functions for managing windows or anyhting with an HWND.
+//Lots of functions for managing windows or anything with an HWND.
 #include "NSWFL_Windows.H"
 
 //File access functions.
 #include "NSWFL_File.H"
 
-//Functions for working with WinAPI menues.
+//Functions for working with WinAPI menus.
 #include "NSWFL_Menu.H"
 
-//Functions for working with WinAPI listviews.
+//Functions for working with WinAPI list views.
 #include "NSWFL_ListView.H"
 
 //Graphics utilities, don't expect much.
@@ -65,10 +65,10 @@
 //Debugging functions/
 #include "NSWFL_Debug.H"
 
-//Fucntions to get around the stupid secure "_s" counterparts to the standard clib.
+//Functions to get around the stupid secure "_s" counterparts to the standard clib.
 #include "NSWFL_InsecureInterface.H"
 
-//It's a hihg precision timer.
+//It's a high precision timer.
 #include "NSWFL_HighPrecisionTimer.H"
 
 //Functions for parsing arguments passed to the command line.
@@ -117,11 +117,11 @@
 //An attempt to create a better critical section for thread locking.
 #include "NSWFL_IsolationLock.h"
 
-//A dictonary template class.
-#include "NSWFL_DictonaryT.H"
+//A dictionary template class.
+#include "NSWFL_DictionaryT.H"
 
-//A dictonary of string(char*) class.
-#include "NSWFL_DictonaryString.H"
+//A dictionary of string(char*) class.
+#include "NSWFL_DictionaryString.H"
 
 //INET/TCP/IP functions. If you really want more, see https://github.com/NTDLS/CSocketServer
 #include "NSWFL_Network.H"

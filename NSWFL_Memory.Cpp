@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,11 +21,11 @@ namespace NSWFL {
 	namespace Memory {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void *ClearMem(void *vBuffer, int iBufSz)
+		void* ClearMem(void* vBuffer, int iBufSz)
 		{
 			for (int iWPos = 0; iWPos < iBufSz; iWPos++)
 			{
-				((char *)vBuffer)[iWPos] = 0;
+				((char*)vBuffer)[iWPos] = 0;
 			}
 
 			return vBuffer;
@@ -35,7 +35,7 @@ namespace NSWFL {
 		/*
 			Destroys the given key by overwriting it with random data before initializing it to 0's.
 		*/
-		void NukeMem(void *pBuf, size_t iBufSz)
+		void NukeMem(void* pBuf, size_t iBufSz)
 		{
 			if (pBuf)
 			{
@@ -43,7 +43,7 @@ namespace NSWFL {
 
 				for (size_t iWPos = 0; iWPos < iBufSz; iWPos++)
 				{
-					((BYTE *)pBuf)[iWPos] = (BYTE)(rand() % 255);
+					((BYTE*)pBuf)[iWPos] = (BYTE)(rand() % 255);
 				}
 			}
 		}
@@ -52,25 +52,25 @@ namespace NSWFL {
 		/*
 			See overload NukeMem()
 		*/
-		void NukeMem(char *sBuf)
+		void NukeMem(char* sBuf)
 		{
 			NukeMem(sBuf, strlen(sBuf));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void *MemCopy(void *vTarget, void *vSource, int iLen)
+		void* MemCopy(void* vTarget, void* vSource, int iLen)
 		{
 			for (int iPos = 0; iPos < iLen; iPos++)
 			{
-				((char *)vTarget)[iPos] = ((char *)vSource)[iPos];
+				((char*)vTarget)[iPos] = ((char*)vSource)[iPos];
 			}
 			return vTarget;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void *MemDup(const void* d, size_t s)
+		void* MemDup(const void* d, size_t s)
 		{
 			void* p;
 			return ((p = malloc(s)) ? memcpy(p, d, s) : NULL);
@@ -79,7 +79,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int MemCopyLong(char *sOutBuf, long lIn)
+		int MemCopyLong(char* sOutBuf, long lIn)
 		{
 			int iWPos = 0;
 
@@ -110,7 +110,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int MemCopyInt(char *sOutBuf, int iIn)
+		int MemCopyInt(char* sOutBuf, int iIn)
 		{
 			return NSWFL::Memory::MemCopyLong(sOutBuf, (long)iIn);
 		}

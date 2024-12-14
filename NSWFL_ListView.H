@@ -19,9 +19,9 @@ namespace NSWFL {
 		bool LVDeleteItem(HWND hList, int iItem);
 		bool LVDeleteItemFriendly(HWND hList);
 		bool LVDeleteItemFriendly(HWND hList, int iItem);
-		bool LVGetItemText(HWND hList, int iRow, int iColumn, char *sText, int iMaxOutSz);
+		bool LVGetItemText(HWND hList, int iRow, int iColumn, char* sText, int iMaxOutSz);
 		LPARAM LVGetItemParam(HWND hList, int iRow, int iColumn);
-		bool LVGetSelectedItemText(HWND hList, int iColumn, char *sText, int iMaxOutSz);
+		bool LVGetSelectedItemText(HWND hList, int iColumn, char* sText, int iMaxOutSz);
 		bool LVMoveItemDown(HWND hList);
 		bool LVMoveItemUp(HWND hList);
 		bool LVMoveItemDown(HWND hList, int iItemIndex);
@@ -34,9 +34,9 @@ namespace NSWFL {
 		int LVDeSelectAllRows(HWND hList);
 
 		int LVColumnCount(HWND hList);
-		int LVColumnIndex(HWND hList, const char *sColumnName);
+		int LVColumnIndex(HWND hList, const char* sColumnName);
 		int LVGetFirstSelectedItemIndex(HWND hList);
-		int LVGetText(HWND hList, int iItem, int iColumn, char *sText, int iMaxText);
+		int LVGetText(HWND hList, int iItem, int iColumn, char* sText, int iMaxText);
 		int LVItemCount(HWND hList);
 		int LVCheckedItemCount(HWND hList);
 

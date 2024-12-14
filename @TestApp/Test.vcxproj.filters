@@ -111,12 +111,6 @@
     <ClInclude Include="..\NSWFL_XMLWriter.H">
       <Filter>NSWFL</Filter>
     </ClInclude>
-    <ClInclude Include="..\NSWFL_DictonaryString.H">
-      <Filter>NSWFL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NSWFL_DictonaryT.H">
-      <Filter>NSWFL</Filter>
-    </ClInclude>
     <ClInclude Include="..\NSWFL_IntegerStack.H">
       <Filter>NSWFL</Filter>
     </ClInclude>
@@ -127,6 +121,15 @@
       <Filter>NSWFL</Filter>
     </ClInclude>
     <ClInclude Include="..\NSWFL_UIntegerStack.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_DictionaryString.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_DictionaryT.H">
+      <Filter>NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NSWFL_Network.h">
       <Filter>NSWFL</Filter>
     </ClInclude>
   </ItemGroup>
@@ -229,6 +232,9 @@
       <Filter>NSWFL</Filter>
     </ClCompile>
     <ClCompile Include="..\NSWFL_UIntegerStack.Cpp">
+      <Filter>NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NSWFL_Network.cpp">
       <Filter>NSWFL</Filter>
     </ClCompile>
   </ItemGroup>

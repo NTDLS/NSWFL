@@ -280,10 +280,11 @@
   <ItemGroup>
     <ClInclude Include="..\NSWFL.h" />
     <ClInclude Include="..\NSWFL_Base64.h" />
-    <ClInclude Include="..\NSWFL_DictonaryString.H" />
-    <ClInclude Include="..\NSWFL_DictonaryT.H" />
+    <ClInclude Include="..\NSWFL_DictionaryString.H" />
+    <ClInclude Include="..\NSWFL_DictionaryT.H" />
     <ClInclude Include="..\NSWFL_IntegerStack.H" />
     <ClInclude Include="..\NSWFL_IsolationLock.h" />
+    <ClInclude Include="..\NSWFL_Network.h" />
     <ClInclude Include="..\NSWFL_Trace.H" />
     <ClInclude Include="..\NSWFL_UIntegerStack.H" />
     <ClInclude Include="..\NSWFL_URLEncoding.H" />
@@ -332,6 +333,7 @@
     <ClCompile Include="..\NSWFL_Graphics.Cpp" />
     <ClCompile Include="..\NSWFL_IntegerStack.Cpp" />
     <ClCompile Include="..\NSWFL_IsolationLock.cpp" />
+    <ClCompile Include="..\NSWFL_Network.cpp" />
     <ClCompile Include="..\NSWFL_SHA1.cpp" />
     <ClCompile Include="..\NSWFL_HighPrecisionTimer.cpp" />
     <ClCompile Include="..\NSWFL_InsecureInterface.Cpp" />

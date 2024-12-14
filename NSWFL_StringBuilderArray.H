@@ -20,7 +20,7 @@ namespace NSWFL {
 		class StringBuilderArray
 		{
 		public:
-			StringBuilder **_Items;
+			StringBuilder** _Items;
 			int _Allocated;
 			int _Used;
 
@@ -29,7 +29,7 @@ namespace NSWFL {
 			{
 				this->_Allocated = 10;
 				this->_Used = 0;
-				this->_Items = (StringBuilder **)calloc(this->_Allocated, sizeof(StringBuilder *));
+				this->_Items = (StringBuilder**)calloc(this->_Allocated, sizeof(StringBuilder*));
 			}
 
 			~StringBuilderArray()
@@ -53,50 +53,50 @@ namespace NSWFL {
 			}
 
 			//Adds a new item to the vector.
-			StringBuilder *Add(char *value)
+			StringBuilder* Add(char* value)
 			{
 				return AddGetIndex(value, (int)strlen(value), NULL);
 			}
 
 			//Adds a new item to the vector.
-			StringBuilder *Add(char *value, int length)
+			StringBuilder* Add(char* value, int length)
 			{
 				return AddGetIndex(value, length, NULL);
 			}
 
 			//Adds a new item to the vector.
-			StringBuilder *AddEmpty(int *outIndex)
+			StringBuilder* AddEmpty(int* outIndex)
 			{
 				if (this->_Used == this->_Allocated)
 				{
 					//Keep a 10 percent overage for allocation efficiency.
 					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (StringBuilder **)realloc(this->_Items, this->_Allocated * sizeof(StringBuilder *));
+					this->_Items = (StringBuilder**)realloc(this->_Items, this->_Allocated * sizeof(StringBuilder*));
 				}
 
-				this->_Items[this->_Used] = (StringBuilder *)calloc(1, sizeof(StringBuilder *));
+				this->_Items[this->_Used] = (StringBuilder*)calloc(1, sizeof(StringBuilder*));
 
 				if (outIndex)
 				{
 					*outIndex = this->_Used;
 				}
 
-				this->_Items[this->_Used] = (StringBuilder *)calloc(1, sizeof(StringBuilder *));
+				this->_Items[this->_Used] = (StringBuilder*)calloc(1, sizeof(StringBuilder*));
 
 				return this->_Items[this->_Used++];
 			}
 
 			//Adds a new item to the vector.
-			StringBuilder *AddGetIndex(char *value, int length, int *outIndex)
+			StringBuilder* AddGetIndex(char* value, int length, int* outIndex)
 			{
 				if (this->_Used == this->_Allocated)
 				{
 					//Keep a 10 percent overage for allocation efficiency.
 					this->_Allocated += (int)(this->_Allocated > 100 ? (this->_Allocated / 10.0f) : 10.0f);
-					this->_Items = (StringBuilder **)realloc(this->_Items, this->_Allocated * sizeof(StringBuilder *));
+					this->_Items = (StringBuilder**)realloc(this->_Items, this->_Allocated * sizeof(StringBuilder*));
 				}
 
-				this->_Items[this->_Used] = (StringBuilder *)calloc(length + 1, 1);
+				this->_Items[this->_Used] = (StringBuilder*)calloc(length + 1, 1);
 				if (value)
 				{
 					this->_Items[this->_Used] = new	StringBuilder(value, length);
@@ -117,12 +117,12 @@ namespace NSWFL {
 			void Compact()
 			{
 				this->_Allocated = this->_Used;
-				this->_Items = (StringBuilder **)realloc(this->_Items, this->_Allocated * sizeof(StringBuilder *));
+				this->_Items = (StringBuilder**)realloc(this->_Items, this->_Allocated * sizeof(StringBuilder*));
 			}
 
 			//Deletes all values from the vector matching on value.
 			//Returns the count of items which were deleted.
-			int DeleteAll(char *value)
+			int DeleteAll(char* value)
 			{
 				int iCount = 0;
 				for (int i = this->_Used - 1; i >= 0 && this->_Used > 0;)
@@ -143,7 +143,7 @@ namespace NSWFL {
 
 			//Deletes a value from the vector.
 			//Returns true if an item was found and removed.
-			bool DeleteOne(char *value)
+			bool DeleteOne(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -158,7 +158,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool Contiains(char *value)
+			bool Contiains(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -172,7 +172,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool ContiainsI(char *value)
+			bool ContiainsI(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -186,7 +186,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool ContiainsNI(char *value, int iLenght)
+			bool ContiainsNI(char* value, int iLenght)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -200,7 +200,7 @@ namespace NSWFL {
 
 			//Determines if a given value is in the vector.
 			//Returns true if an item was found, otherwise false.
-			bool ContiainsN(char *value, int iLenght)
+			bool ContiainsN(char* value, int iLenght)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -214,7 +214,7 @@ namespace NSWFL {
 
 			//Finds the index of a given value.
 			//Returns the index of the found value, otherwise returns -1.
-			int IndexOf(char *value)
+			int IndexOf(char* value)
 			{
 				for (int i = this->_Used - 1; i >= 0; i--)
 				{
@@ -258,23 +258,23 @@ namespace NSWFL {
 			}
 
 			//Returns a pointer to the value by index.
-			StringBuilder *at(int index)
+			StringBuilder* at(int index)
 			{
 				if (index >= 0 && index < this->_Used)
 				{
 					return this->_Items[index];
 				}
-				return (StringBuilder *)NULL;
+				return (StringBuilder*)NULL;
 			}
 
-			char **ToArray()
+			char** ToArray()
 			{
 				return ToStringArray(NULL);
 			}
 
-			char **ToStringArray(int *iNumberOfElements)
+			char** ToStringArray(int* iNumberOfElements)
 			{
-				char **sArray = (char **)calloc(this->_Used, sizeof(char *));
+				char** sArray = (char**)calloc(this->_Used, sizeof(char*));
 
 				if (iNumberOfElements != NULL)
 				{
@@ -283,7 +283,7 @@ namespace NSWFL {
 
 				for (int i = 0; i < _Used; i++)
 				{
-					sArray[i] = (char *)calloc(this->_Items[i]->Length + 1, 1);
+					sArray[i] = (char*)calloc(this->_Items[i]->Length + 1, 1);
 					strcpy_s(sArray[i], this->_Items[i]->Length + 1, this->_Items[i]->Buffer);
 				}
 
@@ -302,7 +302,7 @@ namespace NSWFL {
 					{
 						if (this->_Items[i]->StrCmp(this->_Items[i + 1]) > 0)
 						{
-							StringBuilder *temp = this->_Items[i];
+							StringBuilder* temp = this->_Items[i];
 							this->_Items[i] = this->_Items[i + 1];
 							this->_Items[i + 1] = temp;
 
@@ -324,7 +324,7 @@ namespace NSWFL {
 					{
 						if (this->_Items[i]->StrCmp(this->_Items[i + 1]) < 0)
 						{
-							StringBuilder *temp = this->_Items[i];
+							StringBuilder* temp = this->_Items[i];
 							this->_Items[i] = this->_Items[i + 1];
 							this->_Items[i + 1] = temp;
 

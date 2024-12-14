@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,7 +103,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void *IsolationLock::UnlockShared(void *pValue)
+		void* IsolationLock::UnlockShared(void* pValue)
 		{
 			EnterCriticalSection(&this->CS);
 			IsolationLockAssert(this->iSharedLockCount <= 0, "Shared lock not held.");
@@ -114,7 +114,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *IsolationLock::UnlockShared(char *sValue)
+		char* IsolationLock::UnlockShared(char* sValue)
 		{
 			EnterCriticalSection(&this->CS);
 			IsolationLockAssert(this->iSharedLockCount <= 0, "Shared lock not held.");
@@ -236,7 +236,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *IsolationLock::UnlockExclusive(char *sValue)
+		char* IsolationLock::UnlockExclusive(char* sValue)
 		{
 			IsolationLockAssert(this->iSharedLockCount != 0, "Shared locks still held.");
 			IsolationLockAssert(this->iExclusiveLockCount <= 0, "Exclusive lock not held.");
@@ -302,7 +302,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void *IsolationLock::UnlockExclusive(void *pValue)
+		void* IsolationLock::UnlockExclusive(void* pValue)
 		{
 			IsolationLockAssert(this->iSharedLockCount != 0, "Shared locks still held.");
 			IsolationLockAssert(this->iExclusiveLockCount <= 0, "Exclusive lock not held.");

@@ -13,14 +13,14 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 namespace NSWFL {
 	namespace String {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		StringBuilder StringBuilder::operator+= (StringBuilder &pStr)
+		StringBuilder StringBuilder::operator+= (StringBuilder& pStr)
 		{
 			this->Append(&pStr);
 			return this;
@@ -28,7 +28,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		StringBuilder StringBuilder::operator+ (StringBuilder &pStr)
+		StringBuilder StringBuilder::operator+ (StringBuilder& pStr)
 		{
 			StringBuilder newString(this);
 			newString.Append(&pStr);
@@ -37,42 +37,42 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool StringBuilder::operator== (StringBuilder &pStr)
+		bool StringBuilder::operator== (StringBuilder& pStr)
 		{
 			return(this->StrCmp(&pStr) == 0);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool StringBuilder::operator> (StringBuilder &pStr)
+		bool StringBuilder::operator> (StringBuilder& pStr)
 		{
 			return(this->StrCmp(&pStr) > 0);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool StringBuilder::operator< (StringBuilder &pStr)
+		bool StringBuilder::operator< (StringBuilder& pStr)
 		{
 			return(this->StrCmp(&pStr) < 0);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool StringBuilder::operator>= (StringBuilder &pStr)
+		bool StringBuilder::operator>= (StringBuilder& pStr)
 		{
 			return(this->StrCmp(&pStr) >= 0);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool StringBuilder::operator<= (StringBuilder &pStr)
+		bool StringBuilder::operator<= (StringBuilder& pStr)
 		{
 			return(this->StrCmp(&pStr) <= 0);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool StringBuilder::operator!= (StringBuilder &pStr)
+		bool StringBuilder::operator!= (StringBuilder& pStr)
 		{
 			return(this->StrCmp(&pStr) != 0);
 		}
@@ -80,14 +80,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char &StringBuilder::operator[] (unsigned int i)
+		char& StringBuilder::operator[] (unsigned int i)
 		{
 			return this->Buffer[i];
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char &StringBuilder::operator[] (int i)
+		char& StringBuilder::operator[] (int i)
 		{
 			return this->Buffer[i];
 		}
@@ -96,7 +96,7 @@ namespace NSWFL {
 		/*
 			Operator: char*
 		*/
-		StringBuilder::operator const char*(void)
+		StringBuilder::operator const char* (void)
 		{
 			return this->Buffer;
 		}
@@ -105,7 +105,7 @@ namespace NSWFL {
 		/*
 			Operator: char*
 		*/
-		StringBuilder::operator char*(void)
+		StringBuilder::operator char* (void)
 		{
 			return this->Buffer;
 		}
@@ -141,7 +141,7 @@ namespace NSWFL {
 		/*
 			Constructor, setting the initial value (and therfor the size) of the buffer.
 		*/
-		StringBuilder::StringBuilder(const char *String)
+		StringBuilder::StringBuilder(const char* String)
 		{
 			int iLength = (int)strlen(String) + 10;
 			this->Initialize(iLength);
@@ -154,7 +154,7 @@ namespace NSWFL {
 
 			[InitialSize] should (but does not have to) be larger than [Size].
 		*/
-		StringBuilder::StringBuilder(const char *String, int Size, int InitialSize)
+		StringBuilder::StringBuilder(const char* String, int Size, int InitialSize)
 		{
 			this->Initialize(InitialSize);
 			this->Append(String, Size);
@@ -164,7 +164,7 @@ namespace NSWFL {
 		/*
 			Constructor, setting the initial value of the buffer.
 		*/
-		StringBuilder::StringBuilder(const char *String, int Size)
+		StringBuilder::StringBuilder(const char* String, int Size)
 		{
 			this->Initialize(Size);
 			this->Append(String, Size);
@@ -174,7 +174,7 @@ namespace NSWFL {
 		/*
 			Constructor, clone another instance of the StringBuilder class.
 		*/
-		StringBuilder::StringBuilder(StringBuilder *pSource)
+		StringBuilder::StringBuilder(StringBuilder* pSource)
 		{
 			this->Initialize(pSource->Alloc);
 			this->Append(pSource);
@@ -211,17 +211,17 @@ namespace NSWFL {
 		{
 			this->AllocAhead = iInAllocAhead;
 
-		#ifdef _USE_GLOBAL_MEMPOOL
-			if ((this->Buffer = (char *)pMem->Allocate(sizeof(char), this->AllocAhead + 1)) == NULL)
+#ifdef _USE_GLOBAL_MEMPOOL
+			if ((this->Buffer = (char*)pMem->Allocate(sizeof(char), this->AllocAhead + 1)) == NULL)
 			{
 				return false;
 			}
-		#else
-			if ((this->Buffer = (char *)calloc(sizeof(char), this->AllocAhead + 1)) == NULL)
+#else
+			if ((this->Buffer = (char*)calloc(sizeof(char), this->AllocAhead + 1)) == NULL)
 			{
 				return false;
 			}
-		#endif
+#endif
 
 			this->Alloc = this->AllocAhead;
 			this->Length = 0;
@@ -243,11 +243,11 @@ namespace NSWFL {
 
 			if (this->Buffer)
 			{
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 				pMem->Free(this->Buffer);
-		#else
+#else
 				free(this->Buffer);
-		#endif
+#endif
 			}
 
 			this->Buffer = NULL;
@@ -273,7 +273,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::Set(const char *sString, int iLength)
+		int StringBuilder::Set(const char* sString, int iLength)
 		{
 			this->Clear();
 			this->Append(sString, iLength);
@@ -284,7 +284,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::Set(const char *sString)
+		int StringBuilder::Set(const char* sString)
 		{
 			this->Clear();
 			this->Append(sString);
@@ -295,7 +295,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::Set(StringBuilder *pBuilder)
+		int StringBuilder::Set(StringBuilder* pBuilder)
 		{
 			this->Clear();
 			this->Append(pBuilder);
@@ -308,18 +308,18 @@ namespace NSWFL {
 		/*
 			Sets to the string buffer using standard formatting. Exactly like sprintf("", ...)
 		*/
-		int StringBuilder::SetF(const char *sFormat, ...)
+		int StringBuilder::SetF(const char* sFormat, ...)
 		{
 			va_list ArgList;
 			va_start(ArgList, sFormat);
 
 			int iMemoryRequired = _vscprintf(sFormat, ArgList);
 
-		#ifdef _USE_GLOBAL_MEMPOOL
-			char *sBuf = (char *)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
-		#else
-			char *sBuf = (char *)calloc(sizeof(char), iMemoryRequired + 1);
-		#endif
+#ifdef _USE_GLOBAL_MEMPOOL
+			char* sBuf = (char*)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
+#else
+			char* sBuf = (char*)calloc(sizeof(char), iMemoryRequired + 1);
+#endif
 
 			int iSz = _vsprintf_s_l(sBuf, iMemoryRequired + 1, sFormat, NULL, ArgList);
 			va_end(ArgList);
@@ -328,11 +328,11 @@ namespace NSWFL {
 			this->Append(sBuf, iSz);
 			this->Terminate();
 
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 			pMem->Free(sBuf);
-		#else
+#else
 			free(sBuf);
-		#endif
+#endif
 
 			return this->Length;
 		}
@@ -341,18 +341,18 @@ namespace NSWFL {
 		/*
 			Appends to the string buffer using standard formatting. Exactly like sprintf("", ...)
 		*/
-		int StringBuilder::AppendF(const char *sFormat, ...)
+		int StringBuilder::AppendF(const char* sFormat, ...)
 		{
 			va_list ArgList;
 			va_start(ArgList, sFormat);
 
 			int iMemoryRequired = _vscprintf(sFormat, ArgList);
 
-		#ifdef _USE_GLOBAL_MEMPOOL
-			char *sBuf = (char *)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
-		#else
-			char *sBuf = (char *)calloc(sizeof(char), iMemoryRequired + 1);
-		#endif
+#ifdef _USE_GLOBAL_MEMPOOL
+			char* sBuf = (char*)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
+#else
+			char* sBuf = (char*)calloc(sizeof(char), iMemoryRequired + 1);
+#endif
 
 			int iSz = _vsprintf_s_l(sBuf, iMemoryRequired + 1, sFormat, NULL, ArgList);
 			va_end(ArgList);
@@ -360,11 +360,11 @@ namespace NSWFL {
 			this->Append(sBuf, iSz);
 			this->Terminate();
 
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 			pMem->Free(sBuf);
-		#else
+#else
 			free(sBuf);
-		#endif
+#endif
 
 			return this->Length;
 		}
@@ -373,7 +373,7 @@ namespace NSWFL {
 		/*
 			Replaces a range of bytes with the specified bytes.
 		*/
-		int StringBuilder::ReplaceRange(int iBegin, int iEnd, const char *sWith, int iWithSz)
+		int StringBuilder::ReplaceRange(int iBegin, int iEnd, const char* sWith, int iWithSz)
 		{
 			int iNewSz = this->Length + (iWithSz - (iEnd - iBegin));
 			int iGapSize = (this->Length - iNewSz);
@@ -422,22 +422,22 @@ namespace NSWFL {
 		{
 			int iTextLen = (GetWindowTextLength(hTextBox));
 
-		#ifdef _USE_GLOBAL_MEMPOOL
-			char *sBuf = (char *)pMem->Allocate(iTextLen + 1, sizeof(char));
-		#else
-			char *sBuf = (char *)calloc(iTextLen + 1, sizeof(char));
-		#endif
+#ifdef _USE_GLOBAL_MEMPOOL
+			char* sBuf = (char*)pMem->Allocate(iTextLen + 1, sizeof(char));
+#else
+			char* sBuf = (char*)calloc(iTextLen + 1, sizeof(char));
+#endif
 
 			if (sBuf != NULL)
 			{
 				iTextLen = GetWindowText(hTextBox, sBuf, iTextLen + 1);
 				this->Append(sBuf, iTextLen);
 
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 				pMem->Free(sBuf);
-		#else
+#else
 				free(sBuf);
-		#endif
+#endif
 
 				return true;
 			}
@@ -481,7 +481,7 @@ namespace NSWFL {
 		/*
 			Returns the "Right Most" (x) number bytes form the buffer.
 		*/
-		int StringBuilder::Right(char *sOutBuf, int iMaxSz, int iRight)
+		int StringBuilder::Right(char* sOutBuf, int iMaxSz, int iRight)
 		{
 			return NSWFL::String::Right(sOutBuf, iMaxSz, this->Buffer, this->Length, iRight);
 		}
@@ -490,7 +490,7 @@ namespace NSWFL {
 		/*
 			Returns the "Left Most" (x) nuber bytes form the buffer.
 		*/
-		int StringBuilder::Left(char *sOutBuf, int iMaxSz, int iLeft)
+		int StringBuilder::Left(char* sOutBuf, int iMaxSz, int iLeft)
 		{
 			return NSWFL::String::Left(sOutBuf, iMaxSz, this->Buffer, this->Length, iLeft);
 		}
@@ -500,7 +500,7 @@ namespace NSWFL {
 		/*
 			Replaces a given piece of text with another. (not case-sensitive)
 		*/
-		int StringBuilder::Replace(const char *sReplace, const char *sWith)
+		int StringBuilder::Replace(const char* sReplace, const char* sWith)
 		{
 			return Replace(sReplace, sWith, false);
 		}
@@ -509,7 +509,7 @@ namespace NSWFL {
 		/*
 			Replaces a given piece of text with another allowing for optional case-sensitivity)
 		*/
-		int StringBuilder::Replace(const char *sReplace, const char *sWith, bool bCaseSensitive)
+		int StringBuilder::Replace(const char* sReplace, const char* sWith, bool bCaseSensitive)
 		{
 			return Replace(sReplace, (int)strlen(sReplace), sWith, (int)strlen(sWith), bCaseSensitive);
 		}
@@ -518,7 +518,7 @@ namespace NSWFL {
 		/*
 			Replaces a given piece of text with another allowing for optional case-sensitivity)
 		*/
-		int StringBuilder::Replace(const char *sReplace, int iReplaceLen, const char *sWith, int iWithLen, bool bCaseSensitive)
+		int StringBuilder::Replace(const char* sReplace, int iReplaceLen, const char* sWith, int iWithLen, bool bCaseSensitive)
 		{
 			int iOccurrences = 0;
 			int iPos = 0;
@@ -592,19 +592,19 @@ namespace NSWFL {
 		{
 			this->Alloc += (iAdditionalBytes + 1);
 
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 			//Allocate more RAM.
-			if ((this->Buffer = (char *)pMem->ReAllocate(this->Buffer, sizeof(char), this->Alloc)) != NULL)
+			if ((this->Buffer = (char*)pMem->ReAllocate(this->Buffer, sizeof(char), this->Alloc)) != NULL)
 			{
 				return true;
 			}
-		#else
+#else
 			//Allocate more RAM.
-			if ((this->Buffer = (char *)realloc(this->Buffer, this->Alloc)) != NULL)
+			if ((this->Buffer = (char*)realloc(this->Buffer, this->Alloc)) != NULL)
 			{
 				return true;
 			}
-		#endif
+#endif
 
 			return false;
 		}
@@ -626,19 +626,19 @@ namespace NSWFL {
 					this->Length = this->Alloc; //Truncate if necessary.
 				}
 
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 				//Allocate more RAM.
-				if ((this->Buffer = (char *)pMem->ReAllocate(this->Buffer, sizeof(char), this->Alloc)) != NULL)
+				if ((this->Buffer = (char*)pMem->ReAllocate(this->Buffer, sizeof(char), this->Alloc)) != NULL)
 				{
 					return true;
 				}
-		#else
+#else
 				//Allocate more RAM.
-				if ((this->Buffer = (char *)realloc(this->Buffer, this->Alloc)) != NULL)
+				if ((this->Buffer = (char*)realloc(this->Buffer, this->Alloc)) != NULL)
 				{
 					return true;
 				}
-		#endif
+#endif
 
 				return false;
 			}
@@ -693,7 +693,7 @@ namespace NSWFL {
 		/*
 			Appends (char *) bytes of data of a specified length to the **beginning** of the string.
 		*/
-		bool StringBuilder::Prepend(const char *sDat2Append, const int iDat2AppendSz)
+		bool StringBuilder::Prepend(const char* sDat2Append, const int iDat2AppendSz)
 		{
 			StringBuilder temp(this);
 			this->Set(sDat2Append, iDat2AppendSz);
@@ -704,7 +704,7 @@ namespace NSWFL {
 		/*
 			Appends (char *) bytes of data to the **beginning** of the string.
 		*/
-		bool StringBuilder::Prepend(const char *sDat2Append)
+		bool StringBuilder::Prepend(const char* sDat2Append)
 		{
 			StringBuilder temp(this);
 			this->Set(sDat2Append, (int)strlen(sDat2Append));
@@ -715,7 +715,7 @@ namespace NSWFL {
 		/*
 			Appends bytes of data to the **beginning** of the string.
 		*/
-		bool StringBuilder::Prepend(StringBuilder *pBuffer)
+		bool StringBuilder::Prepend(StringBuilder* pBuffer)
 		{
 			StringBuilder temp(this);
 			this->Set(pBuffer->Buffer, pBuffer->Length);
@@ -726,29 +726,29 @@ namespace NSWFL {
 		/*
 			Appends (char *) bytes of data to the **beginning** of the string.
 		*/
-		int StringBuilder::PrependF(const char *sFormat, ...)
+		int StringBuilder::PrependF(const char* sFormat, ...)
 		{
 			va_list ArgList;
 			va_start(ArgList, sFormat);
 
 			int iMemoryRequired = _vscprintf(sFormat, ArgList);
 
-		#ifdef _USE_GLOBAL_MEMPOOL
-			char *sBuf = (char *)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
-		#else
-			char *sBuf = (char *)calloc(sizeof(char), iMemoryRequired + 1);
-		#endif
+#ifdef _USE_GLOBAL_MEMPOOL
+			char* sBuf = (char*)pMem->Allocate(sizeof(char), iMemoryRequired + 1);
+#else
+			char* sBuf = (char*)calloc(sizeof(char), iMemoryRequired + 1);
+#endif
 
 			int iSz = _vsprintf_s_l(sBuf, iMemoryRequired + 1, sFormat, NULL, ArgList);
 			va_end(ArgList);
 
 			this->Prepend(sBuf, iSz);
 
-		#ifdef _USE_GLOBAL_MEMPOOL
+#ifdef _USE_GLOBAL_MEMPOOL
 			pMem->Free(sBuf);
-		#else
+#else
 			free(sBuf);
-		#endif
+#endif
 
 			return this->Length;
 		}
@@ -756,7 +756,7 @@ namespace NSWFL {
 		/*
 			Appends (char *) bytes of data of a specified length.
 		*/
-		bool StringBuilder::Append(const char *sDat2Append, const int iDat2AppendSz)
+		bool StringBuilder::Append(const char* sDat2Append, const int iDat2AppendSz)
 		{
 			if (sDat2Append && iDat2AppendSz > 0)
 			{
@@ -787,9 +787,9 @@ namespace NSWFL {
 		/*
 			Appends (unsigned char *) bytes of data of a specified length.
 		*/
-		bool StringBuilder::Append(const unsigned char *sDat2Append, const int iDat2AppendSz)
+		bool StringBuilder::Append(const unsigned char* sDat2Append, const int iDat2AppendSz)
 		{
-			return this->Append((const char *)sDat2Append, iDat2AppendSz);
+			return this->Append((const char*)sDat2Append, iDat2AppendSz);
 		}
 
 
@@ -797,11 +797,11 @@ namespace NSWFL {
 		/*
 			Appends (unsigned char *) text. (must be NULL terminated)
 		*/
-		bool StringBuilder::Append(const unsigned char *sDat2Append)
+		bool StringBuilder::Append(const unsigned char* sDat2Append)
 		{
 			if (sDat2Append)
 			{
-				return this->Append(sDat2Append, (int)strlen((const char *)sDat2Append));
+				return this->Append(sDat2Append, (int)strlen((const char*)sDat2Append));
 			}
 			return true;
 		}
@@ -810,7 +810,7 @@ namespace NSWFL {
 		/*
 			Appends (char *) text. (must be NULL terminated)
 		*/
-		bool StringBuilder::Append(const char *sDat2Append)
+		bool StringBuilder::Append(const char* sDat2Append)
 		{
 			if (sDat2Append)
 			{
@@ -877,7 +877,7 @@ namespace NSWFL {
 		/*
 			Appends data to the data buffer from another instance of the class.
 		*/
-		bool StringBuilder::Append(StringBuilder *pBuffer)
+		bool StringBuilder::Append(StringBuilder* pBuffer)
 		{
 			return this->Append(pBuffer->Buffer, pBuffer->Length);
 		}
@@ -886,7 +886,7 @@ namespace NSWFL {
 		/*
 			Writes the string to a file (by handle).
 		*/
-		bool StringBuilder::WriteToFileByHandle(FILE *hTarget)
+		bool StringBuilder::WriteToFileByHandle(FILE* hTarget)
 		{
 			int iBytesWritten = 0;
 			int iOffset = 0;
@@ -912,9 +912,9 @@ namespace NSWFL {
 		/*
 			Writes the string to a file (by name).
 		*/
-		bool StringBuilder::WriteToFile(const char *sFileName)
+		bool StringBuilder::WriteToFile(const char* sFileName)
 		{
-			FILE *hTarget = NULL;
+			FILE* hTarget = NULL;
 
 			if (fopen_s(&hTarget, sFileName, "wb") != 0)
 			{
@@ -932,7 +932,7 @@ namespace NSWFL {
 		/*
 			Appends data to the data buffer from a file (by handle).
 		*/
-		bool StringBuilder::AppendFromFileByHandle(FILE *hSource)
+		bool StringBuilder::AppendFromFileByHandle(FILE* hSource)
 		{
 			int iBytesRead = 0;
 
@@ -950,9 +950,9 @@ namespace NSWFL {
 		/*
 			Appends data to the data buffer from a file (by name).
 		*/
-		bool StringBuilder::AppendFromFile(const char *sFileName)
+		bool StringBuilder::AppendFromFile(const char* sFileName)
 		{
-			FILE *hSource = NULL;
+			FILE* hSource = NULL;
 
 			if (fopen_s(&hSource, sFileName, "rb") != 0)
 			{
@@ -1041,7 +1041,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		char *StringBuilder::ToString(void)
+		char* StringBuilder::ToString(void)
 		{
 			if (this->Terminate())
 			{
@@ -1052,70 +1052,70 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::InStr(const char *sSearchFor, int sSearchForSz, const int iStartPos)
+		int StringBuilder::InStr(const char* sSearchFor, int sSearchForSz, const int iStartPos)
 		{
 			return NSWFL::String::InStr(sSearchFor, sSearchForSz, this->Buffer, this->Length, iStartPos);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::InStr(const char *sSearchFor, const int iStartPos)
+		int StringBuilder::InStr(const char* sSearchFor, const int iStartPos)
 		{
 			return NSWFL::String::InStr(sSearchFor, this->Buffer, this->Length, iStartPos);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::InStr(const char *sSearchFor)
+		int StringBuilder::InStr(const char* sSearchFor)
 		{
 			return NSWFL::String::InStr(sSearchFor, this->Buffer, this->Length, 0);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::InStrI(const char *sSearchFor, int sSearchForSz, const int iStartPos)
+		int StringBuilder::InStrI(const char* sSearchFor, int sSearchForSz, const int iStartPos)
 		{
 			return NSWFL::String::InStrI(sSearchFor, sSearchForSz, this->Buffer, this->Length, iStartPos);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::InStrI(const char *sSearchFor, const int iStartPos)
+		int StringBuilder::InStrI(const char* sSearchFor, const int iStartPos)
 		{
 			return NSWFL::String::InStrI(sSearchFor, this->Buffer, this->Length, iStartPos);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::InStrI(const char *sSearchFor)
+		int StringBuilder::InStrI(const char* sSearchFor)
 		{
 			return NSWFL::String::InStrI(sSearchFor, this->Buffer, this->Length, 0);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::StrCmp(StringBuilder *pStr)
+		int StringBuilder::StrCmp(StringBuilder* pStr)
 		{
 			return strcmp(this->Buffer, pStr->Buffer);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::StrCmpi(StringBuilder *pStr)
+		int StringBuilder::StrCmpi(StringBuilder* pStr)
 		{
 			return _strcmpi(this->Buffer, pStr->Buffer);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::StrnCmp(StringBuilder *pStr, int iChars)
+		int StringBuilder::StrnCmp(StringBuilder* pStr, int iChars)
 		{
 			return strncmp(this->Buffer, pStr->Buffer, iChars);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int StringBuilder::StrnCmpi(StringBuilder *pStr, int iChars)
+		int StringBuilder::StrnCmpi(StringBuilder* pStr, int iChars)
 		{
 			return _strnicmp(this->Buffer, pStr->Buffer, iChars);
 		}

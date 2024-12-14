@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,27 +89,27 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Queue::Push(const void *vInBuf, int iInBufSz)
+		bool Queue::Push(const void* vInBuf, int iInBufSz)
 		{
 			if (this->Collection.Used == this->Collection.Allocated)
 			{
 				this->Collection.Allocated += this->Collection.AllocIncrement;
 
 #ifdef _USE_GLOBAL_MEMPOOL
-				if (!(this->Collection.DataSize = (int *)pMem->ReAllocate(this->Collection.DataSize, sizeof(int), this->Collection.Allocated)))
+				if (!(this->Collection.DataSize = (int*)pMem->ReAllocate(this->Collection.DataSize, sizeof(int), this->Collection.Allocated)))
 				{
 					return false;
 				}
-				else if (!(this->Collection.Data = (char **)pMem->ReAllocate(this->Collection.Data, sizeof(char **), this->Collection.Allocated)))
+				else if (!(this->Collection.Data = (char**)pMem->ReAllocate(this->Collection.Data, sizeof(char**), this->Collection.Allocated)))
 				{
 					return false;
 				}
 #else
-				if (!(this->Collection.DataSize = (int *)realloc(this->Collection.DataSize, sizeof(int) * this->Collection.Allocated)))
+				if (!(this->Collection.DataSize = (int*)realloc(this->Collection.DataSize, sizeof(int) * this->Collection.Allocated)))
 				{
 					return false;
 				}
-				else if (!(this->Collection.Data = (char **)realloc(this->Collection.Data, sizeof(char **) * this->Collection.Allocated)))
+				else if (!(this->Collection.Data = (char**)realloc(this->Collection.Data, sizeof(char**) * this->Collection.Allocated)))
 				{
 					return false;
 				}
@@ -119,9 +119,9 @@ namespace NSWFL {
 			this->Collection.DataSize[this->Collection.Used] = iInBufSz;
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			this->Collection.Data[this->Collection.Used] = (char *)pMem->Allocate(iInBufSz + 1, 1);
+			this->Collection.Data[this->Collection.Used] = (char*)pMem->Allocate(iInBufSz + 1, 1);
 #else
-			this->Collection.Data[this->Collection.Used] = (char *)calloc(iInBufSz + 1, 1);
+			this->Collection.Data[this->Collection.Used] = (char*)calloc(iInBufSz + 1, 1);
 #endif
 
 			memcpy(this->Collection.Data[this->Collection.Used], vInBuf, iInBufSz);
@@ -133,14 +133,14 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Queue::Push(const char *sInBuf)
+		bool Queue::Push(const char* sInBuf)
 		{
 			return this->Push(sInBuf, (int)strlen(sInBuf));
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Queue::Peek(void *pOutBuf, int iMaxSz, int *iOutSz)
+		bool Queue::Peek(void* pOutBuf, int iMaxSz, int* iOutSz)
 		{
 			if (this->Collection.Used == 0)
 			{
@@ -157,7 +157,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void *Queue::Peek(void)
+		void* Queue::Peek(void)
 		{
 			if (this->Collection.Used > 0)
 			{
@@ -168,7 +168,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Queue::Peek(void *pOutBuf, int iMaxSz)
+		bool Queue::Peek(void* pOutBuf, int iMaxSz)
 		{
 			int iOutSz = 0;
 			return this->Peek(pOutBuf, iMaxSz, &iOutSz);
@@ -176,7 +176,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Queue::Peek(char *sOutBuf, int iMaxSz)
+		bool Queue::Peek(char* sOutBuf, int iMaxSz)
 		{
 			int iOutSz = 0;
 			bool bResult = this->Peek(sOutBuf, iMaxSz, &iOutSz);
@@ -186,7 +186,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Queue::Pop(void *pOutBuf, int iMaxSz, int *iOutSz)
+		bool Queue::Pop(void* pOutBuf, int iMaxSz, int* iOutSz)
 		{
 			if (this->Peek(pOutBuf, iMaxSz, iOutSz))
 			{
@@ -197,7 +197,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Queue::Pop(void *pOutBuf, int iMaxSz)
+		bool Queue::Pop(void* pOutBuf, int iMaxSz)
 		{
 			int iOutSz = 0;
 			return this->Pop(pOutBuf, iMaxSz, &iOutSz);
@@ -205,7 +205,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Queue::Pop(char *sOutBuf, int iMaxSz)
+		bool Queue::Pop(char* sOutBuf, int iMaxSz)
 		{
 			int iOutSz = 0;
 			bool bResult = this->Pop(sOutBuf, iMaxSz, &iOutSz);

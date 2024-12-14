@@ -16,7 +16,7 @@
 #include <fcntl.h>
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,9 +25,9 @@ namespace NSWFL {
 	namespace Debug {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		FILE *hRedirectedOutputHandle = NULL;
-		FILE *hRedirectedErrorHandle = NULL;
-		FILE *hRedirectedInputHandle = NULL;
+		FILE* hRedirectedOutputHandle = NULL;
+		FILE* hRedirectedErrorHandle = NULL;
+		FILE* hRedirectedInputHandle = NULL;
 		bool bIsConsoleOpen = false;
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ namespace NSWFL {
 		RedirectIO(stderr, GetStdHandle(STD_OUTPUT_HANDLE));
 		*/
 
-		void RedirectIO(FILE *hFrom, HANDLE hTo)
+		void RedirectIO(FILE* hFrom, HANDLE hTo)
 		{
 			int fd = _open_osfhandle((intptr_t)hTo, _O_WRONLY | _O_TEXT);
 			_dup2(fd, _fileno(hFrom));
@@ -49,20 +49,20 @@ namespace NSWFL {
 
 		DWORD WINAPI DebugConsoleThread(LPVOID pVoid)
 		{
-			_DEBUG_THREAD_DATA *data = (_DEBUG_THREAD_DATA *)pVoid;
+			_DEBUG_THREAD_DATA* data = (_DEBUG_THREAD_DATA*)pVoid;
 			DebugConsoleHandler handler = (DebugConsoleHandler)data->Handler;
 			SetEvent(data->hEvent);
 
-			char sConsolBuffer[5120];
+			char sConsoleBuffer[5120];
 
 			while (true)
 			{
 				printf("\n>");
-				gets_s(sConsolBuffer, sizeof(sConsolBuffer));
-				int iLength = (int)strlen(sConsolBuffer);
+				gets_s(sConsoleBuffer, sizeof(sConsoleBuffer));
+				int iLength = (int)strlen(sConsoleBuffer);
 				if (iLength > 0)
 				{
-					if (!handler(sConsolBuffer, iLength))
+					if (!handler(sConsoleBuffer, iLength))
 					{
 						break;
 					}
@@ -90,7 +90,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Open read/write console with a console input handler. If the handler returns false, the console is closed.
-		bool OpenDebugConsole(const char *sTitle, DebugConsoleHandler pHandler)
+		bool OpenDebugConsole(const char* sTitle, DebugConsoleHandler pHandler)
 		{
 			return OpenDebugConsole(sTitle, pHandler, NULL);
 		}
@@ -98,7 +98,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Open read/write console with a console input handler. If the handler returns false, the console is closed.
-		bool OpenDebugConsole(const char *sTitle, DebugConsoleHandler pHandler, char *sInitialText)
+		bool OpenDebugConsole(const char* sTitle, DebugConsoleHandler pHandler, char* sInitialText)
 		{
 			bool bIsAreadyOpen = (GetConsoleWindow() != NULL);
 
@@ -153,7 +153,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Open write-only console.
-		bool OpenDebugConsole(const char *sTitle)
+		bool OpenDebugConsole(const char* sTitle)
 		{
 			return OpenDebugConsole(sTitle, NULL);
 		}

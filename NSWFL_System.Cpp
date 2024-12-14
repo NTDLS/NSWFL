@@ -13,7 +13,7 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +44,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Get_MachineName(char *sOutVal, int iMaxSz)
+		bool Get_MachineName(char* sOutVal, int iMaxSz)
 		{
 			DWORD dwMaxSz = (DWORD)iMaxSz;
 			//Could be as much as MAX_COMPUTERNAME_LENGTH characters.
@@ -53,7 +53,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Get_UserName(char *sOutVal, int iMaxSz)
+		bool Get_UserName(char* sOutVal, int iMaxSz)
 		{
 			DWORD dwMaxSz = (DWORD)iMaxSz;
 			return (GetUserName(sOutVal, &dwMaxSz) != 0);
@@ -61,7 +61,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool Get_OsVersion(char *sOutVal, int iMaxSz)
+		bool Get_OsVersion(char* sOutVal, int iMaxSz)
 		{
 			DWORD dwMaxSize = iMaxSz;
 			memset(sOutVal, 0, iMaxSz);
@@ -106,7 +106,7 @@ namespace NSWFL {
 
 		bool ResetWindowsSys(unsigned int iFlags)
 		{
-			if (iFlags &EWX_POWEROFF || iFlags &EWX_REBOOT || iFlags &EWX_SHUTDOWN)
+			if (iFlags & EWX_POWEROFF || iFlags & EWX_REBOOT || iFlags & EWX_SHUTDOWN)
 			{
 				HANDLE hToken;
 				TOKEN_PRIVILEGES tkp;
@@ -144,7 +144,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool CreateGenericSecurityDescriptor(SECURITY_DESCRIPTOR *pSD, SECURITY_ATTRIBUTES *pSA)
+		bool CreateGenericSecurityDescriptor(SECURITY_DESCRIPTOR* pSD, SECURITY_ATTRIBUTES* pSA)
 		{
 			memset(pSD, 0, sizeof(SECURITY_DESCRIPTOR));
 			memset(pSA, 0, sizeof(SECURITY_ATTRIBUTES));

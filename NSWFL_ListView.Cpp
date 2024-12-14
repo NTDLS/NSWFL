@@ -15,7 +15,7 @@
 #include <CommCtrl.H>
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ namespace NSWFL {
 		{
 			int iItems = ListView_GetItemCount(hList);
 
-			for(int i = 0; i < iItems; i++)
+			for (int i = 0; i < iItems; i++)
 			{
 				ListView_SetItemState(hList, i, LVIS_SELECTED, LVIS_SELECTED);
 			}
@@ -81,7 +81,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int LVGetText(HWND hList, int iItem, int iColumn, char *sText, int iMaxText)
+		int LVGetText(HWND hList, int iItem, int iColumn, char* sText, int iMaxText)
 		{
 			LVITEM Item;
 			memset(&Item, 0, sizeof(Item));
@@ -126,7 +126,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		bool LVGetItemText(HWND hList, int iRow, int iColumn, char *sText, int iMaxOutSz)
+		bool LVGetItemText(HWND hList, int iRow, int iColumn, char* sText, int iMaxOutSz)
 		{
 			LV_ITEM lvItem;
 			memset(&lvItem, 0, sizeof(lvItem));
@@ -261,7 +261,7 @@ namespace NSWFL {
 		/*
 			This function is designed to only work with single selection list views.
 		*/
-		bool LVGetSelectedItemText(HWND hList, int iColumn, char *sText, int iMaxOutSz)
+		bool LVGetSelectedItemText(HWND hList, int iColumn, char* sText, int iMaxOutSz)
 		{
 			if (ListView_GetSelectedCount(hList) == 1)
 			{
@@ -348,9 +348,9 @@ namespace NSWFL {
 			int iMaxText = 1024 * 10;
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sText = (char *)pMem->Allocate(iMaxText, sizeof(char));
+			char* sText = (char*)pMem->Allocate(iMaxText, sizeof(char));
 #else
-			char *sText = (char *)calloc(iMaxText, sizeof(char));
+			char* sText = (char*)calloc(iMaxText, sizeof(char));
 #endif
 
 			bool bChecked = (ListView_GetCheckState(hList, iItemIndex) > 0);
@@ -419,9 +419,9 @@ namespace NSWFL {
 			int iMaxText = 1024 * 10;
 
 #ifdef _USE_GLOBAL_MEMPOOL
-			char *sText = (char *)pMem->Allocate(iMaxText, sizeof(char));
+			char* sText = (char*)pMem->Allocate(iMaxText, sizeof(char));
 #else
-			char *sText = (char *)calloc(iMaxText, sizeof(char));
+			char* sText = (char*)calloc(iMaxText, sizeof(char));
 #endif
 
 			bool bChecked = (ListView_GetCheckState(hList, iItemIndex) > 0);
@@ -488,7 +488,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int LVColumnIndex(HWND hList, const char *sColumnName)
+		int LVColumnIndex(HWND hList, const char* sColumnName)
 		{
 			LVCOLUMN lColumn;
 

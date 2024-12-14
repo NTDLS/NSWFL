@@ -13,14 +13,14 @@
 #include "NSWFL.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+extern NSWFL::Memory::MemoryPool* pMem; //pMem must be defined and initialized elsewhere.
 #endif
 
 namespace NSWFL {
 	namespace Conversion {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		inline BYTE URLCoding_ToHex(const BYTE &x)
+		inline BYTE URLCoding_ToHex(const BYTE& x)
 		{
 			return x > 9 ? x + 55 : x + 48;
 		}
@@ -30,7 +30,7 @@ namespace NSWFL {
 		// First, a subroutine that substitutes any instance of cBad with
 		// cGood in a string.  This is used to replace the plus sign with
 		// a space character.
-		inline void URLCoding_SwapChar(unsigned char *pOriginal, unsigned char cBad, unsigned char cGood)
+		inline void URLCoding_SwapChar(unsigned char* pOriginal, unsigned char cBad, unsigned char cGood)
 		{
 			int iPos = 0;
 
@@ -50,7 +50,7 @@ namespace NSWFL {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// Now, a subroutine that unescapes escaped characters.
-		inline unsigned char URLCoding_IntFromHex(unsigned char *pChars)
+		inline unsigned char URLCoding_IntFromHex(unsigned char* pChars)
 		{
 			unsigned char Hi = 0; // holds high byte.
 			unsigned char Lo = 0; // holds low byte.
@@ -86,9 +86,9 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int URLDecode(char *sBuffer)
+		int URLDecode(char* sBuffer)
 		{
-			unsigned char *uBuf = (unsigned char *)sBuffer;
+			unsigned char* uBuf = (unsigned char*)sBuffer;
 			int iWPos = 0;
 
 			// First, change those pesky plusses to spaces.
@@ -134,10 +134,10 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int URLEncodeSimulate(const char *sIn, int iLength)
+		int URLEncodeSimulate(const char* sIn, int iLength)
 		{
 			int iWPos = 0;
-			const unsigned char *uIn = (const unsigned char *)sIn;
+			const unsigned char* uIn = (const unsigned char*)sIn;
 
 			for (int iRPos = 0; iRPos < iLength; iRPos++)
 			{
@@ -155,10 +155,10 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int URLEncode(const char *sIn, int iLength, char *sOut, int iMaxOut)
+		int URLEncode(const char* sIn, int iLength, char* sOut, int iMaxOut)
 		{
 			int iWPos = 0;
-			const unsigned char *uIn = (const unsigned char *)sIn;
+			const unsigned char* uIn = (const unsigned char*)sIn;
 
 			for (int iRPos = 0; iRPos < iLength; iRPos++)
 			{
@@ -193,7 +193,7 @@ namespace NSWFL {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		int URLEncode(const char *sIn, char *sOut, int iMaxOut)
+		int URLEncode(const char* sIn, char* sOut, int iMaxOut)
 		{
 			return URLEncode(sIn, (int)strlen(sIn), sOut, iMaxOut);
 		}

@@ -1,0 +1,183 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  Copyright © NetworkDLS 2023, All rights reserved
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifndef _NSWFL_UIntegerStack_CPP_
+#define _NSWFL_UIntegerStack_CPP_
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include "NSWFL.H"
+
+#ifdef _USE_GLOBAL_MEMPOOL
+extern NSWFL::Memory::MemoryPool *pMem; //pMem must be defined and initalized elsewhere.
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace NSWFL {
+	namespace Collections {
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		bool UIntegerStack::Push(unsigned int iNumber)
+		{
+			if (iFree == 0)
+			{
+				this->iStackSize += this->iInitialSize;
+				this->iFree += this->iInitialSize;
+
+				//No free stack space, need to allocate more.
+				if ((iStack = (unsigned int *)realloc(iStack, (sizeof(unsigned int) * this->iStackSize))) == NULL)
+				{
+					return false;
+				}
+			}
+
+			//Move all values down one position in the stack.
+			for (unsigned int iPos = (iStackSize - iFree); iPos > 0; iPos--)
+			{
+				iStack[iPos] = iStack[iPos - 1];
+			}
+
+			iStack[0] = iNumber;
+
+			iFree--;
+
+			return true;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		unsigned int UIntegerStack::Pop(void)
+		{
+			if (iFree == this->iStackSize)
+			{
+				//The stack is empty space.
+				return false;
+			}
+
+			return iStack[(iStackSize - iFree++) - 1];
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		bool UIntegerStack::Peek(unsigned int iSlot, unsigned int *iNumber)
+		{
+			if (iSlot >= (iStackSize - iFree))
+			{
+				//Invalid slot.
+				return false;
+			}
+
+			if (iFree == this->iStackSize)
+			{
+				//The stack is empty.
+				return false;
+			}
+
+			*iNumber = iStack[iSlot];
+
+			return true;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		bool UIntegerStack::Peek(unsigned int *iNumber)
+		{
+			if (iFree == this->iStackSize)
+			{
+				//The stack is empty.
+				return false;
+			}
+
+			*iNumber = iStack[(iStackSize - iFree) - 1];
+
+			return true;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		bool UIntegerStack::Pop(unsigned int *iNumber)
+		{
+			if (iFree == this->iStackSize)
+			{
+				//The stack is empty.
+				return false;
+			}
+
+			*iNumber = iStack[(iStackSize - iFree) - 1];
+
+			iFree++;
+
+			return true;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		unsigned int UIntegerStack::GetFreeSize(void)
+		{
+			return this->iFree;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		bool UIntegerStack::IsStackEmpty(void)
+		{
+			return (this->iFree == this->iStackSize);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		unsigned int UIntegerStack::GetStackLevel(void)
+		{
+			return(this->iStackSize - this->iFree);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		unsigned int UIntegerStack::GetStackSize(void)
+		{
+			return this->iStackSize;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		bool UIntegerStack::Init(void)
+		{
+			return this->Init(100);
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		bool UIntegerStack::Init(unsigned int iInitialSize)
+		{
+			if ((iStack = (unsigned int *)calloc(iInitialSize, sizeof(unsigned int))) == NULL)
+			{
+				return false;
+			}
+
+			this->iInitialSize = iInitialSize;
+			this->iStackSize = iInitialSize;
+			this->iFree = iInitialSize;
+
+			return true;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		bool UIntegerStack::Destroy(void)
+		{
+			if (this->iStackSize > 0)
+			{
+				free(iStack);
+			}
+			return true;
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	} //namespace::InsecureInterface
+} //namespace::NSWFL
+#endif

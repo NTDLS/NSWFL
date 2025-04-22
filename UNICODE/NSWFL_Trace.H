@@ -1,0 +1,53 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  Copyright © NetworkDLS 2023, All rights reserved
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifndef _NSWFL_Trace_H_
+#define _NSWFL_Trace_H_
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace NSWFL {
+	namespace Debug {
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#define TRACE_TYPE_GENERIC	0
+#define TRACE_TYPE_SPECIAL	1
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		class CTrace {
+		public:
+			~CTrace();
+			CTrace(const WCHAR*sApplicationName, const WCHAR*sApplicationVersion);
+
+			void Start(void);
+			void Start(int iType);
+			void Trace(const WCHAR*sText);
+			int Stop(void);
+			int Stop(String::StringBuilder *pOutText);
+			bool IsTracingEnabled(void);
+
+			int Type(void);
+			void Lock(void);
+			bool TryLock(void);
+			void UnLock(void);
+
+		private:
+			Collections::Stack * _Stack;
+			WCHAR*_ApplicationName;
+			WCHAR*_ApplicationVersion;
+			WCHAR*_LogPath;
+			bool _TracingEnabled;
+			int _Type;
+			CRITICAL_SECTION _CS;
+		};
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	} //namespace::Debug
+} //namespace::NSWFL
+#endif
+
